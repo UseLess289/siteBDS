@@ -1,0 +1,81 @@
+body {
+    /* Ce min-height vient de footer.css (chargé après styles.css),
+       donc il écrase toute valeur définie ailleurs */
+    min-height: fit-content;
+    /* augmente la hauteur minimale pour plus de scroll */
+}
+
+main {
+    flex: 1;
+
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+
+    background: transparent;
+    z-index: 9998;
+    height: clamp(50px, 15vh, 80px);
+    font-size: clamp(0.75rem, 1.2vw, 1rem);
+}
+
+.site-footer {
+    background-color: transparent;
+    height: 0px;
+
+}
+
+.footer-pill {
+    position: relative;
+    height: max-content;
+    overflow: hidden;
+    border-radius: 10px;
+    padding: 10px 10px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 -4px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    background-image: url('assets/paper.jpg');
+    vertical-align: top;
+    background-size: cover;
+    color: #2a1005;
+    bottom: 1.5vh;
+}
+
+
+footer a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+}
+
+footer img {
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
+    top: 40%;
+    vertical-align: middle;
+}
+
+.footerLogo:hover,
+.insta:hover {
+    transform: scale(1.08);
+    transition: transform 0.18s ease;
+}
+
+.footer-pill::before {
+    content: '';
+    position: absolute;
+    inset: 0em;
+    z-index: 100000;
+    pointer-events: none;
+    border: 8px solid transparent;
+    border-image: url('./assets/frame.png') 25 fill stretch;
+}
