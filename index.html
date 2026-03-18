@@ -9,18 +9,29 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/logo.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="footer.css">
+    <script type="module">
+        import protect from "/lib/protect.js";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('allo-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                protect.redirect("allo");
+            });
+        });
+    </script>
 </head>
 <body>
     <nav class="navbar">
         <ul>
             <li id="back"><a href="index.html"><img src="assets/back.png" alt="Retour"></a></li>
-            <li id="allo">
-                <a href="allo.html">
-                    ALLO
-                    <img src="assets/phone.png" id="phone">
-                </a>
+            <li>
+                
             </li>
         </ul>
+        <button id="allo-btn" class="allo" href="allo.html">
+                    ALLO
+                    <img src="assets/phone.png" id="phone">
+        </button>
     </nav>
 
     <a href="index.html" class="logo">

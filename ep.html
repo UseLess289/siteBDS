@@ -9,18 +9,26 @@
 
     <link rel="stylesheet" href="footer.css">
     <link rel="stylesheet" href="ep.css">
+    <script type="module">
+        import protect from "/lib/protect.js";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('allo-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                protect.redirect("allo");
+            });
+        });
+    </script>
 </head>
 <body>
     <nav id="navbar">
         <ul>
             <li id="back"><a href="index.html"><img src="assets/back.png" alt="Retour"></a></li>
-            <li id="allo">
-                <a href="allo.html">
-                    ALLO
-                    <img src="assets/phone.png" id="phone">
-                </a>
-            </li>
         </ul>
+        <a id="allo-btn" class="allo" href="allo.html">
+            ALLO
+            <img src="assets/phone.png" id="phone">
+        </a>
     </nav>
 
     <main>
@@ -68,11 +76,22 @@
                 </div>
             </div>
 
+            <div class="ep-card">
+                <div class="face face1">
+                    <p class="track-title">MA SIRÈNE</p>
+                    <p class="track-mcs">Youssef</p>
+                    <div class="track-links">
+                        <a href="#" target="_blank">YouTube</a>
+                    </div>
+                </div>
+                <div class="face face2">
+                    <img src="assets/Cover4.jpg" alt="VIBE PRT">
+                </div>
+            </div>
+
 
         </div>
-        <a href="lien" target="_blank" id="dont-press">
-    <img src="assets/dontpress.png" alt="Don't press">
-</a>
+
     </main>
 
     <canvas id="bg-grid"></canvas>

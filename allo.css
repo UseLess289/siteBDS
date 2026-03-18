@@ -6,7 +6,26 @@
 }
 
 body {
-    background-color: #d4d4d4;
+    background-image: url('assets/allo_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    backdrop-filter: blur(4px);
+}
+.subtit {
+    margin-left: 2em;
+    margin-top: 1.3em;
+    font-size: 2em;
+    font-weight: 900;
+    display: inline-block;
+    transform-origin: bottom center;
+    background-color: #2b1405;
+    background-size: cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 li {
@@ -29,13 +48,18 @@ li {
     font-weight: 900;
     display: inline-block;
     transform-origin: bottom center;
-    background-color: black;
+    background-image: url('./assets/textureTitre3.png');
     background-size: cover;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    -webkit-text-stroke: 3px #2b1405;
+    text-shadow:
+        2px 2px 0 #2b1405,
+        4px 4px 0 #2b1405,
+        6px 6px 0 #2b1405,
+        8px 8px 10px rgba(0, 0, 0, 0.6);
     transition: transform 0.2s ease;
-
 }
 
 .title .letter:hover {
@@ -67,6 +91,47 @@ li {
     opacity: 0.7;
 }
 
+.command {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1.5em;
+    padding: 10px 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: white;
+    text-align: center;
+    justify-content: center;
+
+    cursor: pointer;
+    font-size: 1.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    transition: background 0.2s ease, transform 0.2s ease;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    margin-bottom:  0.4em;
+    margin-right: 0.4em;
+}
+
+.command:hover {
+    background: rgba(255, 255, 255, 0.22);
+    transform: scale(1.03);
+}
+
+.command:active {
+    transform: scale(0.97);
+}
+
+input:checked + label .command {
+    opacity: 1;
+    pointer-events: auto;
+    transition-delay: 0.35s;
+}
 
 #title {
     position: fixed;
@@ -95,8 +160,12 @@ li {
     flex-wrap: nowrap;
     justify-content: start;
     margin-top: 2%;
-    background-color: dimgrey;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 2em;
+    position: fixed;
 }
 
 .card {
@@ -119,6 +188,15 @@ li {
     justify-content: flex-end;
 }
 
+.card[for="c1"],
+.card[for="c2"],
+.card[for="c3"] {
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
 .menu-grid {
     width: 100%;
     display: grid;
@@ -126,22 +204,21 @@ li {
     gap: 10px;
     padding: 15px;
     flex: 1;
-    /* occupe tout l'espace au-dessus de .row */
     overflow-y: auto;
     opacity: 0;
     transition: opacity 0.3s ease;
+    height: 50%;
 }
 
 
-/* Visible quand la carte est ouverte */
 input:checked+label .menu-grid {
     opacity: 1;
     transition-delay: 0.35s;
 }
 
-/* Chaque case */
+
 .menu-item {
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 1.5em;
     padding: 10px 6px;
@@ -159,11 +236,13 @@ input:checked+label .menu-grid {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.03em;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
 }
 
 .menu-price {
     font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 .phone {
@@ -224,13 +303,16 @@ input:checked+label .description {
 }
 
 .card[for="c1"] {
-    background-color: #019639;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
 }
 
 .card[for="c2"] {
-    background-color: black;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
 }
 
 .card[for="c3"] {
-    background-color: #e53a2a;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
 }

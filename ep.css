@@ -49,18 +49,10 @@ main {
     z-index: 10;
 }
 
-#allo {
+.allo {
     position: absolute;
     right: 4em;
     top: 1em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    list-style: none;
-}
-
-#allo a {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -75,7 +67,7 @@ main {
     transition: color 0.2s ease;
 }
 
-#allo a:hover {
+.allo:hover {
     color: #FF0000;
 }
 
@@ -86,7 +78,7 @@ main {
     transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-#allo:hover #phone {
+.allo:hover #phone {
     transform: rotate(15deg) scale(1.15);
 }
 
@@ -196,8 +188,9 @@ main {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
     gap: 24px;
-    align-items: center;
+    align-items: start;
     margin-bottom: 1em;
+    position: sticky;
 }
 
 .ep-card {
@@ -212,8 +205,11 @@ main {
 }
 
 .ep-card:nth-child(1) {
-    grid-row: span 2;
-    align-self: center;
+    grid-column: 1;
+    grid-row: 1;
+}
+.ep-card:nth-child(odd) {
+    margin-top: 48px;
 }
 
 .ep-card .face {
@@ -323,6 +319,9 @@ main {
 .ep-card:nth-child(3) .face2::after {
     --accent: #20a049;
 }
+.ep-card:nth-child(4) .face2::after {
+    --accent: #fb00ff; /* adapte la couleur */
+}
 
 .ep-card .face2::after {
     content: '';
@@ -425,30 +424,6 @@ main {
     }
 }
 
-#dont-press {
-    position: fixed;
-    bottom: 2em;
-    left: 2em;
-    z-index: 10;
-    display: block;
-    width: 120px;
-    height: 120px;
-    transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-#dont-press img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-#dont-press:hover {
-    transform: scale(1.10);
-}
-
-#dont-press:active {
-    transform: scale(0.93);
-}
 
 @media (max-width: 768px) {
 
@@ -551,7 +526,7 @@ main {
         margin-left: -1.5em;
     }
 
-    #allo {
+    .allo {
         right: 1em;
         top: 1em;
         transform: scale(0.75);
