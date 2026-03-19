@@ -5,7 +5,7 @@ const WHITELIST = [
     'rbourgoin'
 ];
 
-const API_URL = 'https://TON-BACKEND.railway.app';
+const API_URL = 'https://sitebds-production.up.railway.app';
 
 let currentUser = null;
 
