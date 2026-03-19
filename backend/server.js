@@ -62,24 +62,41 @@ app.get('/admin/login', async (req, res) => {
         state,
         nonce,
     });
-    const authUrl = `${config.serverMetadata().authorization_endpoint}?${params}`;
+
+    const stateWithNonce = `${state}|${nonce}`;
+    const paramsFixed = new URLSearchParams({
+        response_type: 'code',
+        client_id:     process.env.OPENID_CLIENT_ID,
+        redirect_uri:  process.env.OPENID_REDIRECT_URI,
+        scope:         'openid profile email',
+        state:         stateWithNonce,
+        nonce,
+    });
+
+    const authUrl = `${config.serverMetadata().authorization_endpoint}?${paramsFixed}`;
     res.redirect(authUrl);
 });
 
 app.get('/callback', async (req, res) => {
     try {
         const config = await getOidcConfig();
+        
+        const rawState = req.query.state || '';
+        const [expectedState, expectedNonce] = rawState.split('|');
+
         const tokens = await authorizationCodeGrant(
             config,
             new URL(`${process.env.OPENID_REDIRECT_URI}?${new URLSearchParams(req.query)}`),
             {
                 pkceCodeVerifier: undefined,
-                expectedState: req.query.state,
-                expectedNonce: undefined,
+                expectedState:    rawState,
+                expectedNonce:    expectedNonce,
             }
         );
+
         const userinfo = await fetchUserInfo(config, tokens.access_token, tokens.claims().sub);
         const login    = userinfo.uid || userinfo.preferred_username;
+        console.log('Login récupéré:', login);
 
         const result = await pool.query('SELECT login FROM admins WHERE login = $1', [login]);
         if (result.rows.length === 0) {
