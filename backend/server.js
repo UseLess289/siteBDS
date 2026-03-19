@@ -56,10 +56,14 @@ app.patch('/commandes/:id/statut', async (req, res) => {
     );
     res.json(result.rows[0]);
 });
-
-app.listen(process.env.PORT || 3000, () => {
-    console.log(`Serveur lancé sur http://localhost:${process.env.PORT || 3000}`);
+app.get('/commandes', async (req, res) => {
+    const { qg } = req.query;
+    const result = qg
+        ? await pool.query('SELECT * FROM commandes WHERE qg = $1 ORDER BY created_at DESC', [qg])
+        : await pool.query('SELECT * FROM commandes ORDER BY created_at DESC');
+    res.json(result.rows);
 });
+
 app.get('/auth/antileak', async (req, res) => {
     const { login } = req.query;
     if (!login) return res.status(400).json({ error: 'login manquant' });
@@ -67,3 +71,13 @@ app.get('/auth/antileak', async (req, res) => {
     if (result.rows.length === 0) return res.status(403).json({ error: 'non autorisé' });
     res.json({ ok: true });
 });
+
+
+
+
+
+
+app.listen(process.env.PORT || 3000, () => {
+    console.log(`Serveur lancé sur http://localhost:${process.env.PORT || 3000}`);
+});
+
