@@ -342,6 +342,16 @@ body {
 .seagull {
     z-index: 14;
 }
+.precamp {
+    z-index: 100;
+    position: absolute;
+    transform-origin: center center;
+    pointer-events: none;
+}
+#precamp-wrapper {
+    position: absolute;
+    z-index: 100;
+}
 
 
 /* Tronque le texte dans la card */

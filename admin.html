@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — ALLO</title>
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;600;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="access-denied" style="display:none">
+        <h1>Accès refusé</h1>
+            <p>Cette page réservé à l'équipage de Pirateirb permet à tous les pirates de livrer les élèves.<br>
+                Tu n'y as pas accès.<br>
+                Tu peux toujours contacter Gabriel ou Samuel.
+            </p>
+    </div>
+
+    <div id="admin-app" style="display:none">
+
+        <header id="admin-header">
+            <div id="header-left">
+                <a href="index.html" id="back-btn">← retour</a>
+                <h1>ALLO <span class="tag">ADMIN</span></h1>
+            </div>
+            <div id="header-right">
+                <span id="admin-user"><!-- login CAS  --></span>
+                <button id="logout-btn">Déconnexion</button>
+            </div>
+        </header>
+
+        <main>
+
+            <section id="stats-bar">
+                <div class="stat-card">
+                    <span class="stat-label">Total commandes</span>
+                    <span class="stat-value" id="stat-total">—</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">En attente</span>
+                    <span class="stat-value" id="stat-pending">—</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">En cours</span>
+                    <span class="stat-value" id="stat-progress">—</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Livrées</span>
+                    <span class="stat-value" id="stat-done">—</span>
+                </div>
+            </section>
+
+            <section id="orders-section">
+                <div id="orders-toolbar">
+                    <span id="last-update">Dernière mise à jour : —</span>
+                    <button id="refresh-btn">↻ Actualiser</button>
+                </div>
+
+                <table id="orders-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Login CAS</th>
+                            <th>Articles</th>
+                            <th>Heure</th>
+                            <th>Statut</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-body">
+                        <tr id="empty-row">
+                            <td colspan="6">Aucune commande pour l'instant.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
+
+    <script type="module" src="admin.js"></script>
+</body>
+</html>

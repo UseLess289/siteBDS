@@ -191,6 +191,7 @@ main {
     align-items: start;
     margin-bottom: 1em;
     position: sticky;
+    top:1em;
 }
 
 .ep-card {

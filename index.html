@@ -57,10 +57,14 @@
                 </ul>
                 <img id="seagull" src="./assets/backgrouond/seagull1.svg" class="seagull">
                 <img id="ship"    src="./assets/backgrouond/ship.png"      class="ship">
+                <div id="precamp-wrapper">
+                    <img id="precamp" src="./assets/precamp.png" class="precamp">
+                </div>
+                
 
                 <div class="hero__wrapper">
                     <nav class="hero__nav">
-                        <a href="ep.html"      class="hero__nav-btn hero__nav-btn--videos">EP 4 TITRES</a>
+                        <a href="ep.html"      class="hero__nav-btn hero__nav-btn--videos">EP-4 TITRES</a>
                         <a href="equipage.html"    class="hero__nav-btn hero__nav-btn--equipage">EQUIPE</a>
                         <a href="videos.html" class="hero__nav-btn hero__nav-btn--partenaires">VIDEOS</a>
                         <a href="partenaires.html"        class="hero__nav-btn hero__nav-btn--allo">PARTENAIRES</a>
@@ -113,6 +117,24 @@ Finalement, Diplomates des Sept Mers 🌊🏴‍☠️ (Pôle Partenariat) : le 
     <script src="animate.js"></script>
 
     <script>
+        const precampPath = [
+    { x: 50, y: 70 },
+    { x: 53, y: 55 },
+    { x: 57, y: 40 },
+    { x: 61, y: 26 },
+    { x: 64, y: 13 },
+    { x: 66, y: 2  },
+    { x: 67, y: -10 },
+];
+const precampScaleArr = [1, 0.82, 0.62, 0.43, 0.26, 0.12, 0.03];
+
+animatePath('precamp-wrapper', precampPath, precampScaleArr);
+
+window.addEventListener('scroll', () => {
+    const t = getScrollT();
+    const deg = t * 200;
+    document.getElementById('precamp').style.transform = `rotate(${deg}deg)`;
+}, { passive: true });
     const layers = document.querySelectorAll('.layer');
     const layerConfig = [
         { offset:   0, speed: 0.1  },
@@ -178,7 +200,7 @@ Finalement, Diplomates des Sept Mers 🌊🏴‍☠️ (Pôle Partenariat) : le 
 });
     const btns = document.querySelectorAll('.hero__nav-btn');
 
-    btns.forEach((btn, i) => {
+    btns.forEach((btn, i) => {  
         animate(
             btn,
             { y: [0, -6, 0], rotate: [-0.3, 0.3, -0.3] },
