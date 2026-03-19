@@ -1,40 +1,33 @@
 import protect from "/lib/protect.js";
 
-const WHITELIST = [
-    'smichelchagn',
-    'rbourgoin'
-];
 
 const API_URL = 'https://sitebds-production.up.railway.app';
 
 let currentUser = null;
 
 protect.getData()
-    .then(data => {
+    .then(async data => {
         currentUser = data.user.uid;
-        //filtrer si user est bien autorisé
-        if (!WHITELIST.includes(currentUser)) {
-            document.getElementById('access-denied').style.display = 'flex';//on affiche la code html qui correspond à "pas vérifié"
+
+        const res = await fetch(`${API_URL}/auth/verify?login=${currentUser}`);
+        if (!res.ok) {
+            document.getElementById('access-denied').style.display = 'flex';
             return;
         }
 
-        // sinon, on lui charge l'app
         document.getElementById('admin-app').style.display = 'block';
         document.getElementById('admin-user').textContent = currentUser;
-
         init();
     })
-    .catch(() => protect.login());
+    .catch(() => protect.login()); function init() {
+        loadOrders();
 
-function init() {
-    loadOrders();
+        document.getElementById('refresh-btn').addEventListener('click', loadOrders);
+        document.getElementById('logout-btn').addEventListener('click', () => protect.logout());
 
-    document.getElementById('refresh-btn').addEventListener('click', loadOrders);//refresh quand le bouton refresh est appuyé
-    document.getElementById('logout-btn').addEventListener('click', () => protect.logout());// sécu
-
-    // refresh auto 30sec
-    setInterval(loadOrders, 30_000);
-}
+        // refresh auto 30sec
+        setInterval(loadOrders, 30_000);
+    }
 
 async function loadOrders() {
     try {
