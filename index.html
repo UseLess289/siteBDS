@@ -37,6 +37,10 @@ protect.getData()
 </head>
 <body>
     <div id="main-content" style="display:none">
+        <div id="scroll-popup">
+    <p>Scrolle vers le bas pour découvrir le site</p>
+    <button id="scroll-popup-btn">Compris !</button>
+</div>
         <nav class="navbar">
         <ul>
             <li id="back"><a href="index.html"><img src="assets/back.png" alt="Retour"></a></li>
@@ -204,9 +208,9 @@ window.addEventListener('scroll', () => {
   [...text].forEach(char => {
     const span = document.createElement('span');
     span.textContent = char;
-    const rot   = (Math.random() - 0.5) * 18; // -9° à +9°
-    const tx    = (Math.random() - 0.5) * 4;  // léger décalage X
-    const ty    = (Math.random() - 0.5) * 5;  // léger décalage Y
+    const rot   = (Math.random() - 0.5) * 18;
+    const tx    = (Math.random() - 0.5) * 4; 
+    const ty    = (Math.random() - 0.5) * 5;  
     span.style.cssText = `
       display: inline-block;
       transform: rotate(${rot}deg) translate(${tx}px, ${ty}px);
@@ -285,9 +289,14 @@ modalBg.addEventListener('click', () => {
     bioModal.classList.remove('show');
 });
 
-// Fermeture aussi avec Échap
 document.addEventListener('keydown', e => {
     if (e.key === 'Escape') bioModal.classList.remove('show');
+});
+document.getElementById('scroll-popup-btn').addEventListener('click', () => {
+    const popup = document.getElementById('scroll-popup');
+    popup.style.transition = 'opacity 0.3s ease';
+    popup.style.opacity = '0';
+    setTimeout(() => popup.remove(), 300);
 });
     </script>
 

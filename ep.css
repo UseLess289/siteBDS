@@ -297,7 +297,7 @@ main {
 }
 
 .ep-card:nth-child(1) .face2 {
-    background: #2d2d2d;
+    background: #0a0a0a;
 }
 
 .ep-card:nth-child(2) .face2 {
@@ -310,7 +310,7 @@ main {
 
 /* Trait coloré en bas */
 .ep-card:nth-child(1) .face2::after {
-    --accent: #ffffff;
+    --accent: #ffffff;  
 }
 
 .ep-card:nth-child(2) .face2::after {

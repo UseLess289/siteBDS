@@ -29,13 +29,15 @@ protect.getData()
 function init() {
     loadOrders();
     document.getElementById('refresh-btn').addEventListener('click', loadOrders);
+    document.getElementById('qg-select').addEventListener('change', loadOrders);
     document.getElementById('logout-btn').addEventListener('click', () => protect.logout());
     setInterval(loadOrders, 30_000);
 }
 
 async function loadOrders() {
     try {
-        const res = await fetch(`${API_URL}/commandes`);
+        const qg = document.getElementById('qg-select').value;
+        const res = await fetch(`${API_URL}/commandes?qg=${qg}`);
         const commandes = await res.json();
         renderOrders(commandes);
         updateStats(commandes);

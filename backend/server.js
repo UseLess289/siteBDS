@@ -45,7 +45,10 @@ app.post('/commandes', async (req, res) => {
 });
 
 app.get('/commandes', async (req, res) => {
-    const result = await pool.query('SELECT * FROM commandes ORDER BY created_at DESC');
+    const { qg } = req.query;
+    const result = qg
+        ? await pool.query('SELECT * FROM commandes WHERE qg = $1 ORDER BY created_at DESC', [qg])
+        : await pool.query('SELECT * FROM commandes ORDER BY created_at DESC');
     res.json(result.rows);
 });
 
