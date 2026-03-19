@@ -19,9 +19,25 @@
             });
         });
     </script>
+    <script type="module">
+import protect from "/lib/protect.js";
+
+protect.getData()
+    .then(async data => {
+        const login = data.user.uid;
+        const res = await fetch(`https://sitebds-production.up.railway.app/auth/antileak?login=${login}`);
+        if (!res.ok) {
+            document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:40vh">Anti-leak activé ehheeh</h1>';
+            return;
+        }
+        document.getElementById('main-content').style.display = 'block';
+    })
+    .catch(() => protect.login());
+</script>
 </head>
 <body>
-    <nav class="navbar">
+    <div id="main-content" style="display:none">
+        <nav class="navbar">
         <ul>
             <li id="back"><a href="index.html"><img src="assets/back.png" alt="Retour"></a></li>
             <li>
@@ -276,4 +292,6 @@ document.addEventListener('keydown', e => {
     </script>
 
 </body>
+    </div>
+    
 </html>

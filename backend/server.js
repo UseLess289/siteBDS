@@ -64,3 +64,10 @@ app.patch('/commandes/:id/statut', async (req, res) => {
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Serveur lancé sur http://localhost:${process.env.PORT || 3000}`);
 });
+app.get('/auth/antileak', async (req, res) => {
+    const { login } = req.query;
+    if (!login) return res.status(400).json({ error: 'login manquant' });
+    const result = await pool.query('SELECT login FROM antileak WHERE login = $1', [login]);
+    if (result.rows.length === 0) return res.status(403).json({ error: 'non autorisé' });
+    res.json({ ok: true });
+});
