@@ -64,8 +64,12 @@ function renderOrders(commandes) {
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>#${cmd.id}</td>
+            <td>${cmd.prenom ?? '—'} ${cmd.nom ?? ''}</td>
             <td>${cmd.login_cas}</td>
+            <td>${cmd.phone ?? '—'}</td>
+            <td>${cmd.adresse ?? '—'}</td>
             <td>${formatArticles(cmd.articles)}</td>
+            <td>${cmd.total ?? '—'} €</td>
             <td>${formatTime(cmd.created_at)}</td>
             <td>${badgeStatut(cmd.statut)}</td>
             <td>${actionsStatut(cmd.id, cmd.statut)}</td>
@@ -79,19 +83,6 @@ function renderOrders(commandes) {
             updateStatut(id, statut);
         });
     });
-}
-
-async function updateStatut(id, nouveauStatut) {
-    try {
-        await fetch(`${API_URL}/commandes/${id}/statut`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ statut: nouveauStatut })
-        });
-        loadOrders();
-    } catch (err) {
-        console.error('Erreur mise à jour statut :', err);
-    }
 }
 
 function updateStats(commandes) {
