@@ -1,0 +1,246 @@
+#commande-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+}
+
+#commande-modal.show {
+    display: flex;
+}
+
+.commande-modal-bg {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+}
+
+.commande-modal-box {
+    position: relative;
+    z-index: 1;
+    width: 90%;
+    max-width: 540px;
+    max-height: 88vh;
+    overflow-y: auto;
+    background: #1a1a1a;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 28px 28px;
+    color: #e8e8e8;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    animation: modalIn 0.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes modalIn {
+    from { opacity: 0; transform: scale(0.94); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.commande-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.commande-modal-header h2 {
+    font-family: 'Noto Sans Mono', monospace;
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+#modal-close {
+    background: transparent;
+    border: none;
+    color: #666;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.2s;
+    font-family: 'Noto Sans Mono', monospace;
+}
+
+#modal-close:hover { color: #fff; }
+
+.commande-modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.commande-form-row {
+    display: flex;
+    gap: 12px;
+}
+
+.commande-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.commande-field label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #666;
+    font-family: 'Noto Sans Mono', monospace;
+}
+
+.commande-field input {
+    background: #242424;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: #e8e8e8;
+    font-family: 'Noto Sans Mono', monospace;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.commande-field input:focus {
+    border-color: rgba(255,255,255,0.3);
+}
+
+.commande-field input::placeholder {
+    color: #444;
+}
+
+.commande-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.menu-ligne {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #242424;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 10px 14px;
+}
+
+.menu-ligne-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.menu-ligne-nom {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #e8e8e8;
+    font-family: 'Noto Sans Mono', monospace;
+}
+
+.menu-ligne-prix {
+    font-size: 0.75rem;
+    color: #666;
+    font-family: 'Noto Sans Mono', monospace;
+}
+
+.menu-ligne-counter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.counter-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: #333;
+    color: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+    font-family: 'Noto Sans Mono', monospace;
+    line-height: 1;
+}
+
+.counter-btn:hover { background: #444; }
+
+.counter-val {
+    font-family: 'Noto Sans Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    min-width: 20px;
+    text-align: center;
+    color: #fff;
+}
+
+.commande-total {
+    text-align: right;
+    font-family: 'Noto Sans Mono', monospace;
+    font-size: 1rem;
+    color: #aaa;
+    padding-top: 4px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+}
+
+#commande-total-price {
+    color: #fff;
+    font-weight: 900;
+    font-size: 1.2rem;
+}
+
+#commande-submit {
+    background: #fff;
+    color: #111;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-family: 'Noto Sans Mono', monospace;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+}
+
+#commande-submit:hover {
+    opacity: 0.9;
+    transform: scale(1.01);
+}
+
+#commande-submit:active {
+    transform: scale(0.98);
+}
+
+#commande-confirm-msg {
+    text-align: center;
+    font-family: 'Noto Sans Mono', monospace;
+    font-size: 0.85rem;
+    color: #22c55e;
+    min-height: 1em;
+}
+
+@media (max-width: 768px) {
+    .commande-modal-box {
+        padding: 20px 16px;
+        max-height: 92vh;
+    }
+
+    .commande-form-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
