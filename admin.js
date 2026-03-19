@@ -4,26 +4,25 @@ const API_URL = 'https://sitebds-production.up.railway.app';
 
 let currentUser = null;
 
-fetch(`${API_URL}/admin/me`, { credentials: 'include' })
-    .then(async res => {
+protect.getData()
+    .then(async data => {
+        currentUser = data.user.uid;
+
+        const res = await fetch(`${API_URL}/auth/verify?login=${currentUser}`);
+
         if (!res.ok) {
-            window.location.href = `${API_URL}/admin/login`;
+            document.getElementById('access-denied').style.display = 'flex';
             return;
         }
-        const data = await res.json();
-        currentUser = data.login;
+
         document.getElementById('admin-app').style.display = 'block';
         document.getElementById('admin-user').textContent = currentUser;
         init();
     })
-    .catch(() => {
-        window.location.href = `${API_URL}/admin/login`;
+    .catch(err => {
+        console.error('protect.getData() a échoué :', err);
+        protect.login();
     });
-
-document.getElementById('logout-btn').addEventListener('click', () => {
-    fetch(`${API_URL}/admin/logout`, { credentials: 'include' })
-        .then(() => { window.location.href = `${API_URL}/admin/login`; });
-});
 
 function init() {
     loadOrders();
