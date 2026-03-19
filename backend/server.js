@@ -5,20 +5,18 @@ const cors = require('cors');
 const pool = require('./db');
 
 const app = express();
-const { Issuer, generators } = require('openid-client');
+const { discovery, randomState, randomNonce, authorizationCodeGrant, fetchUserInfo } = require('openid-client');
 
-let oidcClient = null;
+let oidcConfig = null;
 
-async function getOidcClient() {
-    if (oidcClient) return oidcClient;
-    const issuer = await Issuer.discover(process.env.OPENID_ISSUER);
-    oidcClient = new issuer.Client({
-        client_id:     process.env.OPENID_CLIENT_ID,
-        client_secret: process.env.OPENID_CLIENT_SECRET,
-        redirect_uris: [process.env.OPENID_REDIRECT_URI],
-        response_types: ['code'],
-    });
-    return oidcClient;
+async function getOidcConfig() {
+    if (oidcConfig) return oidcConfig;
+    oidcConfig = await discovery(
+        new URL(process.env.OPENID_ISSUER),
+        process.env.OPENID_CLIENT_ID,
+        process.env.OPENID_CLIENT_SECRET
+    );
+    return oidcConfig;
 }
 app.use(cors({
     origin: [
@@ -85,38 +83,42 @@ app.get('/auth/antileak', async (req, res) => {
     if (result.rows.length === 0) return res.status(403).json({ error: 'non autorisé' });
     res.json({ ok: true });
 });
+
 app.get('/admin/login', async (req, res) => {
-    const client       = await getOidcClient();
-    const state        = generators.state();
-    const nonce        = generators.nonce();
-    req.session.state  = state;
-    req.session.nonce  = nonce;
-    const url = client.authorizationUrl({
-        scope: 'openid profile email',
+    const config = await getOidcConfig();
+    const state  = randomState();
+    const nonce  = randomNonce();
+    req.session.state = state;
+    req.session.nonce = nonce;
+    const params = new URLSearchParams({
+        response_type: 'code',
+        client_id:     process.env.OPENID_CLIENT_ID,
+        redirect_uri:  process.env.OPENID_REDIRECT_URI,
+        scope:         'openid profile email',
         state,
         nonce,
     });
-    res.redirect(url);
+    const authUrl = `${config.serverMetadata().authorization_endpoint}?${params}`;
+    res.redirect(authUrl);
 });
 
 app.get('/callback', async (req, res) => {
     try {
-        const client        = await getOidcClient();
-        const params        = client.callbackParams(req);
-        const tokenSet      = await client.callback(
-            process.env.OPENID_REDIRECT_URI,
-            params,
-            { state: req.session.state, nonce: req.session.nonce }
-        );
-        const userinfo      = await client.userinfo(tokenSet.access_token);
-        const login         = userinfo.uid || userinfo.preferred_username;
+        const config   = await getOidcConfig();
+        const tokens   = await authorizationCodeGrant(config, new URL(`${process.env.OPENID_REDIRECT_URI}?${new URLSearchParams(req.query)}`), {
+            pkceCodeVerifier: undefined,
+            expectedState: req.session.state,
+            expectedNonce: req.session.nonce,
+        });
+        const userinfo = await fetchUserInfo(config, tokens.access_token, tokens.claims().sub);
+        const login    = userinfo.uid || userinfo.preferred_username;
 
         const result = await pool.query('SELECT login FROM admins WHERE login = $1', [login]);
         if (result.rows.length === 0) {
             return res.redirect('https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr/admin.html?error=unauthorized');
         }
 
-        req.session.user = login;
+        req.session.user          = login;
         req.session.authenticated = true;
         res.redirect('https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr/admin.html');
     } catch (err) {
