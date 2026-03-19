@@ -53,8 +53,7 @@ app.get('/admin/login', async (req, res) => {
     const config = await getOidcConfig();
     const state  = randomState();
     const nonce  = randomNonce();
-    req.session.state = state;
-    req.session.nonce = nonce;
+
     const params = new URLSearchParams({
         response_type: 'code',
         client_id:     process.env.OPENID_CLIENT_ID,
@@ -69,13 +68,16 @@ app.get('/admin/login', async (req, res) => {
 
 app.get('/callback', async (req, res) => {
     try {
-        console.log('Callback reçu, session state:', req.session.state);
-        const config   = await getOidcConfig();
-        const tokens   = await authorizationCodeGrant(config, new URL(`${process.env.OPENID_REDIRECT_URI}?${new URLSearchParams(req.query)}`), {
-            pkceCodeVerifier: undefined,
-            expectedState:    req.session.state,
-            expectedNonce:    req.session.nonce,
-        });
+        const config = await getOidcConfig();
+        const tokens = await authorizationCodeGrant(
+            config,
+            new URL(`${process.env.OPENID_REDIRECT_URI}?${new URLSearchParams(req.query)}`),
+            {
+                pkceCodeVerifier: undefined,
+                expectedState: req.query.state,
+                expectedNonce: undefined,
+            }
+        );
         const userinfo = await fetchUserInfo(config, tokens.access_token, tokens.claims().sub);
         const login    = userinfo.uid || userinfo.preferred_username;
 
