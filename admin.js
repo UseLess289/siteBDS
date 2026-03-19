@@ -99,7 +99,7 @@ function formatArticles(articles) {
 }
 
 function formatTime(isoString) {
-    return new Date(isoString).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+    return new Date(isoString).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' });
 }
 
 function badgeStatut(statut) {
