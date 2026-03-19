@@ -49,7 +49,7 @@ app.post('/commandes', async (req, res) => {
     if (!login_cas || !articles) return res.status(400).json({ error: 'données manquantes' });
     const result = await pool.query(
         'INSERT INTO commandes (login_cas, prenom, nom, tel, adresse, articles, qg, total) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *',
-        [login_cas, prenom, nom, tel, adresse, JSON.stringify(articles), qg, total]
+        [login_cas, prenom, nom, phone, adresse, JSON.stringify(articles), qg, total, cost]
     );
     res.json(result.rows[0]);
 });

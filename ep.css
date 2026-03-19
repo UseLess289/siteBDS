@@ -546,13 +546,3 @@ main {
         opacity: 0.3;
     }
 }
-.commande-field input {
-    position: relative;
-    z-index: 100001;
-    pointer-events: auto;
-}
-
-.commande-modal-box {
-    position: relative;
-    z-index: 100001;
-}
