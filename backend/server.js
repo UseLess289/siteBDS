@@ -44,12 +44,14 @@ app.post('/commandes', async (req, res) => {
     res.json(result.rows[0]);
 });
 
-app.get('/commandes', async (req, res) => {
-    const { qg } = req.query;
-    const result = qg
-        ? await pool.query('SELECT * FROM commandes WHERE qg = $1 ORDER BY created_at DESC', [qg])
-        : await pool.query('SELECT * FROM commandes ORDER BY created_at DESC');
-    res.json(result.rows);
+app.post('/commandes', async (req, res) => {
+    const { login_cas, prenom, nom, tel, adresse, articles, qg, total } = req.body;
+    if (!login_cas || !articles) return res.status(400).json({ error: 'données manquantes' });
+    const result = await pool.query(
+        'INSERT INTO commandes (login_cas, prenom, nom, tel, adresse, articles, qg, total) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *',
+        [login_cas, prenom, nom, tel, adresse, JSON.stringify(articles), qg, total]
+    );
+    res.json(result.rows[0]);
 });
 
 app.patch('/commandes/:id/statut', async (req, res) => {

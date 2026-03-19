@@ -291,7 +291,7 @@ input:checked+label .menu-grid {
     text-transform: uppercase;
 }
 
-input {
+input[type="radio"] {
     display: none;
 }
 

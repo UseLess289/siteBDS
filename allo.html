@@ -11,20 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="allo.css">
     <link rel="stylesheet" href="commande-modal.css">
-    <script type="module">
-        import protect from "/lib/protect.js";
-
-        document.getElementById('btn-commande').addEventListener('click', async (e) => {
-            e.preventDefault();
-
-            try {
-                const user = await protect.getData();
-                envoyerCommande(user);
-            } catch {
-                protect.login();
-            }
-        });
-
+    <script type="module">  
         function envoyerCommande(user) {
             console.log('Commande envoyée par', user.login);
         }
@@ -66,7 +53,7 @@
                         <h4>QG - Talence</h4>
                         <p class="tel">Tel : 06.XX.XX.XX.XX</p>
                     </div>
-                    <button id="btn-commande" class="command">Commander</button>
+                    <button class="command">Commander</button>
                 </div>
             </label>
             <input type="radio" name="slide" id="c2" >
@@ -89,7 +76,7 @@
                         <h4>QG - Bordeaux</h4>
                         <p class="tel">Tel : 06.XX.XX.XX.XX</p>
                     </div>
-                    <button id="btn-commande" class="command">Commander</button>
+                    <button class="command">Commander</button>
                 </div>
             </label>
             <input type="radio" name="slide" id="c3" >
@@ -108,13 +95,57 @@
                         <h4>QG - Pessac</h4>
                         <p class="tel">Tel : 06.XX.XX.XX.XX</p>
                     </div>
-                    <button id="btn-commande" class="command">Commander</button>
+                    <button class="command">Commander</button>
                 </div>
             </label>
        </div>
     </div>
     
     </main>
+    <div id="commande-modal">
+    <div class="commande-modal-bg"></div>
+    <div class="commande-modal-box">
+        <div class="commande-modal-header">
+            <h2 id="modal-qg-title">Commander</h2>
+            <button id="modal-close">✕</button>
+        </div>
+
+        <div class="commande-modal-body">
+            <div class="commande-form-row">
+                <div class="commande-field">
+                    <label>Prénom</label>
+                    <input type="text" id="field-prenom" placeholder="Prénom">
+                </div>
+                <div class="commande-field">
+                    <label>Nom</label>
+                    <input type="text" id="field-nom" placeholder="Nom">
+                </div>
+            </div>
+
+            <div class="commande-form-row">
+                <div class="commande-field">
+                    <label>Téléphone</label>
+                    <input type="tel" id="field-tel" placeholder="06 XX XX XX XX">
+                </div>
+            </div>
+
+            <div class="commande-field">
+                <label>Adresse de livraison</label>
+                <input type="text" id="field-adresse" placeholder="Bâtiment, salle...">
+            </div>
+
+            <div class="commande-menu" id="commande-menu">
+            </div>
+
+            <div class="commande-total">
+                Total : <span id="commande-total-price">0.00 €</span>
+            </div>
+        </div>
+
+        <button id="commande-submit">Confirmer la commande</button>
+        <p id="commande-confirm-msg"></p>
+    </div>
+</div>
     <script type="module" src="commande.js"></script>
 </body>
 
