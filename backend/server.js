@@ -141,6 +141,23 @@ app.get('/admin/logout', (req, res) => {
     req.session.destroy();
     res.json({ ok: true });
 });
+const pgSession = require('connect-pg-simple')(session);
+
+app.use(session({
+    store: new pgSession({
+        pool,
+        tableName: 'sessions'
+    }),
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: true,
+        sameSite: 'none',
+        maxAge: 24 * 60 * 60 * 1000
+    }
+}));
+
 
 
 
