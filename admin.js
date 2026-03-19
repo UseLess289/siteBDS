@@ -70,7 +70,6 @@ function renderOrders(commandes) {
             <td>${cmd.adresse ?? '—'}</td>
             <td>${formatArticles(cmd.articles)}</td>
             <td>${cmd.total ?? '—'} €</td>
-            <td>${formatTime(cmd.created_at)}</td>
             <td>${badgeStatut(cmd.statut)}</td>
             <td>${actionsStatut(cmd.id, cmd.statut)}</td>
         `;
@@ -91,7 +90,18 @@ function updateStats(commandes) {
     document.getElementById('stat-progress').textContent = commandes.filter(c => c.statut === 'en cours').length;
     document.getElementById('stat-done').textContent = commandes.filter(c => c.statut === 'livrée').length;
 }
-
+async function updateStatut(id, nouveauStatut) {
+    try {
+        await fetch(`${API_URL}/commandes/${id}/statut`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ statut: nouveauStatut })
+        });
+        loadOrders();
+    } catch (err) {
+        console.error('Erreur mise à jour statut :', err);
+    }
+}
 function formatArticles(articles) {
     return Object.entries(articles)
         .map(([nom, qte]) => `${qte}× ${nom}`)

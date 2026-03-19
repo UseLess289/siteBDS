@@ -11,10 +11,10 @@
 
     <div id="access-denied" style="display:none">
         <h1>Accès refusé</h1>
-            <p>Cette page réservé à l'équipage de Pirateirb permet à tous les pirates de livrer les élèves.<br>
-                Tu n'y as pas accès.<br>
-                Tu peux toujours contacter Gabriel ou Samuel.
-            </p>
+        <p>Cette page réservée à l'équipage de Pirat'eirb permet à tous les pirates de livrer les élèves.<br>
+            Tu n'y as pas accès.<br>
+            Tu peux toujours contacter Gabriel ou Samuel.
+        </p>
     </div>
 
     <div id="admin-app" style="display:none">
@@ -25,7 +25,7 @@
                 <h1>ALLO <span class="tag">ADMIN</span></h1>
             </div>
             <div id="header-right">
-                <span id="admin-user"><!-- login CAS  --></span>
+                <span id="admin-user"></span>
                 <button id="logout-btn">Déconnexion</button>
             </div>
         </header>
@@ -55,7 +55,6 @@
 
             <section id="orders-section">
                 <div id="orders-toolbar">
-                    <div id="orders-toolbar">
                     <select id="qg-select">
                         <option value="talence">QG — Talence</option>
                         <option value="bordeaux">QG — Bordeaux</option>
@@ -63,7 +62,6 @@
                     </select>
                     <span id="last-update">Dernière mise à jour : —</span>
                     <button id="refresh-btn">↻ Actualiser</button>
-                </div>
                 </div>
 
                 <table id="orders-table">
@@ -76,30 +74,30 @@
                             <th>Adresse</th>
                             <th>Articles</th>
                             <th>Total</th>
-                            <th>Heure</th>
                             <th>Statut</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="orders-body">
                         <tr id="empty-row">
-                            <td colspan="6">Aucune commande pour l'instant.</td>
+                            <td colspan="9">Aucune commande pour l'instant.</td>
                         </tr>
                     </tbody>
                 </table>
             </section>
+
             <section id="music">
-    <iframe 
-        width="100%" 
-        height="315" 
-        src="https://www.youtube.com/embed/pN5WavYxOoo?si=ExzOl6nLuRRIFKoV&autoplay=1&mute=1" 
-        title="YouTube video player" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-        referrerpolicy="strict-origin-when-cross-origin" 
-        allowfullscreen>
-    </iframe>
-</section>
+                <iframe
+                    width="100%"
+                    height="315"
+                    src="https://www.youtube.com/embed/pN5WavYxOoo?si=ExzOl6nLuRRIFKoV&autoplay=1&mute=1"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+            </section>
 
         </main>
     </div>
