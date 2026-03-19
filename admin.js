@@ -4,27 +4,26 @@ const API_URL = 'https://sitebds-production.up.railway.app';
 
 let currentUser = null;
 
-protect.getData()
-    .then(async data => {
-        currentUser = data.user.uid;
-        console.log('login récupéré :', currentUser);
-
-        const res = await fetch(`${API_URL}/auth/verify?login=${currentUser}`);
-        console.log('verify status :', res.status);
-
+fetch(`${API_URL}/admin/me`, { credentials: 'include' })
+    .then(async res => {
         if (!res.ok) {
-            document.getElementById('access-denied').style.display = 'flex';
+            window.location.href = `${API_URL}/admin/login`;
             return;
         }
-
+        const data = await res.json();
+        currentUser = data.login;
         document.getElementById('admin-app').style.display = 'block';
         document.getElementById('admin-user').textContent = currentUser;
         init();
     })
-    .catch(err => {
-        console.error('protect.getData() a échoué :', err);
-        protect.login();
+    .catch(() => {
+        window.location.href = `${API_URL}/admin/login`;
     });
+
+document.getElementById('logout-btn').addEventListener('click', () => {
+    fetch(`${API_URL}/admin/logout`, { credentials: 'include' })
+        .then(() => { window.location.href = `${API_URL}/admin/login`; });
+});
 
 function init() {
     loadOrders();
@@ -53,14 +52,16 @@ function renderOrders(commandes) {
 
     [...tbody.querySelectorAll('tr:not(#empty-row)')].forEach(r => r.remove());
 
-    if (commandes.length === 0) {
+    const actives = commandes.filter(c => c.statut !== 'livrée');
+
+    if (actives.length === 0) {
         emptyRow.style.display = '';
         return;
     }
 
     emptyRow.style.display = 'none';
 
-    commandes.forEach(cmd => {
+    actives.forEach(cmd => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>#${cmd.id}</td>
@@ -85,11 +86,12 @@ function renderOrders(commandes) {
 }
 
 function updateStats(commandes) {
-    document.getElementById('stat-total').textContent = commandes.length;
-    document.getElementById('stat-pending').textContent = commandes.filter(c => c.statut === 'en attente').length;
+    document.getElementById('stat-total').textContent    = commandes.length;
+    document.getElementById('stat-pending').textContent  = commandes.filter(c => c.statut === 'en attente').length;
     document.getElementById('stat-progress').textContent = commandes.filter(c => c.statut === 'en cours').length;
-    document.getElementById('stat-done').textContent = commandes.filter(c => c.statut === 'livrée').length;
+    document.getElementById('stat-done').textContent     = commandes.filter(c => c.statut === 'livrée').length;
 }
+
 async function updateStatut(id, nouveauStatut) {
     try {
         await fetch(`${API_URL}/commandes/${id}/statut`, {

@@ -5,7 +5,21 @@ const cors = require('cors');
 const pool = require('./db');
 
 const app = express();
+const { Issuer, generators } = require('openid-client');
 
+let oidcClient = null;
+
+async function getOidcClient() {
+    if (oidcClient) return oidcClient;
+    const issuer = await Issuer.discover(process.env.OPENID_ISSUER);
+    oidcClient = new issuer.Client({
+        client_id:     process.env.OPENID_CLIENT_ID,
+        client_secret: process.env.OPENID_CLIENT_SECRET,
+        redirect_uris: [process.env.OPENID_REDIRECT_URI],
+        response_types: ['code'],
+    });
+    return oidcClient;
+}
 app.use(cors({
     origin: [
         'http://localhost:5500',
@@ -71,7 +85,57 @@ app.get('/auth/antileak', async (req, res) => {
     if (result.rows.length === 0) return res.status(403).json({ error: 'non autorisé' });
     res.json({ ok: true });
 });
+app.get('/admin/login', async (req, res) => {
+    const client       = await getOidcClient();
+    const state        = generators.state();
+    const nonce        = generators.nonce();
+    req.session.state  = state;
+    req.session.nonce  = nonce;
+    const url = client.authorizationUrl({
+        scope: 'openid profile email',
+        state,
+        nonce,
+    });
+    res.redirect(url);
+});
 
+app.get('/callback', async (req, res) => {
+    try {
+        const client        = await getOidcClient();
+        const params        = client.callbackParams(req);
+        const tokenSet      = await client.callback(
+            process.env.OPENID_REDIRECT_URI,
+            params,
+            { state: req.session.state, nonce: req.session.nonce }
+        );
+        const userinfo      = await client.userinfo(tokenSet.access_token);
+        const login         = userinfo.uid || userinfo.preferred_username;
+
+        const result = await pool.query('SELECT login FROM admins WHERE login = $1', [login]);
+        if (result.rows.length === 0) {
+            return res.redirect('https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr/admin.html?error=unauthorized');
+        }
+
+        req.session.user = login;
+        req.session.authenticated = true;
+        res.redirect('https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr/admin.html');
+    } catch (err) {
+        console.error('Callback error:', err);
+        res.redirect('https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr/admin.html?error=auth_failed');
+    }
+});
+
+app.get('/admin/me', (req, res) => {
+    if (!req.session.authenticated) {
+        return res.status(401).json({ error: 'non authentifié' });
+    }
+    res.json({ login: req.session.user });
+});
+
+app.get('/admin/logout', (req, res) => {
+    req.session.destroy();
+    res.json({ ok: true });
+});
 
 
 
