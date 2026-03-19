@@ -99,6 +99,9 @@ app.get('/admin/login', async (req, res) => {
         nonce,
     });
     const authUrl = `${config.serverMetadata().authorization_endpoint}?${params}`;
+    
+    console.log('Auth URL générée :', authUrl); 
+    
     res.redirect(authUrl);
 });
 
