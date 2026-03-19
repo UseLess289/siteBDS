@@ -1,6 +1,5 @@
 import protect from "/lib/protect.js";
 
-
 const API_URL = 'https://sitebds-production.up.railway.app';
 
 let currentUser = null;
@@ -8,8 +7,11 @@ let currentUser = null;
 protect.getData()
     .then(async data => {
         currentUser = data.user.uid;
+        console.log('login récupéré :', currentUser);
 
         const res = await fetch(`${API_URL}/auth/verify?login=${currentUser}`);
+        console.log('verify status :', res.status);
+
         if (!res.ok) {
             document.getElementById('access-denied').style.display = 'flex';
             return;
@@ -19,21 +21,22 @@ protect.getData()
         document.getElementById('admin-user').textContent = currentUser;
         init();
     })
-    .catch(() => protect.login()); function init() {
-        loadOrders();
+    .catch(err => {
+        console.error('protect.getData() a échoué :', err);
+        protect.login();
+    });
 
-        document.getElementById('refresh-btn').addEventListener('click', loadOrders);
-        document.getElementById('logout-btn').addEventListener('click', () => protect.logout());
-
-        // refresh auto 30sec
-        setInterval(loadOrders, 30_000);
-    }
+function init() {
+    loadOrders();
+    document.getElementById('refresh-btn').addEventListener('click', loadOrders);
+    document.getElementById('logout-btn').addEventListener('click', () => protect.logout());
+    setInterval(loadOrders, 30_000);
+}
 
 async function loadOrders() {
     try {
         const res = await fetch(`${API_URL}/commandes`);
         const commandes = await res.json();
-
         renderOrders(commandes);
         updateStats(commandes);
         updateTimestamp();
@@ -46,7 +49,6 @@ function renderOrders(commandes) {
     const tbody = document.getElementById('orders-body');
     const emptyRow = document.getElementById('empty-row');
 
-    // Vider les lignes existantes (sauf empty-row)
     [...tbody.querySelectorAll('tr:not(#empty-row)')].forEach(r => r.remove());
 
     if (commandes.length === 0) {
@@ -84,7 +86,7 @@ async function updateStatut(id, nouveauStatut) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ statut: nouveauStatut })
         });
-        loadOrders(); // refresh
+        loadOrders();
     } catch (err) {
         console.error('Erreur mise à jour statut :', err);
     }
