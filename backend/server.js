@@ -34,15 +34,6 @@ app.get('/auth/verify', async (req, res) => {
     res.json({ ok: true });
 });
 
-app.post('/commandes', async (req, res) => {
-    const { login_cas, articles } = req.body;
-    if (!login_cas || !articles) return res.status(400).json({ error: 'données manquantes' });
-    const result = await pool.query(
-        'INSERT INTO commandes (login_cas, articles) VALUES ($1, $2) RETURNING *',
-        [login_cas, JSON.stringify(articles)]
-    );
-    res.json(result.rows[0]);
-});
 
 app.post('/commandes', async (req, res) => {
     const { login_cas, prenom, nom, tel, adresse, articles, qg, total } = req.body;

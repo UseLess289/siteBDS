@@ -79,6 +79,11 @@ function closeModal() {
 }
 
 function renderMenu(qg) {
+    function nomToId(nom) {
+    return nom.normalize('NFD').replace(/[\u0300-\u036f]/g, '') 
+              .replace(/[^a-zA-Z0-9]/g, '-')       
+              .toLowerCase();
+}
     const container = document.getElementById('commande-menu');
     container.innerHTML = '';
 
@@ -94,7 +99,7 @@ function renderMenu(qg) {
             </div>
             <div class="menu-ligne-counter">
                 <button class="counter-btn" data-nom="${item.nom}" data-action="minus">−</button>
-                <span class="counter-val" id="qty-${item.nom.replace(/\s+/g, '-')}">0</span>
+                <span class="counter-val" id="qty-${nomToId(item.nom)}">0</span>
                 <button class="counter-btn" data-nom="${item.nom}" data-action="plus">+</button>
             </div>
         `;
@@ -108,8 +113,8 @@ function renderMenu(qg) {
             if (action === 'plus')  quantities[nom] = (quantities[nom] || 0) + 1;
             if (action === 'minus') quantities[nom] = Math.max(0, (quantities[nom] || 0) - 1);
 
-            const key = nom.replace(/\s+/g, '-');
-            document.getElementById(`qty-${key}`).textContent = quantities[nom];
+            const key = nomToId(nom);
+            document.getElementById(`qty-${key}`).textContent = quantities[nom];            
             updateTotal();
         });
     });
