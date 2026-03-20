@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 
 <head>
@@ -8,47 +7,263 @@
     <title>Pirat'eirb - Partenariats</title>
     <link rel="icon" type="image/png" href="assets/logo.png">
 
-            <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="global.css">
-<link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Satisfy&family=Zen+Dots&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="stylepart.css">
     <link rel="stylesheet" href="footer.css">
+    <script src="part.js"></script>
 </head>
 
 <body>
-    <nav>
-        <ul>
-            <li><a href="videos.html">Vidéos</a></li>
-            <li><a href="equipage.html">Équipage</a></li>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="partenaires.html">Partenariats</a></li>
-            <li><a href="allo.html">Allo</a></li>
-        </ul>
-    </nav>
 
-    
+    <div class="main"></div>
+
     <main>
-<h1>Nos Partenaires</h1>
+        <a href="index.html" class="logo">
+            <span class="letter">P</span>
+            <span class="letter">I</span>
+            <span class="letter">R</span>
+            <span class="letter">A</span>
+            <span class="letter">T</span>
+            <span class="letter">'</span>
+            <span class="letter">E</span>
+            <span class="letter">I</span>
+            <span class="letter">R</span>
+            <span class="letter">B</span>
+        </a>
 
-    <section>
-        <h2>Partenaire 1</h2>
-        <p>Description du partenaire 1.</p>
-    </section>
-
-    <section>
-        <h2>Partenaire 2</h2>
-        <p>Description du partenaire 2.</p>
-    </section>    </main>
-
-
-        <div id="site-footer"></div>
-    <script>
-        fetch("footer.html")
-          .then(r => r.text())
-          .then(html => { document.getElementById("site-footer").innerHTML = html; })
-          .catch(err => console.error("Failed to load footer:", err));
-    </script>
+    </main>
 
     
-</body>
 
+    <div class="frame-container partner-frame">
+        <div class="title">
+            <h1 class="glitch" data-text="Nos partenaires">Nos partenaires</h1>
+        </div>
+        <div class="partner-container">
+                <div class="card">
+                    <h2>Klub</h2>
+                    <p>
+                        <img src="assets/partenaires/klub.avif" alt="Klub" class="partner-logo">
+                        <br>L'application pour faire des économies partout en ville | -5€ avec le code PIRATEIRB
+                    </p>
+                    <a class="btn" href="https://www.klub-app.com/" target="_blank">EXPLORE</a>
+                </div>
+
+                <div class="card">
+                    <h2>Karos</h2>
+                    <p>
+                        <img src="assets/partenaires/karos.png" alt="Karos" class="partner-logo">
+                        <br>L'application de covoiturage pour les trajets du quotidien
+                    </p>
+                    <a class="btn" href="https://karos.fr/" target="_blank">EXPLORE</a>
+                </div>
+
+                <div class="card">
+                    <h2>Passe Montagne</h2>
+                    <p>
+                        <img src="assets/partenaires/passe_montagne.png" alt="Passe Montagne" class="partner-logo">
+                        <br>L'application pour faire des économies sur les actis à la montagne | -5€ avec le code PIRATEIRB
+                    </p>
+                    <a class="btn" href="https://www.passemontagne.fr/" target="_blank">EXPLORE</a>
+                </div>
+
+                <div class="card">
+                    <h2>Sumeria</h2>
+                    <p>
+                        <img src="assets/partenaires/sumeria.png" alt="Sumeria" class="partner-logo">
+                        <br>Sumeria
+                    </p>
+                    <a class="btn" href="https://sumeria.eu/" target="_blank">EXPLORE</a>
+        </div>
+    </div>
+
+    <div class="frame-container sponsor-frame">
+        <div class="title">
+            <h1 class="glitch" data-text="Nos donateurs">Nos donateurs</h1>
+        </div>
+        <div class="sponsor-container">
+            <div class="card">
+                <h2>Urban Quest</h2>
+                <p>
+                    <img src="assets/partenaires/urban_quest.png" alt="Urban Quest" class="partner-logo">
+                    <br>Le jeu de piste urbain interactif qui transforme la ville de Bordeaux en un immense terrain de jeu
+                </p>
+                <a class="btn" href="https://urbanquest.fr/jeux-de-piste/bordeaux/jeu-de-piste-a-bordeaux/" target="_blank">EXPLORE</a>
+            </div>
+                
+            <div class="card">
+                <h2>Improvidence</h2>
+                <p>
+                    <img src="assets/partenaires/logo-improvidence.svg" alt="Improvidence" class="partner-logo">
+                    <br>Le théâtre d'improvisation
+                </p>
+                <a class="btn" href="https://improvidence.fr/" target="_blank">EXPLORE</a>
+            </div>
+
+            <div class="card">
+                <h2>Jean Eustache</h2>
+                <p>
+                    <img src="assets/partenaires/jean_eustache.png" alt="Jean Eustache" class="partner-logo">
+                    <br>Le tiers-lieu bordelais
+                </p>
+                <a class="btn" href="https://www.webeustache.com/" target="_blank">EXPLORE</a>
+            </div>
+            
+            <div class="card">
+                <h2>Hoops Factory</h2>
+                <p>
+                    <img src="assets/partenaires/hoops_factory.png" alt="Hoops Factory" class="partner-logo">
+                    <br>Le centre de basket indoor
+                </p>
+                <a class="btn" href="https://www.hoopsfactory.com/" target="_blank">EXPLORE</a>
+            </div>
+            
+            <div class="card">
+                <h2>Escape the City</h2>
+                <p>
+                    <img src="assets/partenaires/escape_city.png" alt="Escape the City" class="partner-logo">
+                    <br>Le jeu d'escape game en ville ou bien à la maison | Profite de -15% avec le code : TOMBOLA26
+                </p>
+                <a class="btn" href="https://escapethecity.fr/" target="_blank">EXPLORE</a>
+            </div>
+
+            <div class="card">
+                <h2>La cité du vin</h2>
+                <p>
+                    <img src="assets/partenaires/cite_du_vin.svg" alt="Cité du Vin" class="partner-logo">
+                    <br>L'univers du vin
+                </p>
+                <a class="btn" href="https://www.laciteduvin.com/fr" target="_blank">EXPLORE</a>
+            </div>
+
+            <div class="card">
+                <h2>Cazcorp</h2>
+                <p>
+                    <img src="assets/partenaires/cazcorp.png" alt="Cazcorp" class="partner-logo">
+                    <br>Monsieur le 5A trop généreux
+                </p>
+                <a class="btn" href="https://www.cazcorp.fr/" target="_blank">EXPLORE</a>
+            </div>
+
+            <div class="card">
+                <h2>Virtual Room</h2>
+                <p>
+                    <img src="assets/partenaires/bordeaux_virtual_room.png" alt="Bordeaux Virtual Room" class="partner-logo">
+                    <br>Réalité virtuelle
+                </p>
+                <a class="btn" href="https://bordeaux.virtual-room.com/" target="_blank">EXPLORE</a>
+            </div>
+
+            <div class="card">
+                <h2>BO & CO Surf</h2>
+                <p>
+                    <img src="assets/partenaires/bo_co_surf.png" alt="BO & CO Surf" class="partner-logo">
+                    <br>École de surf
+                </p>
+                <a class="btn" href="https://bocosurf.com/" target="_blank">EXPLORE</a>
+            </div>
+
+            <div class="card">
+                <h2>L'Estrade</h2>
+                <p>
+                    <img src="assets/partenaires/estrade.svg" alt="L'estrade" class="partner-logo">
+                    <br>Le tiers-lieu de l'innovation sociale
+                </p>
+                <a class="btn" href="https://lestrade.club/" target="_blank">EXPLORE</a>
+            </div>
+
+            <div class="card">
+                <h2>Simfactory</h2>
+                <p>
+                    <img src="assets/partenaires/simfactory.png" alt="Simfactory" class="partner-logo">
+                    <br>Le tiers-lieu de l'innovation sociale
+                </p>
+                <a class="btn" href="https://www.simfactory.fr/" target="_blank">EXPLORE</a>
+            </div>
+
+            <div class="card">
+                <h2>Swedishfit</h2>
+                <p>
+                    <img src="assets/partenaires/swedishfit.svg" alt="Swedishfit" class="partner-logo">
+                    <br>Le fitness à domicile
+                </p>
+                <a class="btn" href="https://www.swedishfit.fr/" target="_blank">EXPLORE</a>
+            </div>
+
+            <div class="card">
+                <h2>La Burdigala</h2>
+                <p>
+                    <img src="assets/partenaires/burdigala.png" alt="La Burdigala" class="partner-logo">
+                    <br>De bonnes bières artisanales et locales
+                </p>
+                <a class="btn" href="https://www.bieredebordeaux.com/" target="_blank">EXPLORE</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="frame-container caterer-frame">
+        <div class="title">
+            <h1 class="glitch" data-text="Nos traiteurs">Nos traiteurs</h1>
+        </div>
+        <div class="caterer-container">
+            <div class="card">
+                <h2>Cassonade</h2>
+                <p>
+                    <img src="assets/partenaires/cassonade.png" alt="Cassonade" class="partner-logo">
+                    <br>De très bons cannelés
+                </p>
+                <a class="btn" href="https://www.cassonade.fr/" target="_blank">EXPLORE</a>
+            </div>
+            
+            <div class="card"> 
+                <h2>Le Kioske à Pizza</h2>
+                <p>
+                    <img src="assets/partenaires/kioske_pizza.png" alt="Le Kioske à Pizza" class="partner-logo">
+                    <br>Les meilleures pizzas
+                </p>
+                <a class="btn" href="https://www.le-kiosque-a-pizzas.com/" target="_blank">EXPLORE</a>
+            </div>
+
+            <div class="card">
+                <h2>Casa Faiola</h2>
+                <p>
+                    <img src="assets/partenaires/casa_faiola.png" alt="Casa Faiola" class="partner-logo">
+                    <br>Le meilleur plateau de fromages
+                </p>
+                <a class="btn" href="https://www.casafaiola.fr/" target="_blank">EXPLORE</a>
+            </div>
+
+            <div class="card">
+                <h2>Eat Sushi</h2>
+                <p>
+                    <img src="assets/partenaires/eatsushi.svg" alt="Eat Sushi" class="partner-logo">
+                    <br>Les meilleurs sushi de la ville
+                </p>
+                <a class="btn" href="https://www.eatsushi.fr/" target="_blank">EXPLORE</a>
+            </div>
+
+            <div class="card">
+                <h2>Jusqu'à la dernière miette</h2>
+                <p>
+                    <img src="assets/partenaires/derniere_miette.webp" alt="Jusqu'à la dernière miette" class="partner-logo">
+                    <br>Le meilleur plateau de fromages
+                </p>
+                <a class="btn" href="https://la-derniere-miette.fr/" target="_blank">EXPLORE</a>
+            </div>
+
+            <div class="card">
+                <h2>La mie câline</h2>
+                <p>
+                    <img src="assets/partenaires/mie_caline.png" alt="La mie câline" class="partner-logo">
+                    <br>Le meilleur plateau de fromages
+                </p>
+                <a class="btn" href="https://www.lamiecaline.com/" target="_blank">EXPLORE</a>
+            </div>
+        </div>
+    </div>
+</body>
 </html>

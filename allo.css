@@ -321,13 +321,14 @@ input:checked+label .description {
     backdrop-filter: blur(10px);
 }
 
-
 @media (max-width: 768px) {
-
 
     .title {
         top: 10px;
         gap: 0.03em;
+        left: 50%;
+        transform: translateX(-50%);
+        width: auto;
     }
 
     .title .letter {
@@ -339,27 +340,27 @@ input:checked+label .description {
         display: none;
     }
 
-
     .wrapper {
         height: auto;
         min-height: 100svh;
-        align-items: flex-start;
-        padding-top: 90px;
+        align-items: center;
+        justify-content: center;
+        padding-top: 120px;
         padding-bottom: 2.5em;
+        width: 100%;
     }
 
     .container {
-        position: relative; 
-        flex-direction: column;  
+        position: relative;
+        flex-direction: column;
         height: auto;
-        width: 92vw;
+        width: 75vw;
         margin: 0 auto;
         border-radius: 1.5em;
     }
 
-
     .card {
-        width: 100% !important; 
+        width: 100% !important;
         min-height: 68px;
         height: 68px;
         margin: 6px 0;
@@ -379,37 +380,46 @@ input:checked+label .description {
     .menu-grid {
         grid-template-columns: repeat(2, 1fr);
         height: auto;
-        max-height: 320px;
-        padding: 10px;
-        gap: 8px;
+        max-height: 280px;
+        padding: 8px;
+        gap: 6px;
     }
 
     .menu-name {
-        font-size: 1.1rem;
+        font-size: 0.8rem;
     }
 
     .menu-price {
-        font-size: 0.9rem;
+        font-size: 0.7rem;
+    }
+
+    .card > .row {
+        align-items: center;
     }
 
     .card > .row > .description {
-        width: auto; 
+        width: auto;
         flex: 1;
         min-width: 0;
+        height: auto;
     }
 
     .card > .row > .icon {
-        margin: 10px;
-        width: 42px;
-        height: 42px;
-        font-size: 0.78rem;
+        margin: 8px;
+        width: 36px;
+        height: 36px;
+        font-size: 0.7rem;
+        flex-shrink: 0;
     }
 
     .command {
-        font-size: 1.2rem;
-        padding: 8px 5px;
+        font-size: 0.75rem;
+        padding: 6px 8px;
         margin-bottom: 0.3em;
         margin-right: 0.3em;
+        width: auto;
+        align-self: flex-end;
+        flex-shrink: 0;
     }
 
     #back {
@@ -424,19 +434,22 @@ input:checked+label .description {
 }
 
 @media (max-width: 380px) {
-
     .title .letter {
         font-size: clamp(1.9rem, 14vw, 3.5rem);
     }
 
+    .container {
+        width: 85vw;
+    }
+
     .menu-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 6px;
-        padding: 8px;
+        gap: 5px;
+        padding: 6px;
     }
 
     .menu-name {
-        font-size: 0.95rem;
+        font-size: 0.72rem;
     }
 
     input:checked + label {

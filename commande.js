@@ -10,6 +10,8 @@ const MENUS = {
         { nom: 'Panini nutella',         prix: 1.50 },
         { nom: 'Panini fromage',         prix: 1.50 },
         { nom: 'Brownie / Cookie',       prix: 2.00 },
+        { nom: 'Encens',    prix: 6.50},
+        { nom: 'Puff goût paff',        prix: 1.50},
     ],
     bordeaux: [
         { nom: 'Crêpe sucre',           prix: 0.10 },
@@ -22,6 +24,8 @@ const MENUS = {
         { nom: 'Tiramisu oreo',          prix: 2.50 },
         { nom: 'Tiramisu café',          prix: 2.50 },
         { nom: 'Madeleine',              prix: 1.00 },
+        { nom: 'Encens',    prix: 6.50},
+        { nom: 'Puff goût paff',        prix: 1.50},
     ],
     pessac: [
         { nom: 'Crêpe sucre',           prix: 0.10 },
@@ -30,6 +34,8 @@ const MENUS = {
         { nom: 'Panini nutella',         prix: 1.50 },
         { nom: 'Panini fromage',         prix: 1.50 },
         { nom: 'Brownie / Cookie',       prix: 2.00 },
+        { nom: 'Encens',    prix: 6.50},
+        { nom: 'Puff goût paff',        prix: 1.50},
     ],
 };
 
