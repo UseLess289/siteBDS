@@ -4,24 +4,24 @@ const API_URL = 'https://sitebds-production.up.railway.app';
 
 let currentUser = null;
 
-protect.getData()
-    .then(async data => {
-        currentUser = data.user.uid;
-
-        const res = await fetch(`${API_URL}/auth/verify?login=${currentUser}`);
-
+fetch(`${API_URL}/admin/me`, { credentials: 'include' })
+    .then(async res => {
         if (!res.ok) {
-            document.getElementById('access-denied').style.display = 'flex';
+            if (!window.location.search.includes('error=')) {
+                window.location.href = `${API_URL}/admin/login`;
+            } else {
+                document.getElementById('access-denied').style.display = 'flex';
+            }
             return;
         }
-
+        const data = await res.json();
+        currentUser = data.login;
         document.getElementById('admin-app').style.display = 'block';
         document.getElementById('admin-user').textContent = currentUser;
         init();
     })
-    .catch(err => {
-        console.error('protect.getData() a échoué :', err);
-        protect.login();
+    .catch(() => {
+        window.location.href = `${API_URL}/admin/login`;
     });
 
 function init() {
@@ -29,6 +29,10 @@ function init() {
     document.getElementById('refresh-btn').addEventListener('click', loadOrders);
     document.getElementById('qg-select').addEventListener('change', loadOrders);
     document.getElementById('logout-btn').addEventListener('click', () => protect.logout());
+    document.getElementById('logout-btn').addEventListener('click', () => {
+    fetch(`${API_URL}/admin/logout`, { credentials: 'include' })
+        .then(() => { window.location.href = `${API_URL}/admin/login`; });
+});
     setInterval(loadOrders, 30_000);
 }
 

@@ -122,6 +122,54 @@ app.patch('/commandes/:id/statut', async (req, res) => {
     res.json(result.rows[0]);
 });
 
+app.get('/callback', async (req, res) => {
+    try {
+        const config = await getOidcConfig();
+        const rawState = req.query.state || '';
+        const [, expectedNonce] = rawState.split('|');
+
+        const tokens = await authorizationCodeGrant(
+            config,
+            new URL(`${process.env.OPENID_REDIRECT_URI}?${new URLSearchParams(req.query)}`),
+            { pkceCodeVerifier: undefined, expectedState: rawState, expectedNonce }
+        );
+
+        const userinfo = await fetchUserInfo(config, tokens.access_token, tokens.claims().sub);
+        const login = userinfo.uid || userinfo.preferred_username;
+
+        const result = await pool.query('SELECT login FROM admins WHERE login = $1', [login]);
+        if (result.rows.length === 0) {
+            return res.redirect('https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr/admin.html?error=unauthorized');
+        }
+
+        req.session.user = login;
+        req.session.authenticated = true;
+
+        req.session.save(err => {
+            if (err) return res.redirect('https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr/admin.html?error=session_error');
+            res.redirect('https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr/admin.html');
+        });
+    } catch (err) {
+        console.error('Callback error:', err);
+        res.redirect('https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr/admin.html?error=auth_failed');
+    }
+});
+
+app.get('/admin/me', (req, res) => {
+    if (!req.session.authenticated) return res.status(401).json({ error: 'non authentifié' });
+    res.json({ login: req.session.user });
+});
+
+
+app.get('/admin/logout', (req, res) => {
+    req.session.destroy();
+    res.json({ ok: true });
+});
+
+
+
+
+
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Serveur lancé sur http://localhost:${process.env.PORT || 3000}`);
 });
