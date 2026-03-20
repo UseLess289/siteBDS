@@ -43,12 +43,12 @@ function init() {
     document.getElementById('refresh-btn').addEventListener('click', loadOrders);
     document.getElementById('qg-select').addEventListener('change', loadOrders);
     document.getElementById('logout-btn').addEventListener('click', async () => {
-        await fetch(`${API_URL}/admin/logout`, {
-            headers: { 'x-admin-token': adminToken }
-        });
-        localStorage.removeItem('admin_token');
-        window.location.href = `${API_URL}/admin/login`;
+    await fetch(`${API_URL}/admin/logout`, {
+        headers: { 'x-admin-token': adminToken }
     });
+    localStorage.removeItem('admin_token');
+    window.location.href = 'https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr/index.html';
+});
     setInterval(loadOrders, 30_000);
 }
 

@@ -29,6 +29,7 @@ body {
     scrollbar-width: none;
     /* Firefox */
 }
+
 .allo {
     width: 9.5em;
     height: 4.5em;
@@ -53,7 +54,6 @@ body {
     text-transform: uppercase;
     color: #5e341e;
 
-    /* styles décoratifs */
     text-align: center;
     overflow: hidden;
     list-style: none;
@@ -151,7 +151,6 @@ body {
     pointer-events: none;
 }
 
-/* ── Calques parallax ── */
 .layer {
     position: absolute;
     inset: 0;
@@ -179,7 +178,6 @@ body {
     width: 100vw;
 }
 
-/* ── Hero wrapper ── */
 .hero__wrapper {
     position: absolute;
     top: 25vh;
@@ -193,12 +191,10 @@ body {
     align-items: stretch;
 }
 
-/* ── Panneau commun ── */
 .hero__content,
 .hero__nav {
     flex: 1;
     position: relative;
-    border-radius: 10px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 -4px 10px rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.26);
     background-image: url('assets/paper.jpg');
@@ -217,7 +213,6 @@ body {
     border-image: url('./assets/frame.png') 25 fill stretch;
 }
 
-/* ── Hero content ── */
 .hero__content {
     overflow: hidden;
     padding: clamp(15px, 4vw, 40px);
@@ -246,13 +241,11 @@ body {
     animation: bouncy-out 0.35s ease forwards;
 }
 
-/* ── Panneau navigation — colonne verticale ── */
 .hero__nav {
     display: flex;
     flex-direction: column;
     gap: 14px;
     padding: 36px 38px;
-    /* respire sous le cadre */
 }
 
 .hero__nav-btn {
@@ -279,7 +272,6 @@ body {
         0 4px 16px rgba(40, 15, 0, 0.3);
 }
 
-/* supprimé : plus de classes individuelles */
 
 .btn-particle {
     position: fixed;
@@ -337,7 +329,7 @@ body {
     z-index: 99999;
     background: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 1em;
     padding: 16px 28px;
     display: flex;
@@ -345,13 +337,20 @@ body {
     gap: 16px;
     color: white;
     font-family: var(--font-spaceGro);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     animation: fadeInUp 0.4s ease forwards;
 }
 
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateX(-50%) translateY(20px); }
-    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
 }
 
 #scroll-popup-btn {
@@ -366,7 +365,10 @@ body {
     transition: opacity 0.2s;
 }
 
-#scroll-popup-btn:hover { opacity: 0.8; }
+#scroll-popup-btn:hover {
+    opacity: 0.8;
+}
+
 .seagull,
 .ship {
     position: absolute;
@@ -379,23 +381,23 @@ body {
 .seagull {
     z-index: 14;
 }
+
 .precamp {
     z-index: 100;
     position: absolute;
     transform-origin: center center;
     pointer-events: none;
 }
+
 #precamp-wrapper {
     position: absolute;
     z-index: 100;
 }
 
 
-/* Tronque le texte dans la card */
 .bio-preview {
     display: -webkit-box;
     -webkit-line-clamp: 15;
-    /* nombre de lignes visibles */
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -404,7 +406,6 @@ body {
     cursor: pointer;
 }
 
-/* Modal */
 #bio-modal {
     display: none;
     position: fixed;
@@ -443,7 +444,6 @@ body {
     transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Même cadre que hero__content */
 .bio-modal-box::before {
     content: '';
     position: absolute;
@@ -529,6 +529,54 @@ body {
         /* Firefox */
     }
 }
+
+
+@media (max-width: 768px) {
+    #scroll-popup {
+        width: 60%;
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+        padding: 7px 10px;
+        font-size: 0.9rem;
+        bottom: 1.2em;
+        font-size: 0.6em;
+    }
+
+    #scroll-popup-btn {
+        font-size: 0.8em;
+        position: right;
+    }
+
+    .allo {
+        width: 6em;
+        height: 3em;
+        left: 0.8em;
+        top: 0.8em;
+        font-size: 0.75rem;
+        gap: 4px;
+        padding: 0.3em 0.4em;
+        background-image: none;
+        background-color: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .allo:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .allo::before {
+        content: none;
+        position: none;
+        z-index: 100000;
+    }
+
+}
+
+/*
 @media (max-width: 768px) {
 
     .allo {
@@ -556,7 +604,12 @@ body {
         text-shadow:
             1px 1px 0 #2b1405,
             2px 2px 0 #2b1405,
-            3px 3px 5px rgba(0,0,0,0.6);
+            3px 3px 5px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero__content::before,
+    .hero__nav::before {
+        border-image: none;
     }
 
     .hero__wrapper {
@@ -569,8 +622,8 @@ body {
     .hero__content {
         padding: 20px 24px;
         font-size: 0.85em;
-        width:50%;
-        left:25%;
+        width: 50%;
+        left: 25%;
         background-color: transparent;
         backdrop-filter: blur(10px);
     }
@@ -590,9 +643,12 @@ body {
         padding: 16px 20px;
         gap: 10px;
         width: 50%;
-        left:25%;
+        left: 25%;
     }
 
+    .hero__content:hover {
+        animation: none;
+    }
 
 
     #scroll-popup {
@@ -614,4 +670,10 @@ body {
         scrollbar-width: none;
         -ms-overflow-style: none;
     }
+
+    .hero__content,
+    .hero__nav {
+        background-image: none;
+    }
 }
+*/
