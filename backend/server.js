@@ -45,9 +45,6 @@ app.use(session({
     }
 }));
 
-app.get('/ping', (req, res) => {
-    res.json({ message: 'pong' });
-});
 
 app.get('/admin/login', async (req, res) => {
     const config = await getOidcConfig();
