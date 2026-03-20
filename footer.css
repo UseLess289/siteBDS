@@ -79,3 +79,34 @@ footer img {
     border: 8px solid transparent;
     border-image: url('./assets/frame.png') 25 fill stretch;
 }
+
+@media (max-width: 768px) {
+    .footer-pill::before {
+        content: '';
+        position: absolute;
+        inset: 0em;
+        pointer-events: none;
+        border: 4px solid transparent;
+        border-image: none !important;
+    }
+
+    .footer-pill {
+        position: relative;
+        height: max-content;
+        overflow: hidden;
+        border-radius: 4px;
+        padding: 5px 5px;
+        text-align: center;
+        background-image: none;
+        vertical-align: top;
+        color: #2a1005;
+        bottom: 1.5vh;
+        box-shadow: 0 8px 32px rgba(255, 255, 255, 0.3), 0 -4px 10px rgba(255, 255, 255, 0.2);
+        background-color: rgba(210, 85, 0, 0.15);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+
+    }
+
+}

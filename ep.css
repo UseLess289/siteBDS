@@ -9,7 +9,12 @@ body {
     /* IE and Edge */
     scrollbar-width: none;
     /* Firefox */
+    position: relative;
 
+}
+
+html {
+    overflow-x: hidden;
 }
 
 #bg-grid {
@@ -191,7 +196,7 @@ main {
     align-items: start;
     margin-bottom: 1em;
     position: sticky;
-    top:1em;
+    top: 1em;
 }
 
 .ep-card {
@@ -209,6 +214,7 @@ main {
     grid-column: 1;
     grid-row: 1;
 }
+
 .ep-card:nth-child(odd) {
     margin-top: 48px;
 }
@@ -270,7 +276,7 @@ main {
 
 .ep-card .face1 .track-links a:hover {
     background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.8);
+    border-color: #FF0000;
 }
 
 .ep-card .face2 {
@@ -289,6 +295,7 @@ main {
     height: 100%;
     object-fit: cover;
     display: block;
+    background-color: whitey;
 }
 
 .ep-card:hover .face2 {
@@ -308,9 +315,13 @@ main {
     background: #0a0a0a;
 }
 
+.ep-card:nth-child(4) .face2 {
+    background: #0a0a0a;
+}
+
 /* Trait coloré en bas */
 .ep-card:nth-child(1) .face2::after {
-    --accent: #ffffff;  
+    --accent: #ffffff;
 }
 
 .ep-card:nth-child(2) .face2::after {
@@ -320,8 +331,10 @@ main {
 .ep-card:nth-child(3) .face2::after {
     --accent: #20a049;
 }
+
 .ep-card:nth-child(4) .face2::after {
-    --accent: #fb00ff; /* adapte la couleur */
+    --accent: #fb00ff;
+    /* adapte la couleur */
 }
 
 .ep-card .face2::after {
@@ -460,7 +473,7 @@ main {
     #container__grille {
         display: grid;
         grid-template-columns: 1fr;
-        width: 100%;
+        width: 80%;
         max-width: 800px;
         min-width: 80%;
 
@@ -471,7 +484,7 @@ main {
 
     /* ===== CARDS ===== */
     .ep-card {
-        width: 100%;
+        width: 80%;
         aspect-ratio: 1 / 1;
         border-radius: 14px;
     }

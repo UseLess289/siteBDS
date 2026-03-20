@@ -1,8 +1,8 @@
-body{
+body {
     background-color: #000;
     font-family: system-ui, sans-serif;
     background: radial-gradient(circle at 20% 10%, #053581, transparent 60%),
-    radial-gradient(circle at 80% 90%, #020617, transparent 70%), var(--bg);
+        radial-gradient(circle at 80% 90%, #020617, transparent 70%), var(--bg);
     color: white;
     overflow-x: hidden;
 }
@@ -15,19 +15,75 @@ body{
     width: 1px;
     background-color: #fff;
     border-radius: 50%;
-    box-shadow: -42vw -4vh 0px 0px #fff,25vw -41vh 0px 0px #fff,-20vw 49vh 0px 1px #fff,5vw 40vh 1px 1px #fff,29vw 19vh 1px 0px #fff,-44vw -13vh 0px 0px #fff,46vw 41vh 0px 1px #fff,-3vw -45vh 0px 1px #fff,47vw 35vh 1px 0px #fff,12vw -8vh 1px 0px #fff,-34vw 48vh 1px 1px #fff,32vw 26vh 1px 1px #fff,32vw -41vh 1px 1px #fff,0vw 37vh 1px 1px #fff,34vw -26vh 1px 0px #fff,-14vw -49vh 1px 0px #fff,-12vw 45vh 0px 1px #fff,-44vw -33vh 0px 1px #fff,-13vw 41vh 0px 0px #fff,-36vw -11vh 0px 1px #fff,-23vw -24vh 1px 0px #fff,-38vw -27vh 0px 1px #fff,16vw -19vh 0px 0px #fff,28vw 33vh 1px 0px #fff,-49vw -4vh 0px 0px #fff,16vw 32vh 0px 1px #fff,36vw -18vh 1px 0px #fff,-25vw -30vh 1px 0px #fff,-23vw 24vh 0px 1px #fff,-2vw -35vh 1px 1px #fff,-25vw 9vh 0px 0px #fff,-15vw -34vh 0px 0px #fff,-8vw -19vh 1px 0px #fff,-20vw -20vh 1px 1px #fff,42vw 50vh 0px 1px #fff,-32vw 10vh 1px 0px #fff,-23vw -17vh 0px 0px #fff,44vw 15vh 1px 0px #fff,-40vw 33vh 1px 1px #fff,-43vw 8vh 0px 0px #fff,-48vw -15vh 1px 1px #fff,-24vw 17vh 0px 0px #fff,-31vw 50vh 1px 0px #fff,36vw -38vh 0px 1px #fff,-7vw 48vh 0px 0px #fff,15vw -32vh 0px 0px #fff,29vw -41vh 0px 0px #fff,2vw 37vh 1px 0px #fff,7vw -40vh 1px 1px #fff,15vw 18vh 0px 0px #fff,25vw -13vh 1px 1px #fff,-46vw -12vh 1px 1px #fff,-18vw 22vh 0px 0px #fff,23vw -9vh 1px 0px #fff,50vw 12vh 0px 1px #fff,45vw 2vh 0px 0px #fff,14vw -48vh 1px 0px #fff,23vw 43vh 0px 1px #fff,-40vw 16vh 1px 1px #fff,20vw -31vh 0px 1px #fff,-17vw 44vh 1px 1px #fff,18vw -45vh 0px 0px #fff,33vw -6vh 0px 0px #fff,0vw 7vh 0px 1px #fff,-10vw -18vh 0px 1px #fff,-19vw 5vh 1px 0px #fff,1vw 42vh 0px 0px #fff,22vw 48vh 0px 1px #fff,39vw -8vh 1px 1px #fff,-6vw -42vh 1px 0px #fff,-47vw 34vh 0px 0px #fff,-46vw 19vh 0px 1px #fff,-12vw -32vh 0px 0px #fff,-45vw -38vh 0px 1px #fff,-28vw 18vh 1px 0px #fff,-38vw -46vh 1px 1px #fff,49vw -6vh 1px 1px #fff,-28vw 18vh 1px 1px #fff,10vw -24vh 0px 1px #fff,-5vw -11vh 1px 1px #fff,33vw -8vh 1px 0px #fff,-16vw 17vh 0px 0px #fff,18vw 27vh 0px 1px #fff,-8vw -10vh 1px 1px #fff;
-  
-  /* stars were too big with the layers above but left the code in case no one cares  -- as in, if noone's just that  one other loner who actually cares    */
-  
-  box-shadow: 24vw 9vh 1px 0px #fff,12vw -24vh 0px 1px #fff,-45vw -22vh 0px 0px #fff,-37vw -40vh 0px 1px #fff,29vw 19vh 0px 1px #fff,4vw -8vh 0px 1px #fff,-5vw 21vh 1px 1px #fff,-27vw 26vh 1px 1px #fff,-47vw -3vh 1px 1px #fff,-28vw -30vh 0px 1px #fff,-43vw -27vh 0px 1px #fff,4vw 22vh 1px 1px #fff,36vw 23vh 0px 0px #fff,-21vw 24vh 1px 1px #fff,-16vw 2vh 1px 0px #fff,-16vw -6vh 0px 0px #fff,5vw 26vh 0px 0px #fff,-34vw 41vh 0px 0px #fff,1vw 42vh 1px 1px #fff,11vw -13vh 1px 1px #fff,48vw -8vh 1px 0px #fff,22vw -15vh 0px 0px #fff,45vw 49vh 0px 0px #fff,43vw -27vh 1px 1px #fff,20vw -2vh 0px 0px #fff,8vw 22vh 0px 1px #fff,39vw 48vh 1px 1px #fff,-21vw -11vh 0px 1px #fff,-40vw 45vh 0px 1px #fff,11vw -30vh 1px 0px #fff,26vw 30vh 1px 0px #fff,45vw -29vh 0px 1px #fff,-2vw 18vh 0px 0px #fff,-29vw -45vh 1px 0px #fff,-7vw -27vh 1px 1px #fff,42vw 24vh 0px 0px #fff,45vw -48vh 1px 0px #fff,-36vw -18vh 0px 0px #fff,-44vw 13vh 0px 1px #fff,36vw 16vh 0px 1px #fff,40vw 24vh 0px 0px #fff,18vw 11vh 0px 0px #fff,-15vw -23vh 1px 0px #fff,-24vw 48vh 0px 1px #fff,27vw -45vh 1px 0px #fff,-2vw -24vh 0px 1px #fff,-15vw -28vh 0px 0px #fff,-43vw 13vh 1px 0px #fff,7vw 27vh 1px 0px #fff,47vw 5vh 0px 0px #fff,-45vw 15vh 1px 1px #fff,-5vw -28vh 0px 1px #fff,38vw 25vh 1px 1px #fff,-39vw -1vh 1px 0px #fff,5vw 0vh 1px 0px #fff,49vw 13vh 0px 0px #fff,48vw 10vh 0px 1px #fff,19vw -28vh 0px 0px #fff,4vw 7vh 0px 0px #fff,21vw 21vh 1px 1px #fff,-15vw -15vh 0px 1px #fff,-6vw -42vh 1px 0px #fff,-15vw 48vh 1px 1px #fff,-23vw 25vh 1px 1px #fff,-48vw 25vh 0px 1px #fff,-31vw -19vh 0px 1px #fff,4vw 37vh 1px 1px #fff,-43vw 28vh 0px 0px #fff,3vw -25vh 0px 1px #fff,-39vw 14vh 0px 1px #fff,-40vw 31vh 0px 1px #fff,35vw -36vh 1px 1px #fff,16vw 49vh 0px 0px #fff,6vw 39vh 0px 0px #fff,3vw -35vh 0px 1px #fff,-44vw -2vh 1px 0px #fff,-6vw 21vh 1px 0px #fff,48vw 9vh 1px 1px #fff,-43vw 30vh 1px 1px #fff,29vw -12vh 1px 1px #fff,-48vw 13vh 1px 0px #fff,-42vw 32vh 1px 1px #fff,34vw 15vh 1px 1px #fff,29vw -37vh 1px 1px #fff,28vw 2vh 0px 0px #fff;
-  animation: zoom 16s alternate infinite; 
+    box-shadow: -42vw -4vh 0px 0px #fff, 25vw -41vh 0px 0px #fff, -20vw 49vh 0px 1px #fff, 5vw 40vh 1px 1px #fff, 29vw 19vh 1px 0px #fff, -44vw -13vh 0px 0px #fff, 46vw 41vh 0px 1px #fff, -3vw -45vh 0px 1px #fff, 47vw 35vh 1px 0px #fff, 12vw -8vh 1px 0px #fff, -34vw 48vh 1px 1px #fff, 32vw 26vh 1px 1px #fff, 32vw -41vh 1px 1px #fff, 0vw 37vh 1px 1px #fff, 34vw -26vh 1px 0px #fff, -14vw -49vh 1px 0px #fff, -12vw 45vh 0px 1px #fff, -44vw -33vh 0px 1px #fff, -13vw 41vh 0px 0px #fff, -36vw -11vh 0px 1px #fff, -23vw -24vh 1px 0px #fff, -38vw -27vh 0px 1px #fff, 16vw -19vh 0px 0px #fff, 28vw 33vh 1px 0px #fff, -49vw -4vh 0px 0px #fff, 16vw 32vh 0px 1px #fff, 36vw -18vh 1px 0px #fff, -25vw -30vh 1px 0px #fff, -23vw 24vh 0px 1px #fff, -2vw -35vh 1px 1px #fff, -25vw 9vh 0px 0px #fff, -15vw -34vh 0px 0px #fff, -8vw -19vh 1px 0px #fff, -20vw -20vh 1px 1px #fff, 42vw 50vh 0px 1px #fff, -32vw 10vh 1px 0px #fff, -23vw -17vh 0px 0px #fff, 44vw 15vh 1px 0px #fff, -40vw 33vh 1px 1px #fff, -43vw 8vh 0px 0px #fff, -48vw -15vh 1px 1px #fff, -24vw 17vh 0px 0px #fff, -31vw 50vh 1px 0px #fff, 36vw -38vh 0px 1px #fff, -7vw 48vh 0px 0px #fff, 15vw -32vh 0px 0px #fff, 29vw -41vh 0px 0px #fff, 2vw 37vh 1px 0px #fff, 7vw -40vh 1px 1px #fff, 15vw 18vh 0px 0px #fff, 25vw -13vh 1px 1px #fff, -46vw -12vh 1px 1px #fff, -18vw 22vh 0px 0px #fff, 23vw -9vh 1px 0px #fff, 50vw 12vh 0px 1px #fff, 45vw 2vh 0px 0px #fff, 14vw -48vh 1px 0px #fff, 23vw 43vh 0px 1px #fff, -40vw 16vh 1px 1px #fff, 20vw -31vh 0px 1px #fff, -17vw 44vh 1px 1px #fff, 18vw -45vh 0px 0px #fff, 33vw -6vh 0px 0px #fff, 0vw 7vh 0px 1px #fff, -10vw -18vh 0px 1px #fff, -19vw 5vh 1px 0px #fff, 1vw 42vh 0px 0px #fff, 22vw 48vh 0px 1px #fff, 39vw -8vh 1px 1px #fff, -6vw -42vh 1px 0px #fff, -47vw 34vh 0px 0px #fff, -46vw 19vh 0px 1px #fff, -12vw -32vh 0px 0px #fff, -45vw -38vh 0px 1px #fff, -28vw 18vh 1px 0px #fff, -38vw -46vh 1px 1px #fff, 49vw -6vh 1px 1px #fff, -28vw 18vh 1px 1px #fff, 10vw -24vh 0px 1px #fff, -5vw -11vh 1px 1px #fff, 33vw -8vh 1px 0px #fff, -16vw 17vh 0px 0px #fff, 18vw 27vh 0px 1px #fff, -8vw -10vh 1px 1px #fff;
+
+    /* stars were too big with the layers above but left the code in case no one cares  -- as in, if noone's just that  one other loner who actually cares    */
+
+    box-shadow: 24vw 9vh 1px 0px #fff, 12vw -24vh 0px 1px #fff, -45vw -22vh 0px 0px #fff, -37vw -40vh 0px 1px #fff, 29vw 19vh 0px 1px #fff, 4vw -8vh 0px 1px #fff, -5vw 21vh 1px 1px #fff, -27vw 26vh 1px 1px #fff, -47vw -3vh 1px 1px #fff, -28vw -30vh 0px 1px #fff, -43vw -27vh 0px 1px #fff, 4vw 22vh 1px 1px #fff, 36vw 23vh 0px 0px #fff, -21vw 24vh 1px 1px #fff, -16vw 2vh 1px 0px #fff, -16vw -6vh 0px 0px #fff, 5vw 26vh 0px 0px #fff, -34vw 41vh 0px 0px #fff, 1vw 42vh 1px 1px #fff, 11vw -13vh 1px 1px #fff, 48vw -8vh 1px 0px #fff, 22vw -15vh 0px 0px #fff, 45vw 49vh 0px 0px #fff, 43vw -27vh 1px 1px #fff, 20vw -2vh 0px 0px #fff, 8vw 22vh 0px 1px #fff, 39vw 48vh 1px 1px #fff, -21vw -11vh 0px 1px #fff, -40vw 45vh 0px 1px #fff, 11vw -30vh 1px 0px #fff, 26vw 30vh 1px 0px #fff, 45vw -29vh 0px 1px #fff, -2vw 18vh 0px 0px #fff, -29vw -45vh 1px 0px #fff, -7vw -27vh 1px 1px #fff, 42vw 24vh 0px 0px #fff, 45vw -48vh 1px 0px #fff, -36vw -18vh 0px 0px #fff, -44vw 13vh 0px 1px #fff, 36vw 16vh 0px 1px #fff, 40vw 24vh 0px 0px #fff, 18vw 11vh 0px 0px #fff, -15vw -23vh 1px 0px #fff, -24vw 48vh 0px 1px #fff, 27vw -45vh 1px 0px #fff, -2vw -24vh 0px 1px #fff, -15vw -28vh 0px 0px #fff, -43vw 13vh 1px 0px #fff, 7vw 27vh 1px 0px #fff, 47vw 5vh 0px 0px #fff, -45vw 15vh 1px 1px #fff, -5vw -28vh 0px 1px #fff, 38vw 25vh 1px 1px #fff, -39vw -1vh 1px 0px #fff, 5vw 0vh 1px 0px #fff, 49vw 13vh 0px 0px #fff, 48vw 10vh 0px 1px #fff, 19vw -28vh 0px 0px #fff, 4vw 7vh 0px 0px #fff, 21vw 21vh 1px 1px #fff, -15vw -15vh 0px 1px #fff, -6vw -42vh 1px 0px #fff, -15vw 48vh 1px 1px #fff, -23vw 25vh 1px 1px #fff, -48vw 25vh 0px 1px #fff, -31vw -19vh 0px 1px #fff, 4vw 37vh 1px 1px #fff, -43vw 28vh 0px 0px #fff, 3vw -25vh 0px 1px #fff, -39vw 14vh 0px 1px #fff, -40vw 31vh 0px 1px #fff, 35vw -36vh 1px 1px #fff, 16vw 49vh 0px 0px #fff, 6vw 39vh 0px 0px #fff, 3vw -35vh 0px 1px #fff, -44vw -2vh 1px 0px #fff, -6vw 21vh 1px 0px #fff, 48vw 9vh 1px 1px #fff, -43vw 30vh 1px 1px #fff, 29vw -12vh 1px 1px #fff, -48vw 13vh 1px 0px #fff, -42vw 32vh 1px 1px #fff, 34vw 15vh 1px 1px #fff, 29vw -37vh 1px 1px #fff, 28vw 2vh 0px 0px #fff;
+    animation: zoom 16s alternate infinite;
 }
 
+
+.allo {
+    position: absolute;
+    right: 1.5em;
+    top: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Noto Sans Mono', monospace;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ffffff;
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+    z-index: 10000;
+    font-size: 0.6em;
+}
+
+.allo:hover {
+    color: #FF0000;
+}
+
+#back {
+    list-style: none;
+}
+
+#back a {
+    display: inline-block;
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.2s ease;
+}
+
+#back a img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    display: block;
+}
+
+#back a:hover {
+    transform: translateX(-5px);
+    opacity: 0.7;
+}
+
+#phone {
+    width: 2em;
+    height: 2em;
+    filter: invert(27%) sepia(100%) saturate(700%) hue-rotate(330deg) brightness(1.1);
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
 @keyframes zoom {
-    0%{
+    0% {
         transform: scale(1);
     }
-    100%{
+
+    100% {
         transform: scale(1.5);
     }
 }
@@ -158,190 +214,196 @@ main {
 }
 
 * {
-  margin: 0;
-  box-sizing: border-box;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 :root {
-  --bg: #020617;
-  --c1: #38bdf8;
-  --c2: #a855f7;
-  --c3: #22c55e;
-  --noise: rgba(255, 255, 255, 0.05);
+    --bg: #020617;
+    --c1: #38bdf8;
+    --c2: #a855f7;
+    --c3: #22c55e;
+    --noise: rgba(255, 255, 255, 0.05);
 }
 
 
 /* grain */
 body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: repeating-radial-gradient(
-    circle,
-    var(--noise) 0 1px,
-    transparent 1px 2px
-  );
-  mix-blend-mode: overlay;
-  pointer-events: none;
-  opacity: 0.35;
-  animation: grain 0.25s steps(2) infinite;
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: repeating-radial-gradient(circle,
+            var(--noise) 0 1px,
+            transparent 1px 2px);
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    opacity: 0.35;
+    animation: grain 0.25s steps(2) infinite;
 }
+
 @keyframes grain {
-  to {
-    transform: translate(2px, -2px);
-  }
+    to {
+        transform: translate(2px, -2px);
+    }
 }
 
 /* layout */
 section {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 5rem 2rem;
-  perspective: 1000px;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 5rem 2rem;
+    perspective: 1000px;
 }
 
 /* glitch title */
 .glitch {
-  position: relative;
-  font-size: clamp(3rem, 9vw, 6rem);
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  margin-bottom: 4rem;
+    position: relative;
+    font-size: clamp(3rem, 9vw, 6rem);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    margin-bottom: 4rem;
 }
+
 .glitch::before,
 .glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  inset: 0;
-  opacity: 0.8;
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    opacity: 0.8;
 }
+
 .glitch::before {
-  color: var(--c1);
-  transform: translate(3px, -2px);
-  mix-blend-mode: screen;
-  animation: glitch 2s infinite alternate;
+    color: var(--c1);
+    transform: translate(3px, -2px);
+    mix-blend-mode: screen;
+    animation: glitch 2s infinite alternate;
 }
+
 .glitch::after {
-  color: var(--c2);
-  transform: translate(-3px, 2px);
-  mix-blend-mode: screen;
-  animation: glitch 1.5s infinite alternate-reverse;
+    color: var(--c2);
+    transform: translate(-3px, 2px);
+    mix-blend-mode: screen;
+    animation: glitch 1.5s infinite alternate-reverse;
 }
+
 @keyframes glitch {
-  0% {
-    clip-path: inset(0 0 70% 0);
-  }
-  25% {
-    clip-path: inset(20% 0 40% 0);
-  }
-  50% {
-    clip-path: inset(40% 0 20% 0);
-  }
-  75% {
-    clip-path: inset(10% 0 60% 0);
-  }
-  100% {
-    clip-path: inset(0 0 0 0);
-  }
+    0% {
+        clip-path: inset(0 0 70% 0);
+    }
+
+    25% {
+        clip-path: inset(20% 0 40% 0);
+    }
+
+    50% {
+        clip-path: inset(40% 0 20% 0);
+    }
+
+    75% {
+        clip-path: inset(10% 0 60% 0);
+    }
+
+    100% {
+        clip-path: inset(0 0 0 0);
+    }
 }
 
 /* holographic card */
 .card {
-  width: min(420px, 90vw);
-  padding: 2.5rem;
-  border-radius: 28px;
-  background: linear-gradient(
-    120deg,
-    rgba(255, 255, 255, 0.08),
-    rgba(255, 255, 255, 0.02)
-  );
-  backdrop-filter: blur(16px);
-  box-shadow: 0 0 50px rgba(56, 189, 248, 0.35),
-    inset 0 0 35px rgba(255, 255, 255, 0.15);
-  transform-style: preserve-3d;
-  animation: float 6s ease-in-out infinite;
-  position: relative;
+    width: min(420px, 90vw);
+    padding: 2.5rem;
+    border-radius: 28px;
+    background: linear-gradient(120deg,
+            rgba(255, 255, 255, 0.08),
+            rgba(255, 255, 255, 0.02));
+    backdrop-filter: blur(16px);
+    box-shadow: 0 0 50px rgba(56, 189, 248, 0.35),
+        inset 0 0 35px rgba(255, 255, 255, 0.15);
+    transform-style: preserve-3d;
+    animation: float 6s ease-in-out infinite;
+    position: relative;
 }
 
 .card::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  background: linear-gradient(
-    120deg,
-    transparent 20%,
-    var(--c1),
-    var(--c2),
-    var(--c3),
-    transparent 80%
-  );
-  filter: blur(25px);
-  opacity: 0.4;
-  z-index: -1;
-  animation: holo 4s linear infinite;
-  background-size: 400% 100%;
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(120deg,
+            transparent 20%,
+            var(--c1),
+            var(--c2),
+            var(--c3),
+            transparent 80%);
+    filter: blur(25px);
+    opacity: 0.4;
+    z-index: -1;
+    animation: holo 4s linear infinite;
+    background-size: 400% 100%;
 }
 
 @keyframes holo {
-  to {
-    background-position: 400% 0;
-  }
+    to {
+        background-position: 400% 0;
+    }
 }
+
 @keyframes float {
-  0%,
-  100% {
-    transform: rotateX(12deg) rotateY(-10deg) translateY(0);
-  }
-  50% {
-    transform: rotateX(18deg) rotateY(12deg) translateY(-25px);
-  }
+
+    0%,
+    100% {
+        transform: rotateX(12deg) rotateY(-10deg) translateY(0);
+    }
+
+    50% {
+        transform: rotateX(18deg) rotateY(12deg) translateY(-25px);
+    }
 }
 
 .partner-frame .partner-container section .card,
 .sponsor-frame .sponsor-container section .card,
-.caterer-frame .caterer-container section .card
-{
-  width: 400px;
-  min-height: 400px;
-  max-height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1.4rem;
+.caterer-frame .caterer-container section .card {
+    width: 400px;
+    min-height: 400px;
+    max-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.4rem;
 }
 
 .card h2 {
-  font-size: 1.7rem;
-  margin-bottom: 1rem;
+    font-size: 1.7rem;
+    margin-bottom: 1rem;
 }
+
 .card p {
-  line-height: 1.6;
-  opacity: 0.85;
+    line-height: 1.6;
+    opacity: 0.85;
 }
 
 /* holographic button */
 .btn {
-  display: inline-block;
-  margin-top: 2rem;
-  padding: 0.9rem 1.8rem;
-  border-radius: 999px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: white;
-  text-decoration: none;
-  background: linear-gradient(90deg, var(--c1), var(--c2), var(--c3));
-  background-size: 300% 100%;
-  animation: holo 3s linear infinite;
-  box-shadow: 0 0 25px rgba(168, 85, 247, 0.6);
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.9rem 1.8rem;
+    border-radius: 999px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: white;
+    text-decoration: none;
+    background: linear-gradient(90deg, var(--c1), var(--c2), var(--c3));
+    background-size: 300% 100%;
+    animation: holo 3s linear infinite;
+    box-shadow: 0 0 25px rgba(168, 85, 247, 0.6);
 }
 
 .btn:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 #navbar {
-  display: flex;
+    display: flex;
 }
 
 #back {
@@ -349,10 +411,27 @@ section {
 }
 
 #back:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .allo img {
-  max-width: 64px;
-  max-height: 64px;
+    max-width: 64px;
+    max-height: 64px;
+}
+
+@media (max-width: 786px) {
+    .letter {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #fff;
+        transition: transform 0.3s ease;
+    }
+
+    .glitch {
+        font-size: 1.5rem;
+    }
+
+    main {
+        padding-top: 60px;
+    }
 }

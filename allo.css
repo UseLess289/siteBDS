@@ -14,6 +14,7 @@ body {
     min-height: 100vh;
     backdrop-filter: blur(4px);
 }
+
 .subtit {
     margin-left: 2em;
     margin-top: 1.3em;
@@ -116,7 +117,7 @@ li {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
-    margin-bottom:  0.4em;
+    margin-bottom: 0.4em;
     margin-right: 0.4em;
 }
 
@@ -129,7 +130,7 @@ li {
     transform: scale(0.97);
 }
 
-input:checked + label .command {
+input:checked+label .command {
     opacity: 1;
     pointer-events: auto;
     transition-delay: 0.35s;
@@ -171,8 +172,8 @@ input:checked + label .command {
 }
 
 .card {
-    width: 100px;
-    height: 90%;
+    width: 65px;
+    height: 85%;
     align-self: center;
     border-radius: .75rem;
     background-size: cover;
@@ -201,6 +202,7 @@ input:checked + label .command {
 
 .menu-grid {
     width: 100%;
+    height: fit-content;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
@@ -231,10 +233,11 @@ input:checked+label .menu-grid {
     color: white;
     text-align: center;
     justify-content: center;
+    width: 90%;
 }
 
 .menu-name {
-    font-size: 1.75rem;
+    font-size: 0.9rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.03em;
@@ -323,6 +326,7 @@ input:checked+label .description {
 
 @media (max-width: 768px) {
 
+
     .title {
         top: 10px;
         gap: 0.03em;
@@ -368,12 +372,12 @@ input:checked+label .description {
         margin-right: 0;
         border-radius: 1.2rem;
         transition: height 0.6s cubic-bezier(.28, -0.03, 0, .99),
-                    min-height 0.6s cubic-bezier(.28, -0.03, 0, .99);
+            min-height 0.6s cubic-bezier(.28, -0.03, 0, .99);
     }
 
-    input:checked + label {
+    input:checked+label {
         width: 100% !important;
-        min-height: 460px;
+        min-height: 365px;
         height: auto;
     }
 
@@ -393,18 +397,18 @@ input:checked+label .description {
         font-size: 0.7rem;
     }
 
-    .card > .row {
+    .card>.row {
         align-items: center;
     }
 
-    .card > .row > .description {
+    .card>.row>.description {
         width: auto;
         flex: 1;
         min-width: 0;
         height: auto;
     }
 
-    .card > .row > .icon {
+    .card>.row>.icon {
         margin: 8px;
         width: 36px;
         height: 36px;
@@ -452,7 +456,47 @@ input:checked+label .description {
         font-size: 0.72rem;
     }
 
-    input:checked + label {
+    input:checked+label {
         min-height: 400px;
+    }
+
+    .card {
+        height: 0vh;
+        border-radius: none;
+    }
+
+    .title {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        display: flex;
+        gap: 0.05em;
+        text-decoration: none;
+        width: 100vh;
+    }
+
+    .title .letter {
+        font-size: clamp(2.5rem, 10vw, 9rem);
+        font-weight: 900;
+        display: inline-block;
+        transform-origin: bottom center;
+        background-image: none !important;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        -webkit-text-stroke: 3px #2b1405;
+        text-shadow:
+            2px 2px 0 #2b1405,
+            4px 4px 0 #2b1405,
+            6px 6px 0 #2b1405,
+            8px 8px 10px rgba(0, 0, 0, 0.6);
+        transition: transform 0.2s ease;
+        color: #d25500;
+    }
+
+    .title .letter:hover {
+        transform: scale(1.3);
     }
 }

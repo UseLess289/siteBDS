@@ -557,7 +557,9 @@ body {
         gap: 4px;
         padding: 0.3em 0.4em;
         background-image: none;
-        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 2px;
+        box-shadow: 0 8px 32px rgba(255, 255, 255, 0.3), 0 -4px 10px rgba(255, 255, 255, 0.2);
+        background-color: rgba(210, 85, 0, 0.15);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.15);
@@ -574,6 +576,34 @@ body {
         z-index: 100000;
     }
 
+    .hero__wrapper {
+        max-width: 60vw;
+    }
+
+    .hero__content,
+    .hero__nav {
+        background-image: none;
+        flex: 1;
+        position: relative;
+        box-shadow: 0 8px 32px rgba(255, 255, 255, 0.3), 0 -4px 10px rgba(255, 255, 255, 0.2);
+        background-color: rgba(210, 85, 0, 0.15);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        z-index: 10;
+    }
+
+    .hero__content::before,
+    .hero__nav::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 100000;
+        border: 25px solid transparent;
+        border-image: none;
+        background-color: transparent;
+    }
 }
 
 /*
