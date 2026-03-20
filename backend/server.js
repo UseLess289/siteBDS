@@ -125,6 +125,7 @@ app.get('/admin/me', async (req, res) => {
 
 app.get('/admin/logout', async (req, res) => {
     const token = req.headers['x-admin-token'];
+    console.log("#### DECONNEXION ####")
     if (token) {
         const result = await pool.query('DELETE FROM admin_tokens WHERE token = $1', [token]);
         console.log('Token supprimé, rows affected:', result.rowCount);
