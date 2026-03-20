@@ -339,3 +339,20 @@ section {
 .btn:hover {
   transform: scale(1.1);
 }
+
+#navbar {
+  display: flex;
+}
+
+#back {
+    margin-left: -1.5em;
+}
+
+#back:hover {
+  transform: scale(1.1);
+}
+
+.allo img {
+  max-width: 64px;
+  max-height: 64px;
+}
