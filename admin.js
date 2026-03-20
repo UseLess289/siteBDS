@@ -1,17 +1,30 @@
-import protect from "/lib/protect.js";
-
 const API_URL = 'https://sitebds-production.up.railway.app';
-
 let currentUser = null;
+let adminToken  = null;
 
-fetch(`${API_URL}/admin/me`, { credentials: 'include' })
+const urlParams = new URLSearchParams(window.location.search);
+const urlToken  = urlParams.get('token');
+const urlError  = urlParams.get('error');
+
+if (urlToken) {
+    localStorage.setItem('admin_token', urlToken);
+    window.history.replaceState({}, '', '/admin.html');
+}
+
+adminToken = localStorage.getItem('admin_token');
+
+if (urlError === 'unauthorized') {
+    document.getElementById('access-denied').style.display = 'flex';
+} else if (!adminToken) {
+    window.location.href = `${API_URL}/admin/login`;
+} else {
+    fetch(`${API_URL}/admin/me`, {
+        headers: { 'x-admin-token': adminToken }
+    })
     .then(async res => {
         if (!res.ok) {
-            if (!window.location.search.includes('error=')) {
-                window.location.href = `${API_URL}/admin/login`;
-            } else {
-                document.getElementById('access-denied').style.display = 'flex';
-            }
+            localStorage.removeItem('admin_token');
+            window.location.href = `${API_URL}/admin/login`;
             return;
         }
         const data = await res.json();
@@ -23,23 +36,28 @@ fetch(`${API_URL}/admin/me`, { credentials: 'include' })
     .catch(() => {
         window.location.href = `${API_URL}/admin/login`;
     });
+}
 
 function init() {
     loadOrders();
     document.getElementById('refresh-btn').addEventListener('click', loadOrders);
     document.getElementById('qg-select').addEventListener('change', loadOrders);
-    document.getElementById('logout-btn').addEventListener('click', () => protect.logout());
-    document.getElementById('logout-btn').addEventListener('click', () => {
-    fetch(`${API_URL}/admin/logout`, { credentials: 'include' })
-        .then(() => { window.location.href = `${API_URL}/admin/login`; });
-});
+    document.getElementById('logout-btn').addEventListener('click', async () => {
+        await fetch(`${API_URL}/admin/logout`, {
+            headers: { 'x-admin-token': adminToken }
+        });
+        localStorage.removeItem('admin_token');
+        window.location.href = `${API_URL}/admin/login`;
+    });
     setInterval(loadOrders, 30_000);
 }
 
 async function loadOrders() {
     try {
         const qg = document.getElementById('qg-select').value;
-        const res = await fetch(`${API_URL}/commandes?qg=${qg}`);
+        const res = await fetch(`${API_URL}/commandes?qg=${qg}`, {
+            headers: { 'x-admin-token': adminToken }
+        });
         const commandes = await res.json();
         renderOrders(commandes);
         updateStats(commandes);
@@ -99,7 +117,10 @@ async function updateStatut(id, nouveauStatut) {
     try {
         await fetch(`${API_URL}/commandes/${id}/statut`, {
             method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'x-admin-token': adminToken
+            },
             body: JSON.stringify({ statut: nouveauStatut })
         });
         loadOrders();
@@ -107,21 +128,18 @@ async function updateStatut(id, nouveauStatut) {
         console.error('Erreur mise à jour statut :', err);
     }
 }
+
 function formatArticles(articles) {
     return Object.entries(articles)
         .map(([nom, qte]) => `${qte}× ${nom}`)
         .join(', ');
 }
 
-function formatTime(isoString) {
-    return new Date(isoString).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' });
-}
-
 function badgeStatut(statut) {
     const map = {
         'en attente': '<span class="badge badge--pending">En attente</span>',
-        'en cours': '<span class="badge badge--progress">En cours</span>',
-        'livrée': '<span class="badge badge--done">Livrée</span>',
+        'en cours':   '<span class="badge badge--progress">En cours</span>',
+        'livrée':     '<span class="badge badge--done">Livrée</span>',
     };
     return map[statut] ?? statut;
 }
