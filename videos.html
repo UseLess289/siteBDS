@@ -1,48 +1,160 @@
 <!DOCTYPE html>
-
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pirat'eirb - Vidéos</title>
+    <title>VIDEOS | PIRAT'EIRB</title>
     <link rel="icon" type="image/png" href="assets/logo.png">
 
-            <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="global.css">
-<link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="footer.css">
+
+    <link rel="stylesheet" href="videos.css">
+    <script type="module">
+        import protect from "/lib/protect.js";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('allo-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                protect.redirect("allo");
+            });
+        });
+    </script>
 </head>
 <body>
-    <nav>
+    <nav id="navbar">
         <ul>
-            <li><a href="videos.html">Vidéos</a></li>
-            <li><a href="equipage.html">Équipage</a></li>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="partenaires.html">Partenariats</a></li>
-            <li><a href="allo.html">Allo</a></li>
+            <li id="back"><a href="index.html"><img src="assets/back.png" alt="Retour"></a></li>
         </ul>
+        <a id="allo-btn" class="allo" href="allo.html">
+            ALLO
+            <img src="assets/phone.png" id="phone">
+        </a>
     </nav>
 
-    
     <main>
-<h1>Vidéos</h1>
+        <div id="container__title">
+            <h1 data-text="VIDÉOS">VIDÉOS</h1>
+        </div>
 
-    <section>
-        <h2>Titre de la vidéo</h2>
-        <p>Description de la vidéo.</p>
-    </section>    </main>
+        <div id="container__grille">
+            <div class="ep-card">
+                <div class="face face1">
+                    <p class="track-title">Vidéo de présentation</p>
+                    <p class="track-mcs">Merci à tous ! <3</p>
+                    <div class="track-links">
+                        <a href="#" target="_blank">YouTube</a>
+                    </div>
+                </div>
+                <div class="face face2">
+                    <img src="assets/lock.png" alt="PRES">
+                </div>
+            </div>
+        </div>
+    </main>
 
+    <canvas id="bg-grid"></canvas>
 
-        <div id="site-footer"></div>
     <script>
-        fetch("footer.html")
-          .then(r => r.text())
-          .then(html => { document.getElementById("site-footer").innerHTML = html; })
-          .catch(err => console.error("Failed to load footer:", err));
+        const titleEl = document.querySelector('#container__title h1');
+        const originalText = titleEl.textContent;
+        titleEl.innerHTML = originalText.split('').map((ch, i) =>
+            `<span class="letter" style="animation-delay:${0.1 + i * 0.12}s">${ch === ' ' ? '&nbsp;' : ch}</span>`
+        ).join('');
+
+        const canvas = document.getElementById('bg-grid');
+        const ctx = canvas.getContext('2d');
+        const SPACING = 55;
+        const INFLUENCE = 140;
+        const STRENGTH = 45;
+        let W, H, cols, rows, pts;
+        let mouse = { x: -9999, y: -9999 };
+
+        window.addEventListener('mousemove', e => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+
+            if (titleEl) {
+                const rect = titleEl.getBoundingClientRect();
+                const cx = rect.left + rect.width / 2;
+                const cy = rect.top + rect.height / 2;
+                const dx = (e.clientX - cx) / window.innerWidth;
+                const dy = (e.clientY - cy) / window.innerHeight;
+                titleEl.style.transform =
+    `rotate(-90deg) translate(${-dx * -10}px, ${-dy * 8}px) skewX(${-dx * 2}deg)`;
+            }
+        });
+
+        function resize() {
+            W = canvas.width = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+            cols = Math.ceil(W / SPACING) + 2;
+            rows = Math.ceil(H / SPACING) + 2;
+            pts = [];
+            for (let r = 0; r < rows; r++)
+                for (let c = 0; c < cols; c++)
+                    pts.push({ ox: c * SPACING, oy: r * SPACING });
+        }
+
+        window.addEventListener('resize', resize);
+
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+
+            const displaced = pts.map(p => {
+                const dx = p.ox - mouse.x;
+                const dy = p.oy - mouse.y;
+                const dist = Math.hypot(dx, dy);
+                if (dist < INFLUENCE && dist > 0) {
+                    const force = (1 - dist / INFLUENCE) * STRENGTH;
+                    return { x: p.ox + (dx / dist) * force, y: p.oy + (dy / dist) * force };
+                }
+                return { x: p.ox, y: p.oy };
+            });
+
+            ctx.lineWidth = 0.8;
+            for (let r = 0; r < rows; r++) {
+                ctx.beginPath();
+                for (let c = 0; c < cols; c++) {
+                    const p = displaced[r * cols + c];
+                    c === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+                }
+                ctx.strokeStyle = 'rgba(255,255,255,0.13)';
+                ctx.stroke();
+            }
+
+            for (let c = 0; c < cols; c++) {
+                ctx.beginPath();
+                for (let r = 0; r < rows; r++) {
+                    const p = displaced[r * cols + c];
+                    r === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+                }
+                ctx.strokeStyle = 'rgba(255,255,255,0.13)';
+                ctx.stroke();
+            }
+
+            displaced.forEach((p, i) => {
+                const dx = pts[i].ox - mouse.x;
+                const dy = pts[i].oy - mouse.y;
+                const dist = Math.hypot(dx, dy);
+                if (dist < INFLUENCE) {
+                    const alpha = (1 - dist / INFLUENCE) * 0.75;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, 2.2, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255,0,0,${alpha})`;
+                    ctx.fill();
+                }
+            });
+            requestAnimationFrame(draw);
+        }
+        resize();
+        draw();
+
+        if (window.matchMedia('(max-width: 768px)').matches) {
+    document.querySelectorAll('.ep-card').forEach(card => {
+        card.addEventListener('click', () => {
+            card.classList.toggle('tapped');
+        });
+    });
+}
     </script>
-
-
 </body>
-
 </html>

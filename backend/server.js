@@ -1,10 +1,10 @@
 require('dotenv').config();
-const express   = require('express');
-const session   = require('express-session');
+const express = require('express');
+const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
-const cors      = require('cors');
-const crypto    = require('crypto');
-const pool      = require('./db');
+const cors = require('cors');
+const crypto = require('crypto');
+const pool = require('./db');
 const { discovery, randomState, randomNonce, authorizationCodeGrant, fetchUserInfo } = require('openid-client');
 
 const app = express();
@@ -61,16 +61,16 @@ app.get('/ping', (req, res) => {
 
 app.get('/admin/login', async (req, res) => {
     const config = await getOidcConfig();
-    const state  = randomState();
-    const nonce  = randomNonce();
+    const state = randomState();
+    const nonce = randomNonce();
     const stateWithNonce = `${state}|${nonce}`;
 
     const params = new URLSearchParams({
         response_type: 'code',
-        client_id:     process.env.OPENID_CLIENT_ID,
-        redirect_uri:  process.env.OPENID_REDIRECT_URI,
-        scope:         'openid profile email',
-        state:         stateWithNonce,
+        client_id: process.env.OPENID_CLIENT_ID,
+        redirect_uri: process.env.OPENID_REDIRECT_URI,
+        scope: 'openid profile email',
+        state: stateWithNonce,
         nonce,
     });
 
@@ -80,8 +80,8 @@ app.get('/admin/login', async (req, res) => {
 
 app.get('/callback', async (req, res) => {
     try {
-        const config    = await getOidcConfig();
-        const rawState  = req.query.state || '';
+        const config = await getOidcConfig();
+        const rawState = req.query.state || '';
         const [, expectedNonce] = rawState.split('|');
 
         const tokens = await authorizationCodeGrant(
@@ -91,14 +91,14 @@ app.get('/callback', async (req, res) => {
         );
 
         const userinfo = await fetchUserInfo(config, tokens.access_token, tokens.claims().sub);
-        const login    = userinfo.uid || userinfo.preferred_username;
+        const login = userinfo.uid || userinfo.preferred_username;
 
         const result = await pool.query('SELECT login FROM admins WHERE login = $1', [login]);
         if (result.rows.length === 0) {
             return res.redirect('https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr/admin.html?error=unauthorized');
         }
 
-        const token   = crypto.randomBytes(32).toString('hex');
+        const token = crypto.randomBytes(32).toString('hex');
         const expires = new Date(Date.now() + 24 * 60 * 60 * 1000);
         await pool.query(
             'INSERT INTO admin_tokens (token, login, expires_at) VALUES ($1, $2, $3)',
@@ -168,9 +168,9 @@ app.get('/commandes', verifyToken, async (req, res) => {
 });
 
 app.patch('/commandes/:id/statut', verifyToken, async (req, res) => {
-    const { id }    = req.params;
+    const { id } = req.params;
     const { statut } = req.body;
-    const valides   = ['en attente', 'en cours', 'livrée'];
+    const valides = ['en attente', 'en cours', 'livrée'];
     if (!valides.includes(statut)) return res.status(400).json({ error: 'statut invalide' });
     const result = await pool.query(
         'UPDATE commandes SET statut = $1 WHERE id = $2 RETURNING *',
@@ -179,6 +179,85 @@ app.patch('/commandes/:id/statut', verifyToken, async (req, res) => {
     res.json(result.rows[0]);
 });
 
+const QRCode = require('qrcode');
+
+app.get('/primes/classement', async (req, res) => {
+    const result = await pool.query(
+        'SELECT login, prime_totale, defis_reussis FROM joueurs ORDER BY prime_totale DESC'
+    );
+    res.json(result.rows);
+});
+
+app.get('/primes/membres', async (req, res) => {
+    const result = await pool.query('SELECT * FROM membres ORDER BY valeur_prime DESC');
+    res.json(result.rows);
+});
+
+app.get('/primes/joueur/:login', async (req, res) => {
+    const { login } = req.params;
+    const result = await pool.query('SELECT * FROM joueurs WHERE login = $1', [login]);
+    if (result.rows.length === 0) return res.json({ login, prime_totale: 0, defis_reussis: 0 });
+    res.json(result.rows[0]);
+});
+
+app.get('/primes/qr/:login_membre', async (req, res) => {
+    const { login_membre } = req.params;
+    const membre = await pool.query('SELECT * FROM membres WHERE login = $1', [login_membre]);
+    if (membre.rows.length === 0) return res.status(404).json({ error: 'membre introuvable' });
+
+    const url = `https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr/primes.html?valider=${login_membre}`;
+    const qr = await QRCode.toDataURL(url);
+    res.json({ qr, membre: membre.rows[0] });
+});
+
+app.post('/primes/valider', async (req, res) => {
+    const { login_joueur, login_membre } = req.body;
+    if (!login_joueur || !login_membre) return res.status(400).json({ error: 'données manquantes' });
+
+    const membre = await pool.query('SELECT * FROM membres WHERE login = $1', [login_membre]);
+    if (membre.rows.length === 0) return res.status(404).json({ error: 'membre introuvable' });
+
+    try {
+        await pool.query(
+            'INSERT INTO defis_valides (login_joueur, login_membre) VALUES ($1, $2)',
+            [login_joueur, login_membre]
+        );
+    } catch (err) {
+        if (err.code === '23505') return res.status(409).json({ error: 'défi déjà validé' });
+        throw err;
+    }
+
+    const valeur = membre.rows[0].valeur_prime;
+    await pool.query(`
+        INSERT INTO joueurs (login, prime_totale, defis_reussis)
+        VALUES ($1, $2, 1)
+        ON CONFLICT (login) DO UPDATE
+        SET prime_totale   = joueurs.prime_totale + $2,
+            defis_reussis  = joueurs.defis_reussis + 1
+    `, [login_joueur, valeur]);
+
+    res.json({ ok: true, gain: valeur });
+});
+
+app.post('/admin-primes/membres', verifyToken, async (req, res) => {
+    const { login, nom, defi, valeur_prime } = req.body;
+    if (!login || !nom || !defi || !valeur_prime) return res.status(400).json({ error: 'données manquantes' });
+    const result = await pool.query(
+        'INSERT INTO membres (login, nom, defi, valeur_prime) VALUES ($1,$2,$3,$4) RETURNING *',
+        [login, nom, defi, valeur_prime]
+    );
+    res.json(result.rows[0]);
+});
+
+app.patch('/admin-primes/membres/:login', verifyToken, async (req, res) => {
+    const { login } = req.params;
+    const { nom, defi, valeur_prime } = req.body;
+    const result = await pool.query(
+        'UPDATE membres SET nom=$1, defi=$2, valeur_prime=$3 WHERE login=$4 RETURNING *',
+        [nom, defi, valeur_prime, login]
+    );
+    res.json(result.rows[0]);
+});
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Serveur lancé sur http://localhost:${process.env.PORT || 3000}`);
 });

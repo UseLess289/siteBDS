@@ -1,10 +1,14 @@
 const API_URL = 'https://sitebds-production.up.railway.app';
+
+/* Pars d ici c pas pour toi masta */
+/* Une faille révélée = 1 allo gratuit */
+
 let currentUser = null;
-let adminToken  = null;
+let adminToken = null;
 
 const urlParams = new URLSearchParams(window.location.search);
-const urlToken  = urlParams.get('token');
-const urlError  = urlParams.get('error');
+const urlToken = urlParams.get('token');
+const urlError = urlParams.get('error');
 
 if (urlToken) {
     localStorage.setItem('admin_token', urlToken);
@@ -21,21 +25,21 @@ if (urlError === 'unauthorized') {
     fetch(`${API_URL}/admin/me`, {
         headers: { 'x-admin-token': adminToken }
     })
-    .then(async res => {
-        if (!res.ok) {
-            localStorage.removeItem('admin_token');
+        .then(async res => {
+            if (!res.ok) {
+                localStorage.removeItem('admin_token');
+                window.location.href = `${API_URL}/admin/login`;
+                return;
+            }
+            const data = await res.json();
+            currentUser = data.login;
+            document.getElementById('admin-app').style.display = 'block';
+            document.getElementById('admin-user').textContent = currentUser;
+            init();
+        })
+        .catch(() => {
             window.location.href = `${API_URL}/admin/login`;
-            return;
-        }
-        const data = await res.json();
-        currentUser = data.login;
-        document.getElementById('admin-app').style.display = 'block';
-        document.getElementById('admin-user').textContent = currentUser;
-        init();
-    })
-    .catch(() => {
-        window.location.href = `${API_URL}/admin/login`;
-    });
+        });
 }
 
 function init() {
@@ -43,12 +47,12 @@ function init() {
     document.getElementById('refresh-btn').addEventListener('click', loadOrders);
     document.getElementById('qg-select').addEventListener('change', loadOrders);
     document.getElementById('logout-btn').addEventListener('click', async () => {
-    await fetch(`${API_URL}/admin/logout`, {
-        headers: { 'x-admin-token': adminToken }
+        await fetch(`${API_URL}/admin/logout`, {
+            headers: { 'x-admin-token': adminToken }
+        });
+        localStorage.removeItem('admin_token');
+        window.location.href = 'https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr/index.html';
     });
-    localStorage.removeItem('admin_token');
-    window.location.href = 'https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr/index.html';
-});
     setInterval(loadOrders, 30_000);
 }
 
@@ -107,10 +111,10 @@ function renderOrders(commandes) {
 }
 
 function updateStats(commandes) {
-    document.getElementById('stat-total').textContent    = commandes.length;
-    document.getElementById('stat-pending').textContent  = commandes.filter(c => c.statut === 'en attente').length;
+    document.getElementById('stat-total').textContent = commandes.length;
+    document.getElementById('stat-pending').textContent = commandes.filter(c => c.statut === 'en attente').length;
     document.getElementById('stat-progress').textContent = commandes.filter(c => c.statut === 'en cours').length;
-    document.getElementById('stat-done').textContent     = commandes.filter(c => c.statut === 'livrée').length;
+    document.getElementById('stat-done').textContent = commandes.filter(c => c.statut === 'livrée').length;
 }
 
 async function updateStatut(id, nouveauStatut) {
@@ -138,8 +142,8 @@ function formatArticles(articles) {
 function badgeStatut(statut) {
     const map = {
         'en attente': '<span class="badge badge--pending">En attente</span>',
-        'en cours':   '<span class="badge badge--progress">En cours</span>',
-        'livrée':     '<span class="badge badge--done">Livrée</span>',
+        'en cours': '<span class="badge badge--progress">En cours</span>',
+        'livrée': '<span class="badge badge--done">Livrée</span>',
     };
     return map[statut] ?? statut;
 }
