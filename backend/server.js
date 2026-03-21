@@ -204,12 +204,11 @@ app.post('/admin-primes/membres', verifyToken, async (req, res) => {
     const { login, nom, challenge, valeur_prime } = req.body;
     if (!login || !nom || !challenge || !valeur_prime) return res.status(400).json({ error: 'données manquantes' });
     const result = await pool.query(
-        'INSERT INTO membres (login, nom, challenge, valeur_prime) VALUES ($1,$2,$3,$4) RETURNING *',
-        [login, nom, challenge, valeur_prime]
+        'INSERT INTO membres (login, nom, valeur_prime, challenge) VALUES ($1,$2,$3,$4) RETURNING *',
+        [login, nom, valeur_prime, challenge]
     );
     res.json(result.rows[0]);
 });
-
 app.get('/admin-primes/joueur/:login', verifyToken, async (req, res) => {
     const { login } = req.params;
     const joueur = await pool.query('SELECT * FROM joueurs WHERE login = $1', [login]);
