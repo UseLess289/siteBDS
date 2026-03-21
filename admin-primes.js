@@ -36,6 +36,7 @@ if (urlError === 'unauthorized') {
 }
 
 async function init() {
+    setInterval(loadClassement, 15_000);
     await Promise.all([loadClassement(), loadMembres()]);
 
     document.getElementById('search-btn').addEventListener('click', rechercherJoueur);
@@ -98,10 +99,13 @@ async function rechercherJoueur() {
     const login = document.getElementById('search-input').value.trim();
     if (!login) return;
 
-    const res = await fetch(`${API_URL}/admin-primes/joueur/${login}`, {
-        headers: { 'x-admin-token': adminToken }
-    });
-    const data = await res.json();
+    const [joueurRes, demandesRes] = await Promise.all([
+        fetch(`${API_URL}/admin-primes/joueur/${login}`, { headers: { 'x-admin-token': adminToken } }),
+        fetch(`${API_URL}/admin-primes/demandes/${login}`, { headers: { 'x-admin-token': adminToken } })
+    ]);
+
+    const data = await joueurRes.json();
+    const demandes = await demandesRes.json();
 
     document.getElementById('joueur-login').textContent = data.joueur.login;
     document.getElementById('joueur-prime').textContent = `${data.joueur.prime_totale} M berries`;
@@ -112,6 +116,7 @@ async function rechercherJoueur() {
 
     allMembres.forEach(m => {
         const deja = data.defis_valides.includes(m.login);
+        const demande = demandes.includes(m.login);
         const row = document.createElement('div');
         row.className = `membre-row${deja ? ' done' : ''}`;
         row.innerHTML = `
@@ -122,7 +127,9 @@ async function rechercherJoueur() {
             <span class="membre-row-valeur">+${m.valeur_prime} M</span>
             ${deja
                 ? '<span class="done-badge">✓ Validé</span>'
-                : `<button class="valider-btn" data-membre="${m.login}">Valider</button>`
+                : demande
+                    ? `<button class="valider-btn pending" data-membre="${m.login}">⏳ Valider</button>`
+                    : `<button class="valider-btn" data-membre="${m.login}">Valider</button>`
             }
         `;
         list.appendChild(row);
@@ -138,18 +145,17 @@ async function rechercherJoueur() {
 async function validerDefi(login_joueur, login_membre) {
     const res = await fetch(`${API_URL}/admin-primes/valider`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'x-admin-token': adminToken
-        },
+        headers: { 'Content-Type': 'application/json', 'x-admin-token': adminToken },
         body: JSON.stringify({ login_joueur, login_membre })
     });
     const data = await res.json();
+    if (!res.ok) { alert(data.error || 'Erreur'); return; }
 
-    if (!res.ok) {
-        alert(data.error || 'Erreur');
-        return;
-    }
+    // Supprime la demande après validation
+    await fetch(`${API_URL}/admin-primes/demandes/${login_joueur}/${login_membre}`, {
+        method: 'DELETE',
+        headers: { 'x-admin-token': adminToken }
+    });
 
     await Promise.all([loadClassement(), rechercherJoueur()]);
 }

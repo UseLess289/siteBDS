@@ -249,8 +249,37 @@ app.post('/admin-primes/valider', verifyToken, async (req, res) => {
 
     res.json({ ok: true, gain: valeur });
 });
+app.post('/primes/demander', async (req, res) => {
+    const { login_joueur, login_membre } = req.body;
+    if (!login_joueur || !login_membre) return res.status(400).json({ error: 'données manquantes' });
+    try {
+        await pool.query(
+            'INSERT INTO demandes (login_joueur, login_membre) VALUES ($1, $2)',
+            [login_joueur, login_membre]
+        );
+        res.json({ ok: true });
+    } catch (err) {
+        if (err.code === '23505') return res.status(409).json({ error: 'demande déjà envoyée' });
+        throw err;
+    }
+});
 
-
+app.get('/admin-primes/demandes/:login', verifyToken, async (req, res) => {
+    const { login } = req.params;
+    const result = await pool.query(
+        'SELECT login_membre FROM demandes WHERE login_joueur = $1',
+        [login]
+    );
+    res.json(result.rows.map(r => r.login_membre));
+});
+app.delete('/admin-primes/demandes/:login_joueur/:login_membre', verifyToken, async (req, res) => {
+    const { login_joueur, login_membre } = req.params;
+    await pool.query(
+        'DELETE FROM demandes WHERE login_joueur = $1 AND login_membre = $2',
+        [login_joueur, login_membre]
+    );
+    res.json({ ok: true });
+});
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Serveur lancé sur http://localhost:${process.env.PORT || 3000}`);
