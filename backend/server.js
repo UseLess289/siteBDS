@@ -240,24 +240,36 @@ app.post('/primes/valider', async (req, res) => {
 });
 
 app.post('/admin-primes/membres', verifyToken, async (req, res) => {
-    const { login, nom, defi, valeur_prime } = req.body;
-    if (!login || !nom || !defi || !valeur_prime) return res.status(400).json({ error: 'données manquantes' });
+    const { login, nom, challenge, valeur_prime } = req.body;
+    if (!login || !nom || !challenge || !valeur_prime) return res.status(400).json({ error: 'données manquantes' });
     const result = await pool.query(
-        'INSERT INTO membres (login, nom, defi, valeur_prime) VALUES ($1,$2,$3,$4) RETURNING *',
-        [login, nom, defi, valeur_prime]
+        'INSERT INTO membres (login, nom, challenge, valeur_prime) VALUES ($1,$2,$3,$4) RETURNING *',
+        [login, nom, challenge, valeur_prime]
     );
     res.json(result.rows[0]);
 });
 
 app.patch('/admin-primes/membres/:login', verifyToken, async (req, res) => {
     const { login } = req.params;
-    const { nom, defi, valeur_prime } = req.body;
+    const { nom, challenge, valeur_prime } = req.body;
     const result = await pool.query(
-        'UPDATE membres SET nom=$1, defi=$2, valeur_prime=$3 WHERE login=$4 RETURNING *',
-        [nom, defi, valeur_prime, login]
+        'UPDATE membres SET nom=$1, challenge=$2, valeur_prime=$3 WHERE login=$4 RETURNING *',
+        [nom, challenge, valeur_prime, login]
     );
     res.json(result.rows[0]);
+}); app.get('/primes/joueur/:login/valides', async (req, res) => {
+    const { login } = req.params;
+    const result = await pool.query(
+        'SELECT login_membre FROM defis_valides WHERE login_joueur = $1',
+        [login]
+    );
+    res.json(result.rows);
 });
+
+
+
+
+
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Serveur lancé sur http://localhost:${process.env.PORT || 3000}`);
 });
