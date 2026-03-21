@@ -1,47 +1,81 @@
 <!DOCTYPE html>
-
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pirat'eirb - Allo</title>
+    <title>PRIMES | PIRATEIRB</title>
     <link rel="icon" type="image/png" href="assets/logo.png">
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="global.css">
-
-    <link rel="stylesheet" href="styles.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Noto+Sans+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="primes.css">
+    <script type="module">
+        import protect from "/lib/protect.js";
+        protect.getData()
+            .then(data => {
+                window._currentUser = data.user.uid;
+                window._currentName = data.user.prenom || data.user.uid;
+                document.dispatchEvent(new Event('user-ready'));
+            })
+            .catch(() => protect.login());
+    </script>
 </head>
-
 <body>
-    <nav>
-        <ul>
-            <li><a href="videos.html">Vidéos</a></li>
-            <li><a href="equipage.html">Équipage</a></li>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="partenaires.html">Partenariats</a></li>
-            <li><a href="allo.html">Allo</a></li>
-        </ul>
+
+    <nav id="primes-nav">
+        <a href="index.html" id="back-btn"><img src="assets/back.png" alt="Retour"></a>
+        <a href="index.html" class="nav-logo">PIRAT'EIRB</a>
+        <div id="player-score">
+            <span id="player-name">—</span>
+            <span id="player-prime">0 M</span>
+            <span class="berries-label">berries</span>
+        </div>
     </nav>
 
-    <h1>Allo</h1>
+    <main>
 
+        <section id="top3-section">
+            <h2 class="section-title">Classement</h2>
+            <div id="top3-podium">
+                <div class="podium-slot" id="podium-2">
+                    <div class="podium-rank">#2</div>
+                    <div class="podium-name">—</div>
+                    <div class="podium-prime">—</div>
+                    <div class="podium-bar" style="height:80px"></div>
+                </div>
+                <div class="podium-slot" id="podium-1">
+                    <div class="podium-rank">#1</div>
+                    <div class="podium-crown"></div>
+                    <div class="podium-name">—</div>
+                    <div class="podium-prime">—</div>
+                    <div class="podium-bar" style="height:120px"></div>
+                </div>
+                <div class="podium-slot" id="podium-3">
+                    <div class="podium-rank">#3</div>
+                    <div class="podium-name">—</div>
+                    <div class="podium-prime">—</div>
+                    <div class="podium-bar" style="height:55px"></div>
+                </div>
+            </div>
+        </section>
 
+        <section id="membres-section">
+            <h2 class="section-title">Défis à réaliser</h2>
+            <div id="membres-grid"></div>
+        </section>
 
-    <footer>
-        <p>© 2025, 2026 Pirat'eirb</p>
-        <a href="URL-destination">
-            <img src="assets/chemin-vers-l-image.jpg" alt="Instagram : @pirateirb" title="Instagram : @pirateirb">
-        </a>
-        <a href="URL-destination">
-            <img src="assets/chemin-vers-l-image.jpg" alt="TikTok : @pirateirb" title="TikTok : @pirateirb">
-        </a>
-        <a href="URL-destination">
-            <img src="assets/chemin-vers-l-image.jpg" alt="Telegram" title="Telegram">
-        </a>
-    </footer>
+    </main>
 
+    <div id="validation-modal">
+        <div class="val-modal-bg"></div>
+        <div class="val-modal-box">
+            <h2 id="val-titre">Valider le défi</h2>
+            <p id="val-defi">—</p>
+            <p id="val-gain">+ — M berries</p>
+            <button id="val-confirm">Valider</button>
+            <button id="val-cancel">Annuler</button>
+            <p id="val-msg"></p>
+        </div>
+    </div>
+
+    <script src="primes.js"></script>
 </body>
-
 </html>

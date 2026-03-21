@@ -4,7 +4,7 @@ function randomNumber(min, max) {
 
 const STAR_COUNT = 800
 let result = ""
-for(let i = 0; i < STAR_COUNT; i++){
+for (let i = 0; i < STAR_COUNT; i++) {
     result += `${randomNumber(-50, 50)}vw ${randomNumber(-50, 50)}vh ${randomNumber(0, 1)}px ${randomNumber(0, 1)}px #fff,`
 }
 console.log(result.substring(0, result.length - 1))
