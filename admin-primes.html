@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Primes — Pirat'eirb</title>
+    <link rel="stylesheet" href="admin-primes.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;600;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="access-denied" style="display:none">
+        <h1>Accès refusé</h1>
+        <p>Seuls les pirates confirmés ont l'aura pour valider des défis</p>
+    </div>
+
+    <div id="admin-app" style="display:none">
+
+        <header id="admin-header">
+            <div id="header-left">
+                <a href="index.html" id="back-btn">← retour</a>
+                <h1>PRIMES <span class="tag">ADMIN</span></h1>
+            </div>
+            <div id="header-right">
+                <span id="admin-user"></span>
+                <button id="logout-btn">Déconnexion</button>
+            </div>
+        </header>
+
+        <main>
+
+            <section id="search-section">
+                <h2 class="section-title">Valider un défi (!! écrire correctement l'id CAS en ENTIER !!)</h2>
+                <div id="search-bar">
+                    <input type="text" id="search-input" placeholder="Login CAS du joueur...">
+                    <button id="search-btn">Rechercher</button>
+                </div>
+
+                <div id="joueur-panel" style="display:none">
+                    <div id="joueur-info">
+                        <span id="joueur-login">—</span>
+                        <span id="joueur-prime">0 M berries</span>
+                        <span id="joueur-defis">0 défis réussis</span>
+                    </div>
+
+                    <div id="membres-list">
+                    </div>
+                </div>
+            </section>
+
+            <section id="classement-section">
+                <h2 class="section-title">Classement complet</h2>
+                <table id="classement-table">
+                    <thead>
+                        <tr>
+                            <th>Rang</th>
+                            <th>Login</th>
+                            <th>Prime totale</th>
+                            <th>Défis réussis</th>
+                        </tr>
+                    </thead>
+                    <tbody id="classement-body">
+                        <tr><td colspan="4" id="empty-classement">Aucun joueur pour l'instant.</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="membres-section">
+                <h2 class="section-title">Membres & défis</h2>
+
+                <div id="add-membre-form">
+                    <h3>Ajouter un membre</h3>
+                    <div class="form-row">
+                        <input type="text" id="new-login" placeholder="Login CAS">
+                        <input type="text" id="new-nom" placeholder="Nom complet">
+                    </div>
+                    <div class="form-row">
+                        <input type="text" id="new-challenge" placeholder="Défi à réaliser">
+                        <input type="number" id="new-valeur" placeholder="Valeur (M berries)">
+                    </div>
+                    <button id="add-membre-btn">+ Ajouter</button>
+                    <p id="add-msg"></p>
+                </div>
+
+                <table id="membres-table">
+                    <thead>
+                        <tr>
+                            <th>Login</th>
+                            <th>Nom</th>
+                            <th>Défi</th>
+                            <th>Valeur</th>
+                        </tr>
+                    </thead>
+                    <tbody id="membres-body">
+                        <tr><td colspan="4">Aucun membre.</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="admin-primes.js"></script>
+</body>
+</html>
