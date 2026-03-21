@@ -232,6 +232,9 @@ main {
     right: 0;
     text-align: center;
     padding: 0 16px;
+    z-index: 1000;
+    background-color: transparent;
+    background-image: url('assets/frame_prime.png');
 }
 
 .wanted-nom {

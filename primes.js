@@ -77,13 +77,13 @@ async function loadMembres() {
         card.innerHTML = `
             <img class="wanted-frame" src="assets/frame_prime.png" alt="">
             <img class="wanted-photo" src="${photoSrc}" alt="${m.nom}"
-                 onerror="this.src='assets/logo.png'">
+                 onerror="this.src='assets/frame_prime.png'">
             <div class="wanted-info">
                 <div class="wanted-nom">${m.nom}</div>
                 <div class="wanted-prime-val">${m.valeur_prime} M berries</div>
             </div>
             <div class="wanted-defi">${m.challenge}</div>
-            ${deja ? '<div class="wanted-done">VALIDÉ ✓</div>' : ''}
+            ${deja ? '<div class="wanted-done">DÉJA VALIDÉ</div>' : ''}
         `;
 
         if (!deja) {
