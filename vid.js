@@ -1,12 +1,10 @@
 import { animate, scroll, stagger, cubicBezier } from 'https://cdn.jsdelivr.net/npm/motion@11.11.16/+esm';
 
-// Check for reduced motion preference
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isMobile = window.innerWidth <= 768;
 
-if (prefersReducedMotion || isMobile) {
-  // Skip animations if user prefers reduced motion or on mobile
-  console.log('Skipping animations - reduced motion or mobile detected');
+if (isMobile) {
+  // Skip animations if on phone (we handle static view via CSS)
+  console.log('Skipping animations - mobile detected');
 } else {
   // Desktop animation (scroll-bound sticky technique)
   let image = document.querySelector('.scaler img');
@@ -32,12 +30,11 @@ if (prefersReducedMotion || isMobile) {
     }),
     {
       target: firstSection,
-      offset: ['start start', '80% end end']
+      offset: ['start start', 'end end']
     }
   );
 
   // Animate each layer with staggered timing
-  // Different easing per layer: power1, power3, power4
   const scaleEasings = [
     cubicBezier(0.42, 0, 0.58, 1),  // Layer 1: GSAP power1.inOut
     cubicBezier(0.76, 0, 0.24, 1),  // Layer 2: GSAP power3.inOut
@@ -45,9 +42,6 @@ if (prefersReducedMotion || isMobile) {
   ];
 
   layers.forEach((layer, index) => {
-    // Calculate different end points for each layer
-    const endOffset = `${1 - (index * 0.05)} end`;
-
     // fade: opacity stays 0 until 55% of scroll progress, then fades to 1
     scroll(
       animate(layer, {
@@ -58,7 +52,7 @@ if (prefersReducedMotion || isMobile) {
       }),
       {
         target: firstSection,
-        offset: ['start start', endOffset]
+        offset: ['start start', 'end end']
       }
     );
 
@@ -72,7 +66,7 @@ if (prefersReducedMotion || isMobile) {
       }),
       {
         target: firstSection,
-        offset: ['start start', endOffset]
+        offset: ['start start', 'end end']
       }
     );
   });
