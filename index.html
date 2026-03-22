@@ -11,6 +11,15 @@
     <link rel="stylesheet" href="footer.css">
     <script type="module">
         import protect from "/lib/protect.js";
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('primes-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                protect.redirect("primes");
+            });
+        });
+    </script>
+    <script type="module">
+        import protect from "/lib/protect.js";
 
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('allo-btn').addEventListener('click', (e) => {
@@ -41,17 +50,18 @@ protect.getData()
     <p>Scrolle vers le bas pour découvrir le site<br>D'ailleurs, le site est bien mieux sur ordi !</p>
     <button id="scroll-popup-btn">Compris !</button>
 </div>
-        <nav class="navbar">
-        <ul>
-            <li id="back"><a href="index.html"><img src="assets/back.png" alt="Retour"></a></li>
-            <li>
-                
-            </li>
-        </ul>
         <button id="allo-btn" class="allo" href="allo.html">
                     ALLO
                     <img src="assets/phone.png" id="phone">
         </button>
+        <button id="primes-btn" class="primes" href="primes.html">
+                    PRIMES
+        </button>
+       <nav class="navbar">
+        <ul>
+            <li id="back"><a href="index.html"><img src="assets/back.png" alt="Retour"></a></li>
+        </ul>
+
     </nav>
 
     <a href="index.html" class="logo">
@@ -85,6 +95,8 @@ protect.getData()
                 <div class="hero__wrapper">
                     <nav class="hero__nav">
                         <a href="ep.html"      class="hero__nav-btn hero__nav-btn--videos">EP-4 TITRES</a>
+                        <a href="primes.html"      class="hero__nav-btn hero__nav-btn--videos">PRIMES</a>
+
                         <a href="equipage.html"    class="hero__nav-btn hero__nav-btn--equipage">EQUIPE</a>
                         <a href="videos.html" class="hero__nav-btn hero__nav-btn--partenaires">VIDEOS</a>
                         <a href="partenaires.html"        class="hero__nav-btn hero__nav-btn--allo">PARTENAIRES</a>
