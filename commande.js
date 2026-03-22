@@ -4,56 +4,56 @@ const API_URL = 'https://sitebds-production.up.railway.app';
 
 const MENUS = {
     talence: [
-        { nom: 'Crêpe sucre',           prix: 0.10 },
+        { nom: 'Crêpe sucre', prix: 0.10 },
         { nom: 'Crêpe pâte à tartiner', prix: 0.10 },
-        { nom: 'Wrap poulet halal',      prix: 1.50 },
-        { nom: 'Panini nutella',         prix: 1.50 },
-        { nom: 'Panini fromage',         prix: 1.50 },
-        { nom: 'Brownie / Cookie',       prix: 2.00 },
-        { nom: 'Encens',    prix: 6.50},
-        { nom: 'Puff goût paff',        prix: 1.50},
+        { nom: 'Wrap poulet halal', prix: 1.50 },
+        { nom: 'Panini nutella', prix: 1.50 },
+        { nom: 'Panini fromage', prix: 1.50 },
+        { nom: 'Brownie / Cookie', prix: 2.00 },
+        { nom: 'Encens', prix: 6.50 },
+        { nom: 'Puff goût paff', prix: 1.50 },
     ],
     bordeaux: [
-        { nom: 'Crêpe sucre',           prix: 0.10 },
+        { nom: 'Crêpe sucre', prix: 0.10 },
         { nom: 'Crêpe pâte à tartiner', prix: 0.10 },
-        { nom: 'Wrap poulet halal',      prix: 1.50 },
-        { nom: 'Panini nutella',         prix: 1.50 },
-        { nom: 'Panini fromage',         prix: 1.50 },
-        { nom: 'Brownie / Cookie',       prix: 2.00 },
-        { nom: 'Tiramisu spéculos',      prix: 2.50 },
-        { nom: 'Tiramisu oreo',          prix: 2.50 },
-        { nom: 'Tiramisu café',          prix: 2.50 },
-        { nom: 'Madeleine',              prix: 1.00 },
-        { nom: 'Encens',    prix: 6.50},
-        { nom: 'Puff goût paff',        prix: 1.50},
+        { nom: 'Wrap poulet halal', prix: 1.50 },
+        { nom: 'Panini nutella', prix: 1.50 },
+        //{ nom: 'Panini fromage',         prix: 1.50 },
+        { nom: 'Brownie / Cookie', prix: 2.00 },
+        { nom: 'Tiramisu spéculos', prix: 2.50 },
+        { nom: 'Tiramisu oreo', prix: 2.50 },
+        { nom: 'Tiramisu café', prix: 2.50 },
+        { nom: 'Madeleine', prix: 1.00 },
+        { nom: 'Encens', prix: 6.50 },
+        { nom: 'Puff goût paff', prix: 1.50 },
     ],
     pessac: [
-        { nom: 'Crêpe sucre',           prix: 0.10 },
+        { nom: 'Crêpe sucre', prix: 0.10 },
         { nom: 'Crêpe pâte à tartiner', prix: 0.10 },
-        { nom: 'Wrap poulet halal',      prix: 1.50 },
-        { nom: 'Panini nutella',         prix: 1.50 },
-        { nom: 'Panini fromage',         prix: 1.50 },
-        { nom: 'Brownie / Cookie',       prix: 2.00 },
-        { nom: 'Encens',    prix: 6.50},
-        { nom: 'Puff goût paff',        prix: 1.50},
+        { nom: 'Wrap poulet halal', prix: 1.50 },
+        { nom: 'Panini nutella', prix: 1.50 },
+        { nom: 'Panini fromage', prix: 1.50 },
+        { nom: 'Brownie / Cookie', prix: 2.00 },
+        { nom: 'Encens', prix: 6.50 },
+        { nom: 'Puff goût paff', prix: 1.50 },
     ],
 };
 
 const QG_LABELS = {
-    talence:  'QG — Talence',
+    talence: 'QG — Talence',
     bordeaux: 'QG — Bordeaux',
-    pessac:   'QG — Pessac',
+    pessac: 'QG — Pessac',
 };
 
 const QG_MAP = { c1: 'talence', c2: 'bordeaux', c3: 'pessac' };
 
 let currentUser = null;
-let currentQG   = null;
-let quantities  = {};
+let currentQG = null;
+let quantities = {};
 
 protect.getData()
     .then(data => { currentUser = data.user.uid; })
-    .catch(() => {});
+    .catch(() => { });
 
 function getOpenQG() {
     for (const [inputId, qg] of Object.entries(QG_MAP)) {
@@ -64,14 +64,14 @@ function getOpenQG() {
 }
 
 function openModal(qg) {
-    currentQG  = qg;
+    currentQG = qg;
     quantities = {};
 
     document.getElementById('modal-qg-title').textContent = QG_LABELS[qg];
     document.getElementById('commande-confirm-msg').textContent = '';
-    document.getElementById('field-prenom').value  = '';
-    document.getElementById('field-nom').value     = '';
-    document.getElementById('field-tel').value     = '';
+    document.getElementById('field-prenom').value = '';
+    document.getElementById('field-nom').value = '';
+    document.getElementById('field-tel').value = '';
     document.getElementById('field-adresse').value = '';
 
     renderMenu(qg);
@@ -86,10 +86,10 @@ function closeModal() {
 
 function renderMenu(qg) {
     function nomToId(nom) {
-    return nom.normalize('NFD').replace(/[\u0300-\u036f]/g, '') 
-              .replace(/[^a-zA-Z0-9]/g, '-')       
-              .toLowerCase();
-}
+        return nom.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-zA-Z0-9]/g, '-')
+            .toLowerCase();
+    }
     const container = document.getElementById('commande-menu');
     container.innerHTML = '';
 
@@ -114,30 +114,30 @@ function renderMenu(qg) {
 
     container.querySelectorAll('.counter-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            const nom    = btn.dataset.nom;
+            const nom = btn.dataset.nom;
             const action = btn.dataset.action;
-            if (action === 'plus')  quantities[nom] = (quantities[nom] || 0) + 1;
+            if (action === 'plus') quantities[nom] = (quantities[nom] || 0) + 1;
             if (action === 'minus') quantities[nom] = Math.max(0, (quantities[nom] || 0) - 1);
 
             const key = nomToId(nom);
-            document.getElementById(`qty-${key}`).textContent = quantities[nom];            
+            document.getElementById(`qty-${key}`).textContent = quantities[nom];
             updateTotal();
         });
     });
 }
 
 function updateTotal() {
-    const menu  = MENUS[currentQG] || [];
+    const menu = MENUS[currentQG] || [];
     const total = menu.reduce((sum, item) => sum + (quantities[item.nom] || 0) * item.prix, 0);
     document.getElementById('commande-total-price').textContent = total.toFixed(2) + ' €';
 }
 
 async function submitCommande() {
-    const prenom  = document.getElementById('field-prenom').value.trim();
-    const nom     = document.getElementById('field-nom').value.trim();
-    const tel     = document.getElementById('field-tel').value.trim();
+    const prenom = document.getElementById('field-prenom').value.trim();
+    const nom = document.getElementById('field-nom').value.trim();
+    const tel = document.getElementById('field-tel').value.trim();
     const adresse = document.getElementById('field-adresse').value.trim();
-    const msg     = document.getElementById('commande-confirm-msg');
+    const msg = document.getElementById('commande-confirm-msg');
 
     if (!prenom || !nom || !tel || !adresse) {
         msg.style.color = '#ef4444';

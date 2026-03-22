@@ -38,7 +38,7 @@ function openModal(m) {
             return;
         }
         msg.style.color = '#27ae60';
-        msg.textContent = '✅ Demande envoyée à un admin !';
+        msg.textContent = 'Demande envoyée';
     };
 
     document.getElementById('validation-modal').classList.add('show');
@@ -84,7 +84,7 @@ async function loadMembres() {
         card.className = 'wanted-card';
         card.style.animationDelay = `${i * 0.06}s`;
 
-        const prenom = m.nom.split(' ')[0].toLowerCase();
+        const prenom = m.nom.split(' ')[0];
         const photoSrc = `assets/members/${prenom}_bis_.jpg`;
 
         card.innerHTML = `
