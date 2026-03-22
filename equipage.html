@@ -76,7 +76,7 @@
             </div>
             <div class="member">
                 <div class="member_photo"
-                    style="background-image: url('assets/members/lapiraterie/pierre.png'); background-size: cover; background-position: center;">
+                    style="background-image: url('assets/members/lapiraterie/pierre.png'); background-size: cover; background-position: center 10%;">
                 </div>
                 <h2>Pierre</h2>
                 <p>Trésorier</p>
@@ -124,7 +124,7 @@
             </div>
             <div class="member">
                 <div class="member_photo"
-                    style="background-image: url('assets/members/lapiraterie/samuel.jpeg'); background-size: cover; background-position: center;">
+                    style="background-image: url('assets/members/lapiraterie/samuel.jpeg'); background-size: 110%; background-position: center;">
                 </div>
                 <h2>Samuel</h2>
                 <p>Respo Event</p>
@@ -159,7 +159,7 @@
             </div>
             <div class="member">
                 <div class="member_photo"
-                    style="background-image: url('assets/members/lapiraterie/armel.png'); background-size: cover; background-position: center 10%;">
+                    style="background-image: url('assets/members/lapiraterie/armel.jpg'); background-size: 120%; background-position: center;">
                 </div>
                 <h2>Armel</h2>
                 <p>Chargé Event</p>
@@ -338,13 +338,15 @@
 
     <script>
         $("#adopte_un_pirate").click(function () {
-            $(".panel").toggle(); // Alternance affichage/caché
+            if ($(".panel").css("display") === "none") {
+                $(".panel").css("display", "flex");
+            } else {
+                $(".panel").css("display", "none");
+            }
         });
-    </script>
 
-    <script>
         $("#close-panel").click(function () {
-            $(".panel").hide(); // Cacher le panneau
+            $(".panel").css("display", "none");
         });
     </script>
 
