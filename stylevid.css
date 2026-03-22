@@ -1,25 +1,33 @@
 @charset "UTF-8";
+
 /* Step 1: Basic Grid Setup - No animations yet */
 *,
 *::before,
 *::after {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 
 :root {
-  --gutter: 2rem; }
+  --gutter: 2rem;
+}
 
 @media (max-width: 600px) {
   :root {
-    --gutter: 1rem; } }
+    --gutter: 1rem;
+  }
+}
+
 body {
   margin: 0;
   font-family: 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', Helvetica, Arial, sans-serif, system-ui;
   background: #000;
-  color: #fff; }
+  color: #fff;
+}
 
 .content-wrap {
   background: #000;
-  overflow: clip; }
+  overflow: clip;
+}
 
 /* Header */
 header {
@@ -28,35 +36,42 @@ header {
   align-content: center;
   max-width: calc(100% - (2 * var(--gutter)));
   padding-left: 48px;
-  text-align: left; }
+  text-align: left;
+}
 
 h1 {
   font-family: "Parisienne", cursive;
   font-weight: 1000;
   font-style: normal;
-  width: 70vw; }
+  width: 70vw;
+}
 
 h2 {
   font-family: "Satisfy", cursive;
   font-weight: 400;
-  font-style: normal; }
+  font-style: normal;
+}
 
 a {
-  color: white; }
+  color: white;
+}
 
 .fluid {
   font-size: clamp(4rem, 12vw, 12rem);
   line-height: 0.6;
-  margin: 0; }
+  margin: 0;
+}
 
 h2.fluid {
   font-size: clamp(0.5rem, 2vw, 1.5rem);
-  padding-top: 48px; }
+  padding-top: 48px;
+}
 
 /* Section setup - Sticky spacer trick */
 main section:first-of-type {
   min-height: 240vh;
-  /* Extra height for scroll space */ }
+  /* Extra height for scroll space */
+}
 
 .content {
   min-height: 100vh;
@@ -66,12 +81,14 @@ main section:first-of-type {
   align-content: center;
   position: sticky;
   top: 0;
-  overflow: hidden; }
+  overflow: hidden;
+}
 
 main section:last-of-type {
   min-height: 100vh;
   display: grid;
-  place-items: center; }
+  place-items: center;
+}
 
 /* Grid Layout - 5 columns x 3 rows */
 .grid {
@@ -89,10 +106,11 @@ main section:last-of-type {
   position: absolute;
   top: 50%;
   left: 50%;
-  translate: -50% -50%; }
+  translate: -50% -50%;
+}
 
 /* Layers using subgrid */
-.grid > .layer {
+.grid>.layer {
   display: grid;
   grid-column: 1 / -1;
   grid-row: 1 / -1;
@@ -100,105 +118,128 @@ main section:last-of-type {
   grid-template-rows: subgrid;
   z-index: 3;
   pointer-events: none;
-  /* Le conteneur ne capte pas les événements... */ }
+  /* Le conteneur ne capte pas les événements... */
+}
 
 /* ...seules les cellules avec iframes sont interactives */
-.grid > .layer > div {
-  pointer-events: auto; }
+.grid>.layer>div {
+  pointer-events: auto;
+}
 
 /* Layer 1: Outer edges - odd on left column, even on right column */
-.grid > .layer:nth-of-type(1) div:nth-of-type(odd) {
-  grid-column: 1; }
+.grid>.layer:nth-of-type(1) div:nth-of-type(odd) {
+  grid-column: 1;
+}
 
-.grid > .layer:nth-of-type(1) div:nth-of-type(even) {
-  grid-column: -2; }
+.grid>.layer:nth-of-type(1) div:nth-of-type(even) {
+  grid-column: -2;
+}
 
 /* Layer 2: Inner columns */
-.grid > .layer:nth-of-type(2) div:nth-of-type(odd) {
-  grid-column: calc(2 + var(--offset)); }
+.grid>.layer:nth-of-type(2) div:nth-of-type(odd) {
+  grid-column: calc(2 + var(--offset));
+}
 
-.grid > .layer:nth-of-type(2) div:nth-of-type(even) {
-  grid-column: calc(-3 - var(--offset)); }
+.grid>.layer:nth-of-type(2) div:nth-of-type(even) {
+  grid-column: calc(-3 - var(--offset));
+}
 
 /* Layer 3: Center column top and bottom */
-.grid > .layer:nth-of-type(3) div:first-of-type {
+.grid>.layer:nth-of-type(3) div:first-of-type {
   grid-column: calc(3 + var(--offset));
-  grid-row: 1; }
+  grid-row: 1;
+}
 
-.grid > .layer:nth-of-type(3) div:last-of-type {
+.grid>.layer:nth-of-type(3) div:last-of-type {
   grid-column: calc(3 + var(--offset));
-  grid-row: -1; }
+  grid-row: -1;
+}
 
 .grid img:not(.thumbnail) {
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  border-radius: 1rem; }
+  border-radius: 1rem;
+}
 
 .grid a.video-link {
   display: block;
   width: 100%;
   height: 100%;
   border-radius: 1rem;
-  overflow: clip; }
-  .grid a.video-link img.thumbnail {
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    border-radius: 1rem;
-    transition: transform 0.3s ease; }
-  .grid a.video-link:hover img.thumbnail {
-    transform: scale(1.05);
-    /* simple zoom effect on hover */ }
+  overflow: clip;
+}
+
+.grid a.video-link img.thumbnail {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.grid a.video-link:hover img.thumbnail {
+  transform: scale(1.05);
+  /* simple zoom effect on hover */
+}
 
 .grid iframe {
   width: 100%;
   height: 100%;
   border-radius: 1rem;
-  border: none; }
+  border: none;
+}
 
 .grid .scaler {
   position: relative;
-  grid-area: 2/calc(3 + var(--offset)); }
+  grid-area: 2/calc(3 + var(--offset));
+}
 
 .scaler {
   z-index: 1;
   width: 100%;
   height: 100%;
-  position: relative; }
-  .scaler img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    object-fit: cover;
-    border-radius: 1rem;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; }
-  .scaler iframe {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    border-radius: 1rem;
-    width: 100%;
-    height: 100%;
-    border: none; }
+  position: relative;
+}
+
+.scaler img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  object-fit: cover;
+  border-radius: 1rem;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.scaler iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  border-radius: 1rem;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
 
 /* ================================================
    Mobile layout (≤ 768px) — vertical list of videos
    ================================================ */
 @media (max-width: 768px) {
   main section:first-of-type {
-    min-height: auto; }
+    min-height: auto;
+  }
 
   .content {
     position: relative;
     min-height: auto;
     display: block;
-    padding: var(--gutter); }
+    padding: var(--gutter);
+  }
 
   .grid {
     position: relative;
@@ -211,9 +252,10 @@ main section:last-of-type {
     flex-direction: column;
     gap: 1rem;
     grid-template-columns: unset;
-    grid-template-rows: unset; }
+    grid-template-rows: unset;
+  }
 
-  .grid > .layer {
+  .grid>.layer {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -223,46 +265,43 @@ main section:last-of-type {
     grid-template-rows: unset;
     pointer-events: auto;
     opacity: 1 !important;
-    scale: 1 !important; }
+    scale: 1 !important;
+    transform: none !important;
+    translate: none !important;
+  }
 
-  .grid > .layer:nth-of-type(1) {
-    display: flex; }
+  .grid>.layer:nth-of-type(1) {
+    display: flex;
+  }
 
-  .grid > .layer > div {
+  .grid>.layer>div {
     width: 100%;
     aspect-ratio: 16 / 9;
     grid-column: unset;
-    grid-row: unset; }
+    grid-row: unset;
+  }
 
-  .grid > .layer:nth-of-type(1) div:nth-of-type(odd),
-  .grid > .layer:nth-of-type(1) div:nth-of-type(even),
-  .grid > .layer:nth-of-type(2) div:nth-of-type(odd),
-  .grid > .layer:nth-of-type(2) div:nth-of-type(even),
-  .grid > .layer:nth-of-type(3) div:first-of-type,
-  .grid > .layer:nth-of-type(3) div:last-of-type {
+  .grid>.layer:nth-of-type(1) div:nth-of-type(odd),
+  .grid>.layer:nth-of-type(1) div:nth-of-type(even),
+  .grid>.layer:nth-of-type(2) div:nth-of-type(odd),
+  .grid>.layer:nth-of-type(2) div:nth-of-type(even),
+  .grid>.layer:nth-of-type(3) div:first-of-type,
+  .grid>.layer:nth-of-type(3) div:last-of-type {
     grid-column: unset;
-    grid-row: unset; }
+    grid-row: unset;
+  }
 
   .grid iframe,
   .grid a.video-link {
     width: 100%;
     height: 100%;
-    aspect-ratio: 16 / 9; }
+    aspect-ratio: 16 / 9;
+  }
 
   .grid .scaler {
-    grid-area: unset;
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    height: auto;
-    position: relative; }
+    display: none;
+  }
+}
 
-  .scaler img {
-    position: relative;
-    top: auto;
-    left: auto;
-    translate: none;
-    width: 100% !important;
-    height: auto !important;
-    object-fit: cover; } }
 
 /*# sourceMappingURL=stylevid.css.map */

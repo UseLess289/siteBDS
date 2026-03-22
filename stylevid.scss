@@ -52,7 +52,7 @@ h2 {
 }
 
 a {
-  color:white;
+  color: white;
 }
 
 .fluid {
@@ -68,7 +68,8 @@ h2.fluid {
 
 /* Section setup - Sticky spacer trick */
 main section:first-of-type {
-  min-height: 240vh; /* Extra height for scroll space */
+  min-height: 240vh;
+  /* Extra height for scroll space */
 }
 
 .content {
@@ -110,46 +111,47 @@ main section:last-of-type {
 
 
 /* Layers using subgrid */
-.grid > .layer {
+.grid>.layer {
   display: grid;
   grid-column: 1 / -1;
   grid-row: 1 / -1;
   grid-template-columns: subgrid;
   grid-template-rows: subgrid;
   z-index: 3;
-  pointer-events: none; /* Le conteneur ne capte pas les événements... */
+  pointer-events: none;
+  /* Le conteneur ne capte pas les événements... */
 }
 
 /* ...seules les cellules avec iframes sont interactives */
-.grid > .layer > div {
+.grid>.layer>div {
   pointer-events: auto;
 }
 
 /* Layer 1: Outer edges - odd on left column, even on right column */
-.grid > .layer:nth-of-type(1) div:nth-of-type(odd) {
+.grid>.layer:nth-of-type(1) div:nth-of-type(odd) {
   grid-column: 1;
 }
 
-.grid > .layer:nth-of-type(1) div:nth-of-type(even) {
+.grid>.layer:nth-of-type(1) div:nth-of-type(even) {
   grid-column: -2;
 }
 
 /* Layer 2: Inner columns */
-.grid > .layer:nth-of-type(2) div:nth-of-type(odd) {
+.grid>.layer:nth-of-type(2) div:nth-of-type(odd) {
   grid-column: calc(2 + var(--offset));
 }
 
-.grid > .layer:nth-of-type(2) div:nth-of-type(even) {
+.grid>.layer:nth-of-type(2) div:nth-of-type(even) {
   grid-column: calc(-3 - var(--offset));
 }
 
 /* Layer 3: Center column top and bottom */
-.grid > .layer:nth-of-type(3) div:first-of-type {
+.grid>.layer:nth-of-type(3) div:first-of-type {
   grid-column: calc(3 + var(--offset));
   grid-row: 1;
 }
 
-.grid > .layer:nth-of-type(3) div:last-of-type {
+.grid>.layer:nth-of-type(3) div:last-of-type {
   grid-column: calc(3 + var(--offset));
   grid-row: -1;
 }
@@ -178,7 +180,8 @@ main section:last-of-type {
   }
 
   &:hover img.thumbnail {
-    transform: scale(1.05); /* simple zoom effect on hover */
+    transform: scale(1.05);
+    /* simple zoom effect on hover */
   }
 }
 
@@ -228,6 +231,7 @@ main section:last-of-type {
    Mobile layout (≤ 768px) — vertical list of videos
    ================================================ */
 @media (max-width: 768px) {
+
   // --- Remove the sticky scroll-driven layout ---
   main section:first-of-type {
     min-height: auto;
@@ -256,7 +260,7 @@ main section:last-of-type {
   }
 
   // Each layer becomes a plain vertical stack
-  .grid > .layer {
+  .grid>.layer {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -268,15 +272,17 @@ main section:last-of-type {
     // Force initial visibility since we disabled JS animations on mobile
     opacity: 1 !important;
     scale: 1 !important;
+    transform: none !important;
+    translate: none !important;
   }
 
   // Restore Layer 1 (outer-edge videos) — was hidden in the old breakpoint
-  .grid > .layer:nth-of-type(1) {
+  .grid>.layer:nth-of-type(1) {
     display: flex;
   }
 
   // Each video cell: full width, 16:9
-  .grid > .layer > div {
+  .grid>.layer>div {
     width: 100%;
     aspect-ratio: 16 / 9;
     grid-column: unset;
@@ -284,12 +290,12 @@ main section:last-of-type {
   }
 
   // Reset all per-cell column/row overrides
-  .grid > .layer:nth-of-type(1) div:nth-of-type(odd),
-  .grid > .layer:nth-of-type(1) div:nth-of-type(even),
-  .grid > .layer:nth-of-type(2) div:nth-of-type(odd),
-  .grid > .layer:nth-of-type(2) div:nth-of-type(even),
-  .grid > .layer:nth-of-type(3) div:first-of-type,
-  .grid > .layer:nth-of-type(3) div:last-of-type {
+  .grid>.layer:nth-of-type(1) div:nth-of-type(odd),
+  .grid>.layer:nth-of-type(1) div:nth-of-type(even),
+  .grid>.layer:nth-of-type(2) div:nth-of-type(odd),
+  .grid>.layer:nth-of-type(2) div:nth-of-type(even),
+  .grid>.layer:nth-of-type(3) div:first-of-type,
+  .grid>.layer:nth-of-type(3) div:last-of-type {
     grid-column: unset;
     grid-row: unset;
   }
@@ -302,22 +308,9 @@ main section:last-of-type {
     aspect-ratio: 16 / 9;
   }
 
-  // Center image flows in-line between the layers
+  // Center image is hidden on mobile so videos appear directly
   .grid .scaler {
-    grid-area: unset;
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    height: auto;
-    position: relative;
+    display: none;
   }
 
-  .scaler img {
-    position: relative;
-    top: auto;
-    left: auto;
-    translate: none;
-    width: 100% !important;   // Override Motion One inline value
-    height: auto !important;
-    object-fit: cover;
-  }
 }
