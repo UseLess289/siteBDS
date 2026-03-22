@@ -1,39 +1,120 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap');
 
-html, body {
-    width: 100%;
-    min-height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
+@font-face {
+  font-family: 'love';
+  src: url('assets/fonts/Love.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  /* Important pour la performance */
 }
+
+@font-face {
+  font-family: 'Mf Love Song';
+  src: url('assets/fonts/Mf\ Love\ Song.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+html,
 body {
-    position: relative;
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
+
+body {
+  position: relative;
+}
+
 #jsi-sea-container {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: visible;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url('assets/background_ekip2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(4px);
+  transform: scale(1.05);
+  /* Eviter que les bords floutés révelent le fond blanc */
 }
+
+
+#navbar {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  border-radius: 10px;
+  padding: 8px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  width: auto;
+  max-width: 240px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+
+
+.main {
+  position: relative;
+  z-index: 10;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 100px;
+  margin-bottom: 20px;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  gap: 0.05em;
+  text-decoration: none;
+  z-index: 4;
+}
+
+.logo .letter {
+  font-family: 'love', sans-serif;
+  font-size: clamp(3rem, 10vw, 7rem);
+  font-weight: 1000;
+  color: #4b0082;
+  text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8);
+  transition: transform 0.2s ease;
+}
+
+.logo .letter:hover {
+  transform: translateY(-10px) rotate(-5deg) scale(1.1);
+}
+
 .container {
-    position: relative;
-    inset: 0;
-    margin: 0;
-    padding: 0;
+  position: relative;
+  inset: 0;
+  margin: 0;
+  padding: 0;
 }
-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
+
+
+
 section,
-#adopte_un_pirate,
+#main-header,
 .panel,
 .bureau,
 .pole_event,
@@ -42,16 +123,52 @@ section,
 .pole_part,
 .pole_bar,
 .pole_sante {
-    position: relative;
-    z-index: 1;
+  position: relative;
+  z-index: 1;
+}
+
+#main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 200;
+  box-sizing: border-box;
+  pointer-events: none;
+  /* Laisse passer les clics au travers du header vide */
+}
+
+#adopte_un_pirate {
+  pointer-events: auto;
+  /* Mais réactive les clics sur le bouton */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  padding: 0;
+}
+
+#adopte_un_pirate:hover {
+  transform: scale(1.05);
+}
+
+#adopte_un_pirate img {
+  height: 60px;
+  /* Taille à ajuster */
+  width: auto;
 }
 
 .frame {
   position: relative;
-  width: 56vh;
-  height: 84vh;
-  max-width: 400px;
-  max-height: 600px;
+  width: 45vh;
+  height: 65vh;
+  max-width: 300px;
+  max-height: 450px;
+  margin: 0 auto;
   z-index: 1;
 }
 
@@ -61,7 +178,7 @@ section,
   z-index: 1;
 }
 
-.icons > svg {
+.icons>svg {
   width: 10vh;
   height: 10vh;
   max-width: 60px;
@@ -71,9 +188,18 @@ section,
   cursor: pointer;
 }
 
-.icons > svg:nth-child(1) { fill: #fb4f68; margin-right: 2vh; }
-.icons > svg:nth-child(2) { fill: #4dca93; }
-.icons > svg > path:nth-child(1) { fill: #fff; }
+.icons>svg:nth-child(1) {
+  fill: #fb4f68;
+  margin-right: 2vh;
+}
+
+.icons>svg:nth-child(2) {
+  fill: #4dca93;
+}
+
+.icons>svg>path:nth-child(1) {
+  fill: #fff;
+}
 
 .card {
   position: absolute;
@@ -99,12 +225,13 @@ section,
   position: absolute;
   opacity: 0;
 }
+
 .card .is-like::after {
   position: absolute;
   left: 50%;
   bottom: 30%;
   transform: translateX(-50%) rotate(-10deg);
-  width:70%;
+  width: 70%;
   height: 13%;
   font-size: 3em;
   letter-spacing: 0.2em;
@@ -116,13 +243,13 @@ section,
 }
 
 .card .like::after {
-  content: "YUMM";
+  content: "PAIN";
   color: #4dca93;
   border: 0.1em solid #4dca93;
 }
 
 .card .nope::after {
-  content: "YUCK";
+  content: "ATROCE";
   color: #fb4f68;
   border: 0.1em solid #fb4f68;
 }
@@ -139,17 +266,17 @@ section,
   font-weight: 400;
 }
 
-.card .bottom .title > span:nth-child(1) {
+.card .bottom .title>span:nth-child(1) {
   font-size: 2em;
   font-weight: 700;
   margin-right: 0.2em;
 }
 
-.card .bottom .title > span:nth-child(2) {
+.card .bottom .title>span:nth-child(2) {
   font-size: clamp(13px, 1.5em, 25px);
 }
 
-.card .bottom .title > span:nth-child(2) > b {
+.card .bottom .title>span:nth-child(2)>b {
   font-size: 0.6em;
   margin-right: 0.2em;
 }
@@ -173,47 +300,42 @@ section,
   }
 }
 
-h3 {
-  font-family: 'Mr Dafoe';
-  margin: 0;
-  font-size: 3em;
-  color: #424242;
-  text-shadow: 0 0 0.05em #fff;
-}
-
 .panel {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 99;
-  width: min(90%, 420px);
-  background-image: linear-gradient(240deg, #ff7158, #fd2b7b);
-  border: 1px solid #ccc;
+  width: min(90%, 340px);
+  background-image: linear-gradient(240deg, rgba(255, 113, 88, 0.75), rgba(253, 43, 123, 0.75));
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  padding: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
   display: none;
   text-align: center;
-  padding-top: 2rem;
+  padding-top: 1.5rem;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 }
 
 #close-panel {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 2rem;
   height: 2rem;
   border: none;
   border-radius: 50%;
-  background: rgba(255,255,255,0.95);
+  background: rgba(255, 255, 255, 0.95);
   color: #333;
   font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
   display: grid;
   place-items: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   line-height: 1;
 }
 
@@ -221,28 +343,246 @@ h3 {
   background: #fff;
 }
 
+.panel h3 {
+  font-family: 'Mr Dafoe';
+  margin: 0;
+  font-size: 3em;
+  color: #424242;
+  text-shadow: 0 0 0.05em #fff;
+}
+
 h1 {
   text-align: center;
+  font-family: 'love';
+  font-weight: 1000;
+  font-style: normal;
+  font-size: 6em;
+  color: #4b0082;
 }
 
 .members_row {
   display: flex;
+  flex-wrap: wrap;
+  /* Permet aux cartes de passer à la ligne */
   justify-content: center;
-  gap: 20px;
-  margin-bottom: 30px;
+  gap: 120px 100px;
+  /* Espace vertical 70px, horizontal 60px */
+  margin: 0 auto 50px auto;
+  /* Centre la ligne globalement, et laisse une marge au bas */
+  max-width: 1250px;
+  /* Limite la largeur maximale pour éviter que ça s'étale trop sur grand écran */
+  padding: 0 20px;
+  /* Ajoute une respiration sur les très petits écrans */
+
 }
 
 .member {
-  scale: 0.1;
+  scale: 1;
+  /* Rendu visible sans animation scale absente potentiellement */
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  position: relative;
+  z-index: 10;
+  margin-top: 20px;
+  animation: float-up 4s ease-in-out infinite;
+}
+
+/* Animations de lévitation organique */
+@keyframes float-up {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes float-down {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(15px);
+  }
+}
+
+/* Diversité des animations pour créer un côté dispersé (vagues ou quinconce) */
+.member:nth-child(even) {
+  margin-top: 160px;
+  /* Décalage plus grand pour effet en quinconce */
+  animation: float-down 4.5s ease-in-out infinite;
+}
+
+.member:nth-child(odd) {
+  margin-top: 20px;
+  animation: float-up 5s ease-in-out infinite -1s;
+}
+
+.member::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) scale(1.08);
+  /* Agrandissement pour dépasser la photo */
+  width: 350px;
+  height: 400px;
+  background: linear-gradient(135deg, #4b0082 0%, #e6a8ff 100%);
+  /* Dégradé violet foncé à clair pour la bordure */
+  clip-path: path('M175,392 C175,392 0,224 0,112 C0,32 56,0 105,0 C147,0 175,56 175,56 C175,56 203,0 245,0 C294,0 350,32 350,112 C350,224 175,392 175,392 Z');
+  z-index: -1;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Pseudo élément ::after pour l'effet box-shadow avec dégradé */
+.member::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(5px) scale(1.08);
+  width: 350px;
+  height: 400px;
+  background: linear-gradient(135deg, #4b0082 0%, #e6a8ff 100%);
+  /* Le même dégradé pour que son ombre corresponde */
+  clip-path: path('M175,392 C175,392 0,224 0,112 C0,32 56,0 105,0 C147,0 175,56 175,56 C175,56 203,0 245,0 C294,0 350,32 350,112 C350,224 175,392 175,392 Z');
+  z-index: -2;
+  filter: blur(15px);
+  /* L'effet d'ombre portée adoucie */
+  opacity: 0.8;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .member_photo {
-  border-radius: 50%;
+  width: 350px;
+  height: 400px;
   object-fit: cover;
-  border: 3px solid #fff;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  clip-path: path('M175,392 C175,392 0,224 0,112 C0,32 56,0 105,0 C147,0 175,56 175,56 C175,56 203,0 245,0 C294,0 350,32 350,112 C350,224 175,392 175,392 Z');
+  /* La pseudo-ombrage s'en charge maintenant */
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+/* Effets de zoom au survol */
+.member:hover .member_photo {
+  transform: scale(1.05);
+}
+
+.member:hover::before {
+  transform: translateX(-50%) scale(1.13);
+}
+
+.member:hover::after {
+  transform: translateX(-50%) translateY(5px) scale(1.13);
+}
+
+.member h2 {
+  font-family: 'Mf Love Song';
+  font-size: 4em;
+  font-weight: 500;
+  color: #4b0082;
+  margin-bottom: 0;
+}
+
+.member p {
+  color: #e6a8ff;
+  font-family: 'Noto Sans Mono', monospace;
+  margin: 0;
+  font-size: 2em;
+  margin-top: -10px;
+  /* adjust spacing slightly tighter if needed, or just 0 */
+}
+
+/* LIGHTBOX (Zoom Photo) */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+}
+
+#lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 15px;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  animation: zoom-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes zoom-in {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+#lightbox-close {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 2.5rem;
+  line-height: 1;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.2s, transform 0.2s;
+  padding-bottom: 6px;
+}
+
+#lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+/* Cacher le bouton 'Adopte un Pirate' sur les petits écrans (téléphones) */
+@media screen and (max-width: 768px) {
+  #adopte_un_pirate {
+    display: none !important;
+  }
+}
+
+#navbar {
+  position: absolute;
+  width: 100%;
+  height: 60px;
+  background-color: transparent;
+  border-color: transparent;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+
+#back {
+  position: absolute;
+  top: 1em;
+  left: 2em;
+  right: 2em;
 }
