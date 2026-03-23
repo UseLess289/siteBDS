@@ -26,7 +26,7 @@ body {
     backdrop-filter: blur(4px);
     color: var(--paper);
     font-family: var(--font-mono);
-    position: sticky;
+    position: fixed;
     overflow-x: hidden;
 }
 
@@ -265,6 +265,16 @@ main {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 32px;
+}
+
+#val-demander {
+    width: fit-content;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    border: none;
+    align-self: center;
+    padding: 8px 8px;
 }
 
 /* ── CARTE WANTED ── */

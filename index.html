@@ -9,52 +9,14 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/logo.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="footer.css">
-    <script type="module">
-        import protect from "/lib/protect.js";
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('primes-btn').addEventListener('click', (e) => {
-                e.preventDefault();
-                protect.redirect("primes");
-            });
-        });
-    </script>
-    <script type="module">
-        import protect from "/lib/protect.js";
-
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('allo-btn').addEventListener('click', (e) => {
-                e.preventDefault();
-                protect.redirect("allo");
-            });
-        });
-    </script>
-    <script type="module">
-import protect from "/lib/protect.js";
-
-protect.getData()
-    .then(async data => {
-        const login = data.user.uid;
-        const res = await fetch(`https://sitebds-production.up.railway.app/auth/antileak?login=${login}`);
-        if (!res.ok) {
-            document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:40vh">Anti-leak activé ehheeh</h1>';
-            return;
-        }
-        document.getElementById('main-content').style.display = 'block';
-    })
-    .catch(() => protect.login());
-</script>
-</head>
-<body>
-    <div id="main-content" style="display:none">
-        <div id="scroll-popup">
     <p>Scrolle vers le bas pour découvrir le site<br>D'ailleurs, le site est bien mieux sur ordi !</p>
     <button id="scroll-popup-btn">Compris !</button>
 </div>
-        <button id="allo-btn" class="allo" href="allo.html">
+        <button id="allo-btn" class="allo" href="https://pirat.eirb.fr/allo.html">
                     ALLO
-                    <img src="assets/phone.png" id="phone">
+                    <img src="https://pirat.eirb/assets/phone.png" id="phone">
         </button>
-        <button id="primes-btn" class="primes" href="primes.html">
+        <button id="primes-btn" class="primes" href="https://pirat.eirb.fr/primes.html">
                     PRIMES
         </button>
        <nav class="navbar">

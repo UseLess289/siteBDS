@@ -51,7 +51,7 @@ function init() {
             headers: { 'x-admin-token': adminToken }
         });
         localStorage.removeItem('admin_token');
-        window.location.href = 'https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr/index.html';
+        window.location.href = 'https://pirat.eirb.fr/index.html';
     });
     setInterval(loadOrders, 30_000);
 }

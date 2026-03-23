@@ -36,7 +36,8 @@ async function verifyToken(req, res, next) {
 app.use(cors({
     origin: [
         'http://localhost:5500',
-        'https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr'
+        'https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr',
+        'https://pirat.eirb.fr'
     ],
     credentials: true
 }));
@@ -95,7 +96,7 @@ app.get('/callback', async (req, res) => {
 
         const result = await pool.query('SELECT login FROM admins WHERE login = $1', [login]);
         if (result.rows.length === 0) {
-            return res.redirect('https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr/admin.html?error=unauthorized');
+            return res.redirect('https://pirat.eirb.fr/admin.html?error=unauthorized');
         }
 
         const token = crypto.randomBytes(32).toString('hex');
@@ -105,10 +106,10 @@ app.get('/callback', async (req, res) => {
             [token, login, expires]
         );
 
-        res.redirect(`https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr/admin.html?token=${token}`);
+        res.redirect(`https://pirat.eirb.fr/admin.html?token=${token}`);
     } catch (err) {
         console.error('Callback error:', err);
-        res.redirect('https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr/admin.html?error=auth_failed');
+        res.redirect('https://pirat.eirb.fr/admin.html?error=auth_failed');
     }
 });
 
