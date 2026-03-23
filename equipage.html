@@ -36,11 +36,12 @@
 
     <main>
         <a href="index.html" class="logo">
-            <span class="letter">P</span>
-            <span class="letter">I</span>
-            <span class="letter">R</span>
             <span class="letter">A</span>
-            <span class="letter">T</span>
+            <span class="letter">F</span>
+            <span class="letter">R</span>
+            <span class="letter">I</span>
+            <span class="letter">Q</span>
+            <span class="letter">U</span>
             <span class="letter">'</span>
             <span class="letter">E</span>
             <span class="letter">I</span>
@@ -76,7 +77,7 @@
             </div>
             <div class="member">
                 <div class="member_photo"
-                    style="background-image: url('assets/members/lapiraterie/pierre.png'); background-size: cover; background-position: center 10%;">
+                    style="background-image: url('assets/members/lapiraterie/pierre.png'); background-size: cover; background-position: center;">
                 </div>
                 <h2>Pierre</h2>
                 <p>Trésorier</p>
@@ -124,7 +125,7 @@
             </div>
             <div class="member">
                 <div class="member_photo"
-                    style="background-image: url('assets/members/lapiraterie/samuel.jpeg'); background-size: 110%; background-position: center;">
+                    style="background-image: url('assets/members/lapiraterie/samuel.jpeg'); background-size: cover; background-position: center;">
                 </div>
                 <h2>Samuel</h2>
                 <p>Respo Event</p>
@@ -159,7 +160,7 @@
             </div>
             <div class="member">
                 <div class="member_photo"
-                    style="background-image: url('assets/members/lapiraterie/armel.jpg'); background-size: 120%; background-position: center;">
+                    style="background-image: url('assets/members/lapiraterie/armel.jpg'); background-size: cover; background-position: center 10%;">
                 </div>
                 <h2>Armel</h2>
                 <p>Chargé Event</p>
@@ -202,7 +203,7 @@
         <div class="members_row">
             <div class="member">
                 <div class="member_photo"
-                    style="background-image: url('assets/members/lapiraterie/abdel.png'); background-size: cover; background-position: center;">
+                    style="background-image: url('assets/members/lapiraterie/abdel.jpg'); background-size: cover; background-position: center;">
                 </div>
                 <h2>Abdel</h2>
                 <p>Respo Log</p>
@@ -338,15 +339,13 @@
 
     <script>
         $("#adopte_un_pirate").click(function () {
-            if ($(".panel").css("display") === "none") {
-                $(".panel").css("display", "flex");
-            } else {
-                $(".panel").css("display", "none");
-            }
+            $(".panel").toggle(); // Alternance affichage/caché
         });
+    </script>
 
+    <script>
         $("#close-panel").click(function () {
-            $(".panel").css("display", "none");
+            $(".panel").hide(); // Cacher le panneau
         });
     </script>
 

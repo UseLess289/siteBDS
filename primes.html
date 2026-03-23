@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRIMES | PIRATEIRB</title>
+    <title>PRIMES | AFRIQU'EIRB</title>
     <link rel="icon" type="image/png" href="assets/logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Noto+Sans+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Noto+Sans+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="primes.css">
     <script type="module">
         import protect from "/lib/protect.js";
@@ -18,10 +20,11 @@
             .catch(() => protect.login());
     </script>
 </head>
+
 <body>
     <nav id="primes-nav">
         <a href="index.html" id="back-btn"><img src="assets/back.png" alt="Retour"></a>
-        <a href="index.html" class="nav-logo">PIRAT'EIRB</a>
+        <a href="index.html" class="nav-logo">AFRIQU'EIRB</a>
         <div id="player-score">
             <span id="player-name">—</span>
             <span id="player-prime">0 M</span>
@@ -58,15 +61,17 @@
             <div id="membres-grid"></div>
         </section>
     </main>
-<div id="validation-modal">
-    <div class="val-modal-bg"></div>
-    <div class="val-modal-box">
-        <h2 id="val-titre">Valider le défi</h2>
-        <p id="val-defi">—</p>
-        <p id="val-gain">+ — M berries</p>
-        <button id="val-demander">Demander les points</button>
-        <p id="val-msg"></p>
+    <div id="validation-modal">
+        <div class="val-modal-bg"></div>
+        <div class="val-modal-box">
+            <h2 id="val-titre">Valider le défi</h2>
+            <p id="val-defi">—</p>
+            <p id="val-gain">+ — M berries</p>
+            <button id="val-demander">Demander les points</button>
+            <p id="val-msg"></p>
+        </div>
     </div>
-</div>    <script src="primes.js"></script>
+    <script src="primes.js"></script>
 </body>
+
 </html>
