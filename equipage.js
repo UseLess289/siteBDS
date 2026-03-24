@@ -14,7 +14,7 @@ const data = [
   { img: `assets/members/Mourad_bis.jpg`, name: 'MOURADGOAT', age: '20', qg: 'Pessac' },
   { img: `assets/members/Thibault_bis.jpg`, name: 'LETHIBZ', age: '21', qg: 'Talence' },
   { img: `assets/members/Sekou_bis.jpg`, name: 'SK', age: '20', qg: 'Talence' },
-  { img: `assets/members/Youssef_bis.jpg`, name: 'YOIBOI', age: '20', qg: 'Pessac' },
+  { img: `assets/members/Youssef_bis.jpg`, name: 'YOBOI', age: '20', qg: 'Pessac' },
   { img: `assets/members/Alexis_bis.jpg`, name: 'TITI', age: '20', qg: 'Pesasac' },
   { img: `assets/members/Adam_bis.jpg`, name: 'PRÉSIDENT DÉCHU', age: '21', qg: 'Pessac' },
   { img: `assets/members/Samuel_bis.jpeg`, name: 'SAM', age: '19', qg: 'Talence' },
