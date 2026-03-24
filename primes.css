@@ -34,11 +34,7 @@ body::before {
     z-index: -1;
 }
 
-<<<<<<< HEAD body {
-    /* plus de background ni backdrop-filter ici */
-}
-
-=======>>>>>>>refs/remotes/origin/main .valider-btn.pending {
+.valider-btn.pending {
     background: var(--accent);
     color: #111;
 }
