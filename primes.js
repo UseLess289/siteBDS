@@ -34,7 +34,7 @@ function openModal(m) {
         const msg = document.getElementById('val-msg');
         if (res.status === 409) {
             msg.style.color = '#c0392b';
-            msg.textContent = 'Demande déjà envoyée !';
+            msg.textContent = 'Demande déjà envoyée';
             return;
         }
         msg.style.color = '#27ae60';
@@ -84,18 +84,21 @@ async function loadMembres() {
         card.className = 'wanted-card';
         card.style.animationDelay = `${i * 0.06}s`;
 
-        const prenom = m.nom.split(' ')[0];
-        const photoSrc = `assets/members/${prenom}_bis_.jpg`;
+        const prenom = m.nom.split(' ')[0].toLowerCase();
+        console.log(prenom);
+        const photoSrc = `assets/members/lapiraterie/${prenom}_web.jpg`;
 
         card.innerHTML = `
-            <img class="wanted-frame" src="assets/frame_prime.png" alt="">
-            <img class="wanted-photo" src="${photoSrc}" alt="${m.nom}"
-                 onerror="this.src=''">
             <div class="wanted-info">
                 <div class="wanted-nom">${m.nom}</div>
                 <div class="wanted-prime-val">${m.valeur_prime} M berries</div>
             </div>
-            <div class="wanted-defi">${m.challenge}</div>
+ 
+            <img class="wanted-photo" src="${photoSrc}" alt="${m.nom}"
+                 onerror="this.src=''">
+            <img class="wanted-frame" src="assets/frame_prime.png" alt="">
+
+           <div class="wanted-defi">${m.challenge}</div>
         `;
 
         card.style.cursor = 'pointer';
