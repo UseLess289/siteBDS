@@ -17,17 +17,25 @@
 
 body {
     background-color: transparent;
-    background-image: url('assets/bg-primes.png');
-    background-size: 100% auto;
-    background-position: center;
-    background-repeat: repeat-y;
-    background-attachment: fixed;
-    min-height: 100vh;
-    backdrop-filter: blur(4px);
     color: var(--paper);
     font-family: var(--font-mono);
-    position: fixed;
+    position: relative;
     overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url('assets/bg-primes.png');
+    background-size: 100% auto;
+    background-repeat: repeat-y;
+    filter: blur(4px);
+    z-index: -1;
+}
+
+body {
+    /* plus de background ni backdrop-filter ici */
 }
 
 .valider-btn.pending {
@@ -37,7 +45,7 @@ body {
 
 #validation-modal {
     display: none;
-    position: fixed;
+    position: absolute;
     inset: 0;
     z-index: 99999;
     align-items: center;
@@ -307,12 +315,13 @@ main {
 
 .wanted-photo {
     position: absolute;
-    top: 30.5%;
-    left: 22%;
-    width: 56%;
+    top: 28.4%;
+    left: 23.5%;
+    width: 53%;
     aspect-ratio: 4/3;
+    height: 28%;
     object-fit: cover;
-    object-position: center top;
+    object-position: center 20%;
 }
 
 .wanted-info {

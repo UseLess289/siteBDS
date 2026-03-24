@@ -10,22 +10,20 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="footer.css">
     <p>Scrolle vers le bas pour découvrir le site<br>D'ailleurs, le site est bien mieux sur ordi !</p>
-    <button id="scroll-popup-btn">Compris !</button>
+    <button id="scroll-popup-btn">Compris.</button>
 </div>
-        <button id="allo-btn" class="allo" href="https://pirat.eirb.fr/allo.html">
+        <!--
+        <button id="allo-btn" class="allo" href="allo.html">
                     ALLO
-                    <img src="https://pirat.eirb/assets/phone.png" id="phone">
+                    <img src="assets/phone.png" id="phone">
         </button>
-        <button id="primes-btn" class="primes" href="https://pirat.eirb.fr/primes.html">
                     PRIMES
         </button>
        <nav class="navbar">
         <ul>
             <li id="back"><a href="index.html"><img src="assets/back.png" alt="Retour"></a></li>
         </ul>
-
-    </nav>
-
+-->
     <a href="index.html" class="logo">
         <span class="letter">P</span>
         <span class="letter">I</span>
@@ -56,9 +54,10 @@
 
                 <div class="hero__wrapper">
                     <nav class="hero__nav">
+                            <a href="allo.html" class="hero__nav-btn hero__nav-btn--videos">ALLO</a>
+
                         <a href="ep.html"      class="hero__nav-btn hero__nav-btn--videos">EP-4 TITRES</a>
                         <a href="primes.html"      class="hero__nav-btn hero__nav-btn--videos">PRIMES</a>
-
                         <a href="equipage.html"    class="hero__nav-btn hero__nav-btn--equipage">EQUIPE</a>
                         <a href="videos.html" class="hero__nav-btn hero__nav-btn--partenaires">VIDEOS</a>
                         <a href="partenaires.html"        class="hero__nav-btn hero__nav-btn--allo">PARTENAIRES</a>
@@ -159,7 +158,6 @@ window.addEventListener('scroll', () => {
 
     animatePath('ship',    shipPath,    shipScaleArr,    { flipDown:  1, flipUp: -1 });
     animatePath('seagull', seagullPath, seagullScaleArr, { flipDown: -1, flipUp:  1 });
-    animatePath('beach', [{ x: 0, y: 15 }, { x: 0, y: 5 }], [1, 1]);
 
     const heroWrapper = document.querySelector('.hero__wrapper');
     const heroContent = document.querySelector('.hero__content');

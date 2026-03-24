@@ -47,7 +47,7 @@ async function init() {
     document.getElementById('logout-btn').addEventListener('click', async () => {
         await fetch(`${API_URL}/admin/logout`, { headers: { 'x-admin-token': adminToken } });
         localStorage.removeItem('admin_token');
-        window.location.href = 'https://w59ny1o37izpd8sy68bsb6e96lj63r.eirb.fr/index.html';
+        window.location.href = 'https://pirat.eirb.fr/index.html';
     });
 }
 
@@ -128,7 +128,7 @@ async function rechercherJoueur() {
             ${deja
                 ? '<span class="done-badge">✓ Validé</span>'
                 : demande
-                    ? `<button class="valider-btn pending" data-membre="${m.login}">⏳ Valider</button>`
+                    ? `<button class="valider-btn pending" data-membre="${m.login}"> Défi à valider</button>`
                     : `<button class="valider-btn" data-membre="${m.login}">Valider</button>`
             }
         `;
