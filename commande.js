@@ -28,9 +28,8 @@ const MENUS = {
         { nom: 'Garro', prix: 5.50 },
         { nom: 'Le J, le S', prix: 1.50 },
         { nom: 'Boisson du bar eheheheh', prix: 3.00 },
-        { nom: 'Menage/Vaisselle', prix: 0.00 },
-        { nom: 'Chorée', prix: 0.00 },
-        { nom: 'Taxi VROUUUM', prix: 0.00 },
+        //{ nom: 'Menage/Vaisselle', prix: 0.00 },
+        //{ nom: 'Chorée', prix: 0.00 },
     ],
     pessac: [
         { nom: 'Crêpe sucre', prix: 0.10 },
