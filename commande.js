@@ -6,7 +6,7 @@ const MENUS = {
     talence: [
         { nom: 'Crêpe sucre', prix: 0.10 },
         { nom: 'Crêpe pâte à tartiner', prix: 0.10 },
-        { nom: 'DEMI-Wrap poulet halal', prix: 1.50 },
+        { nom: 'DEMI-Wrap poulet halal', prix: 2.00 },
         { nom: 'ENTIER GROS GOURMAND VAS-Wrap poulet halal', prix: 3.00 },
         { nom: 'Panini nutella', prix: 1.50 },
         { nom: 'Cookie', prix: 3.00 },
