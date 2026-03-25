@@ -96,7 +96,7 @@ async function loadMembres() {
 }
 
 async function rechercherJoueur() {
-    const login = document.getElementById('search-input').value.trim();
+    const login = document.getElementById('search-input').value.trim().toLowerCase();
     if (!login) return;
 
     const [joueurRes, demandesRes] = await Promise.all([
