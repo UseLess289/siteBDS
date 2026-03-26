@@ -6,7 +6,7 @@ const MENUS = {
     talence: [
         { nom: 'Crêpe sucre', prix: 0.10 },
         { nom: 'Crêpe pâte à tartiner', prix: 0.10 },
-        { nom: 'Wrap poulet halal', prix: 1.50 },
+        { nom: 'Wrap poulet halal', prix: 2.00 },
         { nom: 'Panini nutella', prix: 1.50 },
         { nom: 'Tiramisu spéculos', prix: 3.00 },
         { nom: 'Tiramisu oreo', prix: 2.50 },
@@ -20,7 +20,7 @@ const MENUS = {
     bordeaux: [
         { nom: 'Crêpe sucre', prix: 0.10 },
         { nom: 'Crêpe pâte à tartiner', prix: 0.10 },
-        { nom: 'Wrap poulet halal', prix: 3.00 },
+        { nom: 'Wrap poulet halal', prix: 2.00 },
         { nom: 'Panini nutella', prix: 1.50 },
         { nom: 'Tiramisu spéculos', prix: 3.00 },
         { nom: '3xMadeleines', prix: 3.00 },
@@ -36,7 +36,7 @@ const MENUS = {
     pessac: [
         { nom: 'Crêpe sucre', prix: 0.10 },
         { nom: 'Crêpe pâte à tartiner', prix: 0.10 },
-        { nom: 'Wrap poulet halal', prix: 3.00 },
+        { nom: 'Wrap poulet halal', prix: 2.00 },
         { nom: 'Panini nutella', prix: 1.50 },
         { nom: 'Tiramisu spéculos', prix: 3.00 },
         { nom: 'Tiramisu oreo', prix: 2.50 },
