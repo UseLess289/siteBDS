@@ -16,6 +16,7 @@ const MENUS = {
         { nom: 'Menage/Vaisselle', prix: 0.00 },
         { nom: 'Chorée', prix: 0.00 },
         { nom: 'Taxi VROUUUM', prix: 0.00 },
+        { nom: 'Cookie', prix: 0.50 },
     ],
     bordeaux: [
         { nom: 'Crêpe sucre', prix: 0.10 },
